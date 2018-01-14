@@ -6,7 +6,7 @@ Xendiz provides a html sync code that should be loaded into the browser on impre
 iframe (recomended):
 <iframe src="https://advsync.com/xendiz/ssp/?location=REDIRECT_URL" style="display:none"></iframe>
 pixel: 
-<img src="https://advsync.com/xendiz/ssp/?pixel=1&location=REDIRECT_URL" style="display:none"></iframe>
+<img src="https://advsync.com/xendiz/ssp/?pixel=1&location=REDIRECT_URL" style="display:none">
 ```
 Where `REDIRECT_URL` is url-encoded SSP sync endpoint. `REDIRECT_URL` must include macro {UID} which will be replaced by actual `user id`.
 When sending requests to the Xendiz, `user id` should be passed in `user.buyerid` object.
