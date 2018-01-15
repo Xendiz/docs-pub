@@ -19,4 +19,4 @@ pixel: https://advsync.com/xendiz/dsp/:id/?pixel=1&buid={UID}
 ```
 DSP should redirect to this url after replacing the macro {UID} with actual `user id`.
 DSP should provide cookie sync code which will be loaded on impression.
-Xendiz will pass DSP's `user id` in `user.buyerid` object. Sync delay is ~ 1-2 sec.
+Xendiz will pass DSP's `user id` in `user.buyerid` object.
