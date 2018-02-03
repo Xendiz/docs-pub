@@ -1,6 +1,4 @@
 # DSP API
-todo links
-
 * [Overview](#overview)
 * [Profile](#profile-api)
   * [Company DSP endpoints](#company-dsp-endpoints) 
@@ -309,11 +307,11 @@ Response:
        "spend": 2.21,
        "impressions": 2021
     }, {
-       "hour": "00:01",
+       "hour": "02:00",
        "spend": 20.90,
        "impressions": 221132
     }, {
-       "hour": "00:02",
+       "hour": "03:00",
        "spend": 21.5,
        "impressions": 222191
     }]
