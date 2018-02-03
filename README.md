@@ -4,8 +4,8 @@
   * [SSP](./cookie_sync#cookie-syncing-with-xendiz-ssp)
   * [DSP](/./cookie_sync#cookie-syncing-with-xendiz-dsp)
 * [API](./api)
-  * [SSP](./api/ssp)
-  * [DSP](./api/dsp)
+  * [SSP API](./api/ssp)
+  * [DSP API](./api/dsp)
     * [Overview](./api/dsp#overview)
     * [Profile](./api/dsp#profile-api)
       * [Company DSP endpoints](./api/dsp#company-dsp-endpoints) 
@@ -27,7 +27,7 @@
       * [Geo report](./api/dsp#geo-report)
       * [Users report](./api/dsp#user-report)
       * [Custom report](./api/dsp#custom-report)
-    * Trends
+  * Trends API
 * Specification
     * Bid request
     * Bid response
