@@ -27,7 +27,7 @@
       * [Geo report](./api/dsp#geo-report)
       * [Users report](./api/dsp#user-report)
       * [Custom report](./api/dsp#custom-report)
-  * Trends API
+  * [Trends API](./api/trends)
 * Specification
     * Bid request
     * Bid response
