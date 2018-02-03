@@ -5,7 +5,7 @@ todo links
 * [Profile](#profile-api)
   * [Company DSP endpoints](#company-dsp-endpoints) 
   * [DSP endpoint details](#dsp-endpoint-details)
-  * Add item to block list
+  * [Add item to block list](#add-item-to-block-list)
   * [DSP campaigns target](#dsp-campaigns-target)
   * [Add DSP campaign target](#add-dsp-campaign-target)
   * [Delete DSP campaign target](#delete-dsp-campaign-target)
