@@ -1,26 +1,27 @@
 # DSP API
 todo links
 
-* Overview
-* Profile
-  * Company DSP endpoints 
-  * DSP endpoint details 
-  * DSP campaigns target
-  * Add DSP campaign target
-  * Delete DSP campaign target
-  * Change DSP endpoint URL
-* Financial
-* Detailed
-  * Campaign report
-  * Creative report
-  * Domain list
-  * Bundle list
-  * Specific domain report
-  * Specific bundle report
-  * OS report
-  * Geo report
-  * Users report
-  * Custom report
+* [Overview](#overview)
+* [Profile](#profile-api)
+  * [Company DSP endpoints](#company-dsp-endpoints) 
+  * [DSP endpoint details](#dsp-endpoint-details)
+  * Add item to block list
+  * [DSP campaigns target](#dsp-campaigns-target)
+  * [Add DSP campaign target](#add-dsp-campaign-target)
+  * [Delete DSP campaign target](#delete-dsp-campaign-target)
+  * [Change DSP endpoint URL](#change-dsp-endpoint-url)
+* [Financial](#financial-api)
+* [Detailed](#detailed-reports-api)
+  * [ampaign report](#campaign-report)
+  * [Creative report](#creative-report)
+  * [Domain list](#domain-list)
+  * [Bundle list](#bundle-list)
+  * [Specific domain report](#specific-domain-report)
+  * [Specific bundle report](#specific-bundle-report)
+  * [OS report](#os-report)
+  * [Geo report](#geo-report)
+  * [Users report](#user-report)
+  * [Custom report](#custom-report)
 
 ## Overview
 todo description
@@ -94,6 +95,34 @@ Response:
     }]
   }
 }
+```
+
+### Add item to block list
+
+`POST` /dsp/`:id`/block
+
+Path params
+
+| Name         | Type | isRequired | Description   |
+| -------------| ---- | ---------- | ------------- |
+| id           | Int  | Yes        | Specific endpoint id. Example: `/21`
+
+Body params
+
+| Name         | Type    | isRequired | Description   |
+| -------------| ------- | ---------- | ------------- |
+| type         | String  | Yes        | One of `app`, `site`, `publisher`
+| source       | Object  | No         | App bundle, site domain or Xendiz publisher ID
+
+Request:
+```json
+[{
+  "type": "app",
+  "source": "com.test.bundle"
+}, {
+  "type": "publisher",
+  "source": "eef8d4ee64"
+}]
 ```
 
 ### DSP campaigns target
@@ -248,7 +277,7 @@ Query params
 
 | Name         | Type | isRequired | Description   |
 | -------------| ---- | ---------- | ------------- |
-| from         | Date | Yes        | Start date. Example: `&from=2018-01-01`
+| from         | Date | No         | Start date. If not set then current day will be chosen. Example: `&from=2018-01-01`
 | to           | Date | No         | End date. Example: `&to=2018-01-10`
 | endpoint_id  | Int  | No         | Specific endpoint id. If the param is not specified, a full report will be created for all the endpoints of the company. Example: `&endpoint_id=21`
 | hour         | Bool | No         | Hour aggregated report. Example: `&hour=1`
@@ -302,7 +331,7 @@ Query params
 | Name         | Type   | isRequired | Description   |
 | -------------| ------ | ---------- | ------------- |
 | campaign     | String | Yes        | Campaign ID. Example: `&campaign=cid-12345`
-| from         | Date   | Yes        | Start date. Example: `&from=2018-01-01`
+| from         | Date   | No        | Start date. If not set then current day will be chosen. Example: `&from=2018-01-01`
 | to           | Date   | No         | End date. Example: `&to=2018-01-10`
 | endpoint_id  | Int    | No         | Specific endpoint id. If the param is not specified, a full report will be created for all the endpoints of the company. Example: `&endpoint_id=21`
 
@@ -331,7 +360,7 @@ Query params
 | Name         | Type   | isRequired | Description   |
 | -------------| ------ | ---------- | ------------- |
 | creative     | String | Yes        | Creative ID. Example: `&creative=crid-12345`
-| from         | Date   | Yes        | Start date. Example: `&from=2018-01-01`
+| from         | Date   | No        | Start date. If not set then current day will be chosen. Example: `&from=2018-01-01`
 | to           | Date   | No         | End date. Example: `&to=2018-01-10`
 | endpoint_id  | Int    | No         | Specific endpoint id. If the param is not specified, a full report will be created for all the endpoints of the company. Example: `&endpoint_id=21`
 
@@ -359,7 +388,7 @@ Query params
 
 | Name         | Type   | isRequired | Description   |
 | -------------| ------ | ---------- | ------------- |
-| from         | Date   | Yes        | Start date. Example: `&from=2018-01-01`
+| from         | Date   | No        | Start date. If not set then current day will be chosen. Example: `&from=2018-01-01`
 | to           | Date   | No         | End date. Example: `&to=2018-01-10`
 | endpoint_id  | Int    | No         | Specific endpoint id. If the param is not specified, a full report will be created for all the endpoints of the company. Example: `&endpoint_id=21`
 
@@ -383,13 +412,13 @@ Response:
 
 ### Bundle list 
 
-`GET` /dsp/detailed/bundle
+`GET` /dsp/detailed/bundles
 
 Query params
 
 | Name         | Type   | isRequired | Description   |
 | -------------| ------ | ---------- | ------------- |
-| from         | Date   | Yes        | Start date. Example: `&from=2018-01-01`
+| from         | Date   | No        | Start date. If not set then current day will be chosen. Example: `&from=2018-01-01`
 | to           | Date   | No         | End date. Example: `&to=2018-01-10`
 | endpoint_id  | Int    | No         | Specific endpoint id. If the param is not specified, a full report will be created for all the endpoints of the company. Example: `&endpoint_id=21`
 
@@ -400,7 +429,7 @@ Response
   "data": [{
     "date": "2018-01-01",
     "bundle": "com.test.bundle",
-    "name": "Test bundle"
+    "name": "Test bundle",
     "spend": 40.21,
     "impressions": 1293811
   }, {
@@ -427,7 +456,7 @@ Query params
 
 | Name         | Type   | isRequired | Description   |
 | -------------| ------ | ---------- | ------------- |
-| from         | Date   | Yes        | Start date. Example: `&from=2018-01-01`
+| from         | Date   | No        | Start date. If not set then current day will be chosen. Example: `&from=2018-01-01`
 | to           | Date   | No         | End date. Example: `&to=2018-01-10`
 | endpoint_id  | Int    | No         | Specific endpoint id. If the param is not specified, a full report will be created for all the endpoints of the company. Example: `&endpoint_id=21`
 
@@ -458,7 +487,7 @@ Query params
 
 | Name         | Type   | isRequired | Description   |
 | -------------| ------ | ---------- | ------------- |
-| from         | Date   | Yes        | Start date. Example: `&from=2018-01-01`
+| from         | Date   | No        | Start date. If not set then current day will be chosen. Example: `&from=2018-01-01`
 | to           | Date   | No         | End date. Example: `&to=2018-01-10`
 | endpoint_id  | Int    | No         | Specific endpoint id. If the param is not specified, a full report will be created for all the endpoints of the company. Example: `&endpoint_id=21`
 
@@ -478,13 +507,13 @@ Query params
 
 ### OS report
 
-`GET` /dsp/detailed/os/
+`GET` /dsp/detailed/os
 
 Query params
 
 | Name         | Type   | isRequired | Description   |
 | -------------| ------ | ---------- | ------------- |
-| from         | Date   | Yes        | Start date. Example: `&from=2018-01-01`
+| from         | Date   | No        | Start date. If not set then current day will be chosen. Example: `&from=2018-01-01`
 | to           | Date   | No         | End date. Example: `&to=2018-01-10`
 | endpoint_id  | Int    | No         | Specific endpoint id. If the param is not specified, a full report will be created for all the endpoints of the company. Example: `&endpoint_id=21`
 
@@ -506,13 +535,13 @@ Query params
 
 ### Geo report
 
-`GET` /dsp/detailed/os/
+`GET` /dsp/detailed/geo
 
 Query params
 
 | Name         | Type   | isRequired | Description   |
 | -------------| ------ | ---------- | ------------- |
-| from         | Date   | Yes        | Start date. Example: `&from=2018-01-01`
+| from         | Date   | No        | Start date. If not set then current day will be chosen. Example: `&from=2018-01-01`
 | to           | Date   | No         | End date. Example: `&to=2018-01-10`
 | endpoint_id  | Int    | No         | Specific endpoint id. If the param is not specified, a full report will be created for all the endpoints of the company. Example: `&endpoint_id=21`
 
@@ -536,13 +565,13 @@ Query params
 
 You should intargate cookie sync with Xendiz SSP to use this method
 
-`GET` /dsp/detailed/users/
+`GET` /dsp/detailed/users
 
 Query params
 
 | Name         | Type   | isRequired | Description   |
 | -------------| ------ | ---------- | ------------- |
-| from         | Date   | Yes        | Start date. Example: `&from=2018-01-01`
+| from         | Date   | No        | Start date. If not set then current day will be chosen. Example: `&from=2018-01-01`
 | to           | Date   | No         | End date. Example: `&to=2018-01-10`
 | endpoint_id  | Int    | No         | Specific endpoint id. If the param is not specified, a full report will be created for all the endpoints of the company. Example: `&endpoint_id=21`
 
@@ -570,7 +599,7 @@ Query params
 
 | Name         | Type   | isRequired | Description   |
 | -------------| ------ | ---------- | ------------- |
-| from         | Date   | Yes        | Start date. Example: `&from=2018-01-01`
+| from         | Date   | No        | Start date. If not set then current day will be chosen. Example: `&from=2018-01-01`
 | to           | Date   | No         | End date. Example: `&to=2018-01-10`
 | endpoint_id  | Int    | No         | Specific endpoint id. If the param is not specified, a full report will be created for all the endpoints of the company. Example: `&endpoint_id=21`
 
@@ -578,10 +607,10 @@ Body Params
 
 | Name         | Type   | isRequired | Description   |
 | -------------| ------ | ---------- | ------------- |
-| adtype       | Object | No         | Platfrom type. `app` or `site`
+| adtype       | String | No         | Platfrom type. `app` or `site`
 | platform     | Object | No         | Platfrom Object
 | device       | Object | No         | Device Object
-| selection    | Object | No         | Selection Object
+| select    | Object | No         | Selection Object
 
 Platfrom Object
 
@@ -603,7 +632,7 @@ Device Object
 | ct           | Bool   | No         | Device connection type
 | country      | Bool   | No         | Device country
 
-Selection
+Select
 
 | Name         | Type   | isRequired | Description   |
 | -------------| ------ | ---------- | ------------- |
@@ -620,7 +649,7 @@ Example request
 
 ```json
 {
-    "type": "app",
+    "adType": "app",
     "platform": {
         "domain": false,
         "bundle": false,
@@ -635,7 +664,7 @@ Example request
         "ct": true,
         "country": false
     },
-    "selection": {
+    "select": {
         "date": false,
         "size": true,
         "campaign": false,
