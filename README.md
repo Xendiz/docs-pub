@@ -41,6 +41,16 @@
     * [Sites](./api/trends#sites)
     * [Formats](./api/trends#formats)
     * [Device](./api/trends#device)
-* Specification
-    * Bid request
-    * Bid response
+* Integration
+  * Glossary
+  * Xendiz DSP
+    * Overview
+    * Required fields
+    * User matching
+    * Discrepancies
+    * Examples
+  * Xendiz SSP
+    * Overview
+    * User matching
+    * Discrepancies 
+    * Examples
