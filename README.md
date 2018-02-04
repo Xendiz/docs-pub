@@ -36,6 +36,11 @@
       * [Users report](./api/dsp#user-report)
       * [Custom report](./api/dsp#custom-report)
   * [Trends API](./api/trends)
+    * [Overview](./api/trends#overview)
+    * [Applications](./api/trends#applications)
+    * [Sites](./api/trends#sites)
+    * [Formats](./api/trends#formats)
+    * [Device](./api/trends#device)
 * Specification
     * Bid request
     * Bid response
