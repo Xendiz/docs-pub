@@ -23,8 +23,8 @@ This section of describes API routes for supply-side platforms.
 
 ### Second section is used when you want to get financial report of your company
 It's only method recieves up to 4 parameters which are fully optional
-- First parameter is `from` and it is used to set beginning of date interval in format YYYY-MM-DD. If not set then date for current day will be used.
-- Second parameter is `to` and it is used to set end of date interval in format YYYY-MM-DD. If not set then date for current day will be used.
+- First parameter is `from` and it is used to set beginning of date interval in format `YYYY-MM-DD`. If not set then date for current day will be used.
+- Second parameter is `to` and it is used to set end of date interval in format `YYYY-MM-DD`. If not set then date for current day will be used.
 - Third parameter is `endpoint_id` which is used to choose one distinct endpoint for report generation. If not set then report will be generated based on all of your company's endpoints.
 - Fourth and last parameter is `hour` and it is used to switch report to hourly format
 
