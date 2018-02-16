@@ -11,7 +11,7 @@
 ## Overview
 This section of describes API routes for supply-side platforms.
 
-### Section is divided into 3 general sections:
+### This part of API is divided into 3 general sections:
 - Profile-based data
 - Financial report generation
 - Custom report generation
@@ -30,11 +30,11 @@ It's only method recieves up to 4 parameters which are fully optional
 
 All of these parameters are sent via URL.
 
-### Third section is used when you need to generate custom report with fields that interests you (no more than 5 for one request)
+### Third section is used when you need to generate custom report with fields that interests you
 
 First three parameters are send via URL and duplicate first three parameters for financial report:
-- First parameter is `from` and it is used to set beginning of date interval in format YYYY-MM-DD. If not set then date for current day will be used.
-- Second parameter is `to` and it is used to set end of date interval in format YYYY-MM-DD. If not set then date for current day will be used.
+- First parameter is `from` and it is used to set beginning of date interval in format `YYYY-MM-DD`. If not set then date for current day will be used.
+- Second parameter is `to` and it is used to set end of date interval in format `YYYY-MM-DD`. If not set then date for current day will be used.
 - Third parameter is `endpoint_id` which is used to choose one distinct endpoint for report generation. If not set then report will be generated based on all of your company's endpoints.
 
 Next parameters are sent via body of POST request:
@@ -43,6 +43,8 @@ Next parameters are sent via body of POST request:
 - Device is an object that describes which device-specific parameters you want to include to your report.  All of it's fields are boolean-typed.
 - Select is an object that describes fields that you want to group by and select for your report.
   - Almost all of it's parameters are boolean, exept for `price` - it's an object than has two fields: boolean flag which is used to add or remove this option from selection and second string-based one which describes function with which you want to aggregate your price by.
+
+**You cannot set more than five flags to true at the same time.**
 
 ## Profile API
 
