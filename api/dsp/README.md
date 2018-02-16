@@ -10,7 +10,7 @@
   * [Change DSP endpoint URL](#change-dsp-endpoint-url)
 * [Financial](#financial-api)
 * [Detailed](#detailed-reports-api)
-  * [ampaign report](#campaign-report)
+  * [Campaign report](#campaign-report)
   * [Creative report](#creative-report)
   * [Domain list](#domain-list)
   * [Bundle list](#bundle-list)
@@ -22,7 +22,12 @@
   * [Custom report](#custom-report)
 
 ## Overview
-todo description
+This section of describes API routes for demand-side platforms.
+
+### This part of API is divided into 3 general sections:
+- Profile-based data
+- Financial report generation
+- Detailed report generation
 
 ## Profile API
 
