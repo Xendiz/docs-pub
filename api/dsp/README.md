@@ -29,6 +29,13 @@ This section of describes API routes for demand-side platforms.
 - Financial report generation
 - Detailed report generation
 
+### First section is used for work with your endpoints
+- First method of this section helps you to see all of your company's endpoints
+- Second method is used when you need more detailed information for specific endpoint
+- Third method is used to add new items to blacklist for specific endpoint. It receives two parameters in body of `POST` request:
+  - type - sets type of blocked item. Can be set to `app` to block bundle, `site` to block  domain or `publisher` to block publisher.
+  - source - that describes blocked entity and could be app bundle, site domain or Xendiz publisher ID
+- Fourth method is used to get list of all targeting campaigns for specific endpoint
 ## Profile API
 
 ### Company DSP endpoints 
