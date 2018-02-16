@@ -41,6 +41,6 @@
     * [Sites](./api/trends#sites)
     * [Formats](./api/trends#formats)
     * [Device](./api/trends#device)
-* Specification
+* [Specification](./rtb)
     * Bid request
     * Bid response
