@@ -1,7 +1,7 @@
 # Partners API
 * [Overview](#overview)
 * [DSP API](./dsp)
-* [DSP API](./ssp)
+* [SSP API](./ssp)
 * [Trends API](./trends)
 
 ## Overview
