@@ -87,7 +87,6 @@ All of these parameters are sent via URL.
       - Almost all of it's parameters are boolean, exept for `price` - it's an object than has two fields: boolean flag which is used to add or remove this option from selection and second string-based one which describes function with which you want to aggregate your price by.
 
 **You cannot set more than five flags to true at the same time.**
->>>>>>> Stashed changes
 
 ## Profile API
 
