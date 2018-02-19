@@ -22,9 +22,6 @@
   * [Custom report](#custom-report)
 
 ## Overview
-<<<<<<< Updated upstream
-todo description
-=======
 This section of describes API routes for demand-side platforms.
 
 ### This part of API is divided into 3 general sections:
