@@ -9,7 +9,43 @@
 * [Custom report](#custom-report)
 
 ## Overview
-todo description
+This section of describes API routes for supply-side platforms.
+
+### This part of API is divided into 3 general sections:
+- Profile-based data
+- Financial report generation
+- Custom report generation
+
+### First section is used for work with your endpoints
+- First method of this section helps you to see all of your company's endpoints
+- Second method is used when you need more detailed information for specific endpoint
+- Last two methods are used to block and unblock your creative campaign, while latter method only requires your SSP id and Creative id, former also is able to recieve reason for your campaign blockage though it's optional
+
+### Second section is used when you want to get financial report of your company
+It's only method recieves up to 4 parameters which are fully optional
+- First parameter is `from` and it is used to set beginning of date interval in format `YYYY-MM-DD`. If not set then date for current day will be used.
+- Second parameter is `to` and it is used to set end of date interval in format `YYYY-MM-DD`. If not set then date for current day will be used.
+- Third parameter is `endpoint_id` which is used to choose one distinct endpoint for report generation. If not set then report will be generated based on all of your company's endpoints.
+- Fourth and last parameter is `hour` and it is used to switch report to hourly format
+
+All of these parameters are sent via URL.
+
+### Third section is used when you need to generate custom report with fields that interests you
+
+First three parameters are send via URL and duplicate first three parameters for financial report:
+- First parameter is `from` and it is used to set beginning of date interval in format `YYYY-MM-DD`. If not set then date for current day will be used.
+- Second parameter is `to` and it is used to set end of date interval in format `YYYY-MM-DD`. If not set then date for current day will be used.
+- Third parameter is `endpoint_id` which is used to choose one distinct endpoint for report generation. If not set then report will be generated based on all of your company's endpoints.
+
+Next parameters are sent via body of POST request:
+- AdType is a parameter that describes platform that you want to do research for (site or application).
+- Platform is an object that describes which platform-specific parameters you want to include to your report. All of it's fields are boolean-typed.
+- Device is an object that describes which device-specific parameters you want to include to your report.  All of it's fields are boolean-typed.
+- Select is an object that describes fields that you want to group by and select for your report.
+  - Almost all of it's parameters are boolean, exept for `price` - it's an object than has two fields: boolean flag which is used to add or remove this option from selection and second string-based one which describes function with which you want to aggregate your price by.
+
+**You cannot set more than five flags to true at the same time.**
+
 
 ## Profile API
 
