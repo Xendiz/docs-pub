@@ -27,7 +27,7 @@ Response:
 [{
   "app": {
     "bundle": "com.enflick.android.TextNow",
-    "os": "android"
+    "os": "android",
     "name": "TextNow - free text + calls",
     "price": 0,
     "score": 4.4,
@@ -40,7 +40,7 @@ Response:
 }, {
   "app": {
     "bundle": "635896473",
-    "os": "ios"
+    "os": "ios",
     "name": "ASKfm: Ask Anonymous Questions 12+",
     "price": 0,
     "score": 4,
@@ -65,7 +65,7 @@ Response:
   "median_bidprice": 0.77,
   "imps_available": 129001211
 }, {
-  "domain": "msn.com"
+  "domain": "msn.com",
   "median_bidfloor": 0.84,
   "median_bidprice": 2.2,
   "imps_available": 12345321
@@ -85,7 +85,7 @@ Response:
   "geo": "USA",
   "median_bidfloor": 0.32,
   "median_bidprice": 0.45,
-  "imps_available": 12345321
+  "imps_available": 12345321,
   "position": 1
 }]
 ```
