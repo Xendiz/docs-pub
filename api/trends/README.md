@@ -11,6 +11,13 @@ Trends are something that is popular inside the Xendiz Marketplace right now. Op
 ### Dsp
 Trading volumes and prices for the most popular traffic in real time. Set up your campaigns based on data.
 
+This section's methods main purpose - is to provide you data about trends on our platform
+All of methods are more or less self-descriptive:
+- If you want to get data on trending applications then you should use first method.
+- Second method is used when you want to get trends on sites.
+- Third method will provide you with data on what ad types are popular right now.
+- Last method will show you which platforms are currently trending.
+
 ## Applications
 Get the most trading applications.
 
@@ -20,7 +27,7 @@ Response:
 [{
   "app": {
     "bundle": "com.enflick.android.TextNow",
-    "os": "android"
+    "os": "android",
     "name": "TextNow - free text + calls",
     "price": 0,
     "score": 4.4,
@@ -33,7 +40,7 @@ Response:
 }, {
   "app": {
     "bundle": "635896473",
-    "os": "ios"
+    "os": "ios",
     "name": "ASKfm: Ask Anonymous Questions 12+",
     "price": 0,
     "score": 4,
@@ -58,7 +65,7 @@ Response:
   "median_bidprice": 0.77,
   "imps_available": 129001211
 }, {
-  "domain": "msn.com"
+  "domain": "msn.com",
   "median_bidfloor": 0.84,
   "median_bidprice": 2.2,
   "imps_available": 12345321
@@ -78,7 +85,7 @@ Response:
   "geo": "USA",
   "median_bidfloor": 0.32,
   "median_bidprice": 0.45,
-  "imps_available": 12345321
+  "imps_available": 12345321,
   "position": 1
 }]
 ```
