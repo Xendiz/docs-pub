@@ -11,6 +11,13 @@ Trends are something that is popular inside the Xendiz Marketplace right now. Op
 ### Dsp
 Trading volumes and prices for the most popular traffic in real time. Set up your campaigns based on data.
 
+This section's methods main purpose - is to provide you data about trends on our platform
+All of methods are more or less self-descriptive:
+- If you want to get data on trending applications then you should use first method.
+- Second method is used when you want to get trends on sites.
+- Third method will provide you with data on what ad types are popular right now.
+- Last method will show you which platforms are currently trending.
+
 ## Applications
 Get the most trading applications.
 
