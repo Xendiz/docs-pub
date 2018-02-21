@@ -36,6 +36,57 @@ This section of describes API routes for demand-side platforms.
   - type - sets type of blocked item. Can be set to `app` to block bundle, `site` to block  domain or `publisher` to block publisher.
   - source - that describes blocked entity and could be app bundle, site domain or Xendiz publisher ID
 - Fourth method is used to get list of all targeting campaigns for specific endpoint
+
+### Second section is used when you want to get financial report of your company
+It's only method recieves up to 4 parameters which are fully optional
+- First parameter is `from` and it is used to set beginning of date interval in format `YYYY-MM-DD`. If not set then date for current day will be used.
+- Second parameter is `to` and it is used to set end of date interval in format `YYYY-MM-DD`. If not set then date for current day will be used.
+- Third parameter is `endpoint_id` which is used to choose one distinct endpoint for report generation. If not set then report will be generated based on all of your company's endpoints.
+- Fourth and last parameter is `hour` and it is used to switch report to hourly format
+
+All of these parameters are sent via URL.
+
+### Third section is used when you need to generate custom report with fields that interests you
+- First method of this section generates report based on your ad campaign
+  - The only required paramater here is `cid` - that is id of your campaign
+  - `from` and `to` parameters are optional and used to set beginning and end of date period for your report respectively in `YYYY-MM-DD` format. If either or both of them aren't set, then date for current day will be used.
+  - Last parameter, which is `endpoint_id` is used when you want to get report for specific enpoint. If not set, then full report for all of your endpoints will be generated.
+- Second method of this section generates report based on your creative identifier.
+  - The only required paramater here is `crid` - that is your creative identifier
+  - `from` and `to` parameters are optional and used to set beginning and end of date period for your report respectively in `YYYY-MM-DD` format. If either or both of them aren't set, then date for current day will be used.
+  - Last parameter, which is `endpoint_id` is used when you want to get report for specific enpoint. If not set, then full report for all of your endpoints will be generated.
+- Next two methods are used when you want to get report based on either your domains or bundles.
+  - Both methods may receive up to three parameters, all of them are fully optional.
+    - `from` and `to` parameters are optional and used to set beginning and end of date period for your report respectively in `YYYY-MM-DD` format. If either or both of them aren't set, then date for current day will be used.
+    - `endpoint_id` parameter is used to choose one distinct endpoint for report generation. If not set then report will be generated based on all of your company's endpoints.
+- Next two methods are used when you want to get report based on either one specific domain or bundle.
+  - Necessary domain or bundle should be set in route's path
+  - As URL parameters you can set up to three parameters which are fully optional
+    - `from` and `to` parameters are optional and used to set beginning and end of date period for your report respectively in `YYYY-MM-DD` format. If either or both of them aren't set, then date for current day will be used.
+    - `endpoint_id` parameter is used to choose one distinct endpoint for report generation. If not set then report will be generated based on all of your company's endpoints.
+- Two following methods are used when you want to get report based on os or geo.
+  - Both methods may receive up to three parameters, all of them are fully optional.
+    - `from` and `to` parameters are optional and used to set beginning and end of date period for your report respectively in `YYYY-MM-DD` format. If either or both of them aren't set, then date for current day will be used.
+    - `endpoint_id` parameter is used to choose one distinct endpoint for report generation. If not set then report will be generated based on all of your company's endpoints.
+- Next method is used when you want to get report based on users.
+  - **To use this method you shoul integrate your cookie sync with Xendiz SSP**
+  - This method may receive up to three parameters, all of them are fully optional.
+    - `from` and `to` parameters are optional and used to set beginning and end of date period for your report respectively in `YYYY-MM-DD` format. If either or both of them aren't set, then date for current day will be used.
+    - `endpoint_id` parameter is used to choose one distinct endpoint for report generation. If not set then report will be generated based on all of your company's endpoints.
+- Last method is used when you need to generate custom report with fields that interests you
+  - First three parameters are send via URL and duplicate first three parameters for financial report:
+    - First parameter is `from` and it is used to set beginning of date interval in format `YYYY-MM-DD`. If not set then date for current day will be used.
+    - Second parameter is `to` and it is used to set end of date interval in format `YYYY-MM-DD`. If not set then date for current day will be used.
+    - Third parameter is `endpoint_id` which is used to choose one distinct endpoint for report generation. If not set then report will be generated based on all of your company's endpoints.
+
+  - Next parameters are sent via body of POST request:
+    - AdType is a parameter that describes platform that you want to do research for (site or application).
+    - Platform is an object that describes which platform-specific parameters you want to include to your report. All of it's fields are boolean-typed.
+    - Device is an object that describes which device-specific parameters you want to include to your report.  All of it's fields are boolean-typed.
+    - Select is an object that describes fields that you want to group by and select for your report.
+      - Almost all of it's parameters are boolean, exept for `price` - it's an object than has two fields: boolean flag which is used to add or remove this option from selection and second string-based one which describes function with which you want to aggregate your price by.
+
+**You cannot set more than five flags to true at the same time.**
 ## Profile API
 
 ### Company DSP endpoints 
@@ -573,7 +624,7 @@ Query params
 
 ### User report
 
-You should intargate cookie sync with Xendiz SSP to use this method
+You should intergate cookie sync with Xendiz SSP to use this method
 
 `GET` /dsp/detailed/users
 
