@@ -46,7 +46,6 @@ Next parameters are sent via body of POST request:
 
 **You cannot set more than five flags to true at the same time.**
 
-
 ## Profile API
 
 ### Company SSP endpoints
