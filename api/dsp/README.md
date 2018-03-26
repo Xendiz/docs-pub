@@ -47,7 +47,7 @@ It's only method recieves up to 4 parameters which are fully optional
 All of these parameters are sent via URL.
 
 ### Third section is used when you need to generate custom report with fields that interests you
-**All methods in this section are accepting optional parameter which limits amount of rows in response, if not set then default value will be used (10 rows)**
+**All methods in this section are accepting optional url parameter which limits amount of rows in response, if not set then default value will be used (10 rows)**
 - First method of this section generates report based on your ad campaign
   - The only required paramater here is `cid` - that is id of your campaign
   - `from` and `to` parameters are optional and used to set beginning and end of date period for your report respectively in `YYYY-MM-DD` format. If either or both of them aren't set, then date for current day will be used.
