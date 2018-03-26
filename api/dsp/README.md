@@ -59,6 +59,7 @@ All of these parameters are sent via URL.
   - Both methods may receive up to three parameters, all of them are fully optional.
     - `from` and `to` parameters are optional and used to set beginning and end of date period for your report respectively in `YYYY-MM-DD` format. If either or both of them aren't set, then date for current day will be used.
     - `endpoint_id` parameter is used to choose one distinct endpoint for report generation. If not set then report will be generated based on all of your company's endpoints.
+    - if you want to get detailed data about each bundle set url parameter `detailed` to 1
 - Next two methods are used when you want to get report based on either one specific domain or bundle.
   - Necessary domain or bundle should be set in route's path
   - As URL parameters you can set up to three parameters which are fully optional
@@ -86,7 +87,6 @@ All of these parameters are sent via URL.
     - Select is an object that describes fields that you want to group by and select for your report.
       - Almost all of it's parameters are boolean, exept for `price` - it's an object than has two fields: boolean flag which is used to add or remove this option from selection and second string-based one which describes function with which you want to aggregate your price by.
 
-**You cannot set more than five flags to true at the same time.**
 ## Profile API
 
 ### Company DSP endpoints 
@@ -395,6 +395,7 @@ Query params
 | from         | Date   | No        | Start date. If not set then current day will be chosen. Example: `&from=2018-01-01`
 | to           | Date   | No         | End date. Example: `&to=2018-01-10`
 | endpoint_id  | Int    | No         | Specific endpoint id. If the param is not specified, a full report will be created for all the endpoints of the company. Example: `&endpoint_id=21`
+| limit        | Int    | No         | Number of rows in response. Default is 10
 
 Response:
 
@@ -424,6 +425,7 @@ Query params
 | from         | Date   | No        | Start date. If not set then current day will be chosen. Example: `&from=2018-01-01`
 | to           | Date   | No         | End date. Example: `&to=2018-01-10`
 | endpoint_id  | Int    | No         | Specific endpoint id. If the param is not specified, a full report will be created for all the endpoints of the company. Example: `&endpoint_id=21`
+| limit        | Int    | No         | Number of rows in response. Default is 10
 
 Response:
 
@@ -452,6 +454,7 @@ Query params
 | from         | Date   | No        | Start date. If not set then current day will be chosen. Example: `&from=2018-01-01`
 | to           | Date   | No         | End date. Example: `&to=2018-01-10`
 | endpoint_id  | Int    | No         | Specific endpoint id. If the param is not specified, a full report will be created for all the endpoints of the company. Example: `&endpoint_id=21`
+| limit        | Int    | No         | Number of rows in response. Default is 10
 
 Response:
 
@@ -482,6 +485,8 @@ Query params
 | from         | Date   | No        | Start date. If not set then current day will be chosen. Example: `&from=2018-01-01`
 | to           | Date   | No         | End date. Example: `&to=2018-01-10`
 | endpoint_id  | Int    | No         | Specific endpoint id. If the param is not specified, a full report will be created for all the endpoints of the company. Example: `&endpoint_id=21`
+| detailed     | int   | No         | Set to 1 if you want detailed data about bundle
+| limit        | Int    | No         | Number of rows in response. Default is 10
 
 Response
 
@@ -512,6 +517,7 @@ Path params
 | Name         | Type   | isRequired | Description   |
 | -------------| ------ | ---------- | ------------- |
 | domain       | String | Yes        | Domain for which you want to receive the report
+| limit        | Int    | No         | Number of rows in response. Default is 10
 
 Query params
 
@@ -543,6 +549,7 @@ Path params
 | Name         | Type   | isRequired | Description   |
 | -------------| ------ | ---------- | ------------- |
 | bundle       | String | Yes        | Bundle for which you want to receive the report
+| limit        | Int    | No         | Number of rows in response. Default is 10
 
 Query params
 
@@ -577,6 +584,7 @@ Query params
 | from         | Date   | No        | Start date. If not set then current day will be chosen. Example: `&from=2018-01-01`
 | to           | Date   | No         | End date. Example: `&to=2018-01-10`
 | endpoint_id  | Int    | No         | Specific endpoint id. If the param is not specified, a full report will be created for all the endpoints of the company. Example: `&endpoint_id=21`
+| limit        | Int    | No         | Number of rows in response. Default is 10
 
 ```json
 {
@@ -605,6 +613,7 @@ Query params
 | from         | Date   | No        | Start date. If not set then current day will be chosen. Example: `&from=2018-01-01`
 | to           | Date   | No         | End date. Example: `&to=2018-01-10`
 | endpoint_id  | Int    | No         | Specific endpoint id. If the param is not specified, a full report will be created for all the endpoints of the company. Example: `&endpoint_id=21`
+| limit        | Int    | No         | Number of rows in response. Default is 10
 
 ```json
 {
@@ -635,6 +644,7 @@ Query params
 | from         | Date   | No        | Start date. If not set then current day will be chosen. Example: `&from=2018-01-01`
 | to           | Date   | No         | End date. Example: `&to=2018-01-10`
 | endpoint_id  | Int    | No         | Specific endpoint id. If the param is not specified, a full report will be created for all the endpoints of the company. Example: `&endpoint_id=21`
+| limit        | Int    | No         | Number of rows in response. Default is 10
 
 ```json
 {
@@ -663,15 +673,24 @@ Query params
 | from         | Date   | No        | Start date. If not set then current day will be chosen. Example: `&from=2018-01-01`
 | to           | Date   | No         | End date. Example: `&to=2018-01-10`
 | endpoint_id  | Int    | No         | Specific endpoint id. If the param is not specified, a full report will be created for all the endpoints of the company. Example: `&endpoint_id=21`
+| limit        | Int    | No         | Number of rows in response. Default is 10
 
 Body Params
 
 | Name         | Type   | isRequired | Description   |
 | -------------| ------ | ---------- | ------------- |
-| adtype       | String | No         | Platfrom type. `app` or `site`
+| adtype       | Object | No         | Adv object
 | platform     | Object | No         | Platfrom Object
 | device       | Object | No         | Device Object
 | select    | Object | No         | Selection Object
+
+Adv object
+
+| Name         | Type   | isRequired | Description   |
+| -------------| ------ | ---------- | ------------- |
+| site         | Bool   | No         | Advert in site
+| app          | Bool   | No         | Advert in bundle
+
 
 Platfrom Object
 
