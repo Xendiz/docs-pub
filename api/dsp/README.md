@@ -202,31 +202,82 @@ Response:
 ```json
 {
   "data": [{
-    "campaignId": "cid1234",
-    "device": {
-      "mobile": true,
-      "desktop": true,
-      "tablet": true
+        "campaignId": "default",
+        "cost": 0,
+        "device": {
+            "mobile": false,
+            "desktop": true,
+            "tablet": false
+        },
+        "platform": {
+            "web": true,
+            "app": true
+        },
+        "connection": {
+            "ethernet": true,
+            "wifi": true,
+            "cellular": true
+        },
+        "os": [
+            "android",
+            "blackberry",
+            "ios",
+            "windows",
+            "windows mobile"
+        ],
+        "countries": [
+            "ALA"
+        ],
+        "sizes": [
+            {
+                "w": 336,
+                "h": 445
+            },
+            {
+                "w": 345,
+                "h": 333
+            }
+        ]
     },
-    "platform": {
-      "web": true,
-      "app": true
-    },
-    "os": ["android", "ios"],
-    "connection": {
-      "ethernet": true,
-      "wifi": true,
-      "cellular": true
-    },
-    "sizes": [{
-      "w": 320,
-      "h": 250
-    }, {
-      "w": 320,
-      "h": 50
-    }],
-    "countries": ["USA", "RUS", "ITA", "GBR"]
-  }]
+    {
+        "campaignId": "cid-2234",
+        "cost": 0,
+        "device": {
+            "mobile": true,
+            "desktop": true,
+            "tablet": true
+        },
+        "platform": {
+            "web": true,
+            "app": true
+        },
+        "connection": {
+            "ethernet": true,
+            "wifi": true,
+            "cellular": true
+        },
+        "os": [
+            "android",
+            "ios",
+            "windows"
+        ],
+        "countries": [
+            "AUS",
+            "JAP",
+            "RUS",
+            "USA"
+        ],
+        "sizes": [
+            {
+                "w": 150,
+                "h": 150
+            },
+            {
+                "w": 300,
+                "h": 400
+            }
+        ]
+    }]
 }
 ```
 
