@@ -159,9 +159,9 @@ Response:
 }
 ```
 
-### Add item to block list
+### Add items to block list
 
-`POST` /dsp/`:id`/block
+`PUT` /dsp/`:id`/block
 
 Path params
 
@@ -186,6 +186,40 @@ Request:
   "source": "eef8d4ee64"
 }]
 ```
+
+Response: 
+* STATUS CODE 204
+
+### Remove items to block list
+
+`DELETE` /dsp/`:id`/block
+
+Path params
+
+| Name         | Type | isRequired | Description   |
+| -------------| ---- | ---------- | ------------- |
+| id           | Int  | Yes        | Specific endpoint id. Example: `/21`
+
+Body params
+
+| Name         | Type    | isRequired | Description   |
+| -------------| ------- | ---------- | ------------- |
+| type         | String  | Yes        | One of `app`, `site`, `publisher`
+| source       | Object  | No         | App bundle, site domain or Xendiz publisher ID
+
+Request:
+```json
+[{
+  "type": "app",
+  "source": "com.test.bundle"
+}, {
+  "type": "publisher",
+  "source": "eef8d4ee64"
+}]
+```
+
+Response: 
+* STATUS CODE 204
 
 ### DSP campaigns target
 
