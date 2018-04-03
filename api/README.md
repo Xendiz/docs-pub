@@ -20,9 +20,9 @@ Response:
 ```json
 {
     "data": {
-        "username": "Lorem Ipsum",
-        "password": "pass",
-        "apiKey": "apikey",
+        "username": "demo",
+        "password": "demoe",
+        "apiKey": "01bde69ca3b11b8eaac505b63562hd0a",
         "Ssps": [
             {
                 "id": 5,
@@ -33,7 +33,7 @@ Response:
         "Dsps": [
             {
                 "id": 1,
-                "name": "Lorem "
+                "name": "Demo DSP #1"
             },
             {}
         ]
