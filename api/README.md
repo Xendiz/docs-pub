@@ -19,9 +19,8 @@ Request:
 Response:
 ```json
 {
-	{
     "data": {
-        "username": "Lorem Ipsum"",
+        "username": "Lorem Ipsum",
         "password": "pass",
         "apiKey": "apikey",
         "Ssps": [
@@ -39,7 +38,6 @@ Response:
             {}
         ]
     }
-}
 }
 ```
 
