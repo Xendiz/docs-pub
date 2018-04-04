@@ -137,21 +137,21 @@ Response:
         "id": 1,
         "name": "Lorem ",
         "token": "2330c0eef8d4ee649c8e8b6cefd2d9a3",
-        "endpoint": "dsp.com/",
+        "endpoint": "http://dsp.com/bid/xendiz",
         "isBanner": 1,
         "isAudio": 0,
         "isVideo": 1,
         "isNative": 1,
-        "qpsLimit": 50,
+        "qpsLimit": 500,
         "bidQps": 1,
         "sumReq": 2000014,
         "sumRes": 1000004,
-        "sumImp": 0,
-        "realQps": 1,
-        "spendToday": 0,
+        "sumImp": 2440931,
+        "realQps": 1024,
+        "spendToday": 122.2,
         "manager": {
-            "name": "Lorem1 Ipsum2",
-            "email": "demo@xendiz.com"
+            "name": "John Doe",
+            "email": "hello@xendiz.com"
         },
         "blockedPlatforms": [
             {
