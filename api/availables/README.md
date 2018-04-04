@@ -1,13 +1,7 @@
 # Availables API
-* [Overview](#overview)
 
-
-## Overview
-  This section of API lists two methods:
-- First is used to fetch list of available OS in our system.
-- Second is used to fetch lost of available sizes in our system.
-
-`GET` /availables/os
+`GET` /availables/os<br>
+Fetch list of available OS.
 
 Response
 ```json
@@ -21,6 +15,7 @@ Response
 ```
 
 `GET` /availables/size
+Fetch list of available sizes.
 
 Response
 ```json
