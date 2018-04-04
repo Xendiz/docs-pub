@@ -16,7 +16,20 @@ All of methods are more or less self-descriptive:
 - If you want to get data on trending applications then you should use first method.
 - Second method is used when you want to get trends on sites.
 - Third method will provide you with data on what ad types are popular right now.
-- Last method will show you which platforms are currently trending.
+- Fourth method will show you which platforms are currently trending.
+- Last method is used when you want to generate custom trends report
+  - First three parameters are send via URL and duplicate first three parameters for financial report:
+    - First parameter is `from` and it is used to set beginning of date interval in format `YYYY-MM-DD`. If not set then date for current day will be used.
+    - Second parameter is `to` and it is used to set end of date interval in format `YYYY-MM-DD`. If not set then date for current day will be used.
+
+  - Next parameters are sent via body of POST request:
+    - AdType is a parameter that describes platform that you want to do research for (site or application).
+    - Platform is an object that describes which platform-specific parameters you want to include to your report. All of it's fields are boolean-typed.
+    - Device is an object that describes which device-specific parameters you want to include to your report.  All of it's fields are boolean-typed.
+    - Select is an object that describes fields that you want to group by and select for your report.
+      - Almost all of it's parameters are boolean, exept for `price` - it's an object than has two fields: boolean flag which is used to add or remove this option from selection and second string-based one which describes function with which you want to aggregate your price by.
+      
+**Last method's difference between dates shouldn't be greater than 1 month**
 
 ## Applications
 Get the most trading applications.
@@ -105,4 +118,124 @@ Response:
   "median_bidprice": 0.45,
   "imps_available": 12345321
 }]
+```
+
+## Custom
+Generate custom trends report 
+
+`POST` /trends/custom
+
+Query params
+
+| Name         | Type   | isRequired | Description   |
+| -------------| ------ | ---------- | ------------- |
+| from         | Date   | No        | Start date. If not set then current day will be chosen. Example: `&from=2018-01-01`
+| to           | Date   | No         | End date. Example: `&to=2018-01-10`
+
+**Date difference between from and to must be lesser than month**
+
+Body Params
+
+| Name         | Type   | isRequired | Description   |
+| -------------| ------ | ---------- | ------------- |
+| adtype       | Object | No         | Adv object
+| platform     | Object | No         | Platform Object
+| device       | Object | No         | Device Object
+| select    | Object | No         | Selection Object
+
+Adv object
+
+| Name         | Type   | isRequired | Description   |
+| -------------| ------ | ---------- | ------------- |
+| site         | Bool   | No         | Advert in site
+| app          | Bool   | No         | Advert in bundle
+
+
+Platfrom Object
+
+| Name         | Type   | isRequired | Description   |
+| -------------| ------ | ---------- | ------------- |
+| domain       | Bool   | No         | Platfrom domain
+| bundle       | Bool   | No         | Platfrom bundle
+| name         | Bool   | No         | Platfrom name
+| id           | Bool   | No         | Platfrom id
+
+Device Object
+
+| Name         | Type   | isRequired | Description   |
+| -------------| ------ | ---------- | ------------- |
+| os           | Bool   | No         | Device os
+| type         | Bool   | No         | Device type
+| vendor       | Bool   | No         | Device vendor
+| ct           | Bool   | No         | Device connection type
+| country      | Bool   | No         | Device country
+
+Select
+
+| Name         | Type   | isRequired | Description   |
+| -------------| ------ | ---------- | ------------- |
+| date         | Bool   | No         | Date
+| size         | Bool   | No         | Size
+| campaign     | Bool   | No         | Dsp campaign
+| creative     | Bool   | No         | Dsp creative
+| category     | Bool   | No         | Content category
+| price        | Object | No         |
+| price.on     | Bool   | No         | Add cost to selection
+| price.value  | String | No         | Aggregate function: `median`, `sum`, `average`
+
+Example request
+
+```json
+{
+    "adType": "app",
+    "platform": {
+        "domain": false,
+        "bundle": false,
+        "name": false,
+        "id": false
+    },
+    "device": {
+        "ip": false,
+        "os": true,
+        "type": false,
+        "vendor": false,
+        "ct": true,
+        "country": false
+    },
+    "select": {
+        "date": false,
+        "size": true,
+        "campaign": false,
+        "creative": false,
+        "category": false,
+        "price": {
+            "on": true,
+            "value": "median"
+        }
+    }
+}
+```
+
+Response
+```json
+{
+    "fields": [
+        "OS",
+        "Connection Type",
+        "Date",
+        "Size",
+        "Price",
+        "Impressions"
+    ],
+    "data": [
+        [
+            "android",
+            "WIFI",
+            "320x50",
+            0.58792,
+            "290112"
+        ],
+        []
+    ]
+}
 ```

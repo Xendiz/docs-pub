@@ -228,6 +228,7 @@ Body Params
 | platform     | Object | No         | Platfrom Object
 | device       | Object | No         | Device Object
 | select       | Object | No         | Selection Object
+| limit        | Int    | No         | Number of rows in response. Default is 10
 
 Platfrom Object
 
