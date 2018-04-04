@@ -126,36 +126,35 @@ Response:
 
 ```json
 {
-  "data": {
-    "id": 21,
-    "name": "Demo banner",
-    "token": "2330c0eef8d4ee649c8e8b6cefd2d9a3",
-    "endpoint": "http://dsp.com/bid",
-    "region": "us-east-1",
-    "isBanner": 1,
-    "isNative": 0,
-    "isVideo": 0,
-    "isAudio": 0,
-    "qpsLimit": 1000,
-    "bidQps": 100,
-    "sumReq": 123420199321,
-    "sumRes": 221342132,
-    "sumImp": 200210,
-    "manager": {
-      "name": "John Doe",
-      "email": "john.doe@xendiz.com"
-    },
-    "blockedPlatforms": [{
-      "type": "site",
-      "source": "google.com"
-    }, {
-      "type": "app",
-      "source": "com.google"
-    }, {
-      "type": "publisher",
-      "source": "eef8d4ee64"
-    }]
-  }
+    "data": {
+        "id": 1,
+        "name": "Lorem ",
+        "token": "2330c0eef8d4ee649c8e8b6cefd2d9a3",
+        "endpoint": "dsp.com/",
+        "isBanner": 1,
+        "isAudio": 0,
+        "isVideo": 1,
+        "isNative": 1,
+        "qpsLimit": 50,
+        "bidQps": 1,
+        "sumReq": 2000014,
+        "sumRes": 1000004,
+        "sumImp": 0,
+        "realQps": 1,
+        "spendToday": 0,
+        "manager": {
+            "name": "Lorem1 Ipsum2",
+            "email": "demo@xendiz.com"
+        },
+        "blockedPlatforms": [
+            {
+                "type": "app",
+                "source": "com.app.awesome"
+            },
+            {}
+        ],
+        "region": "us-east-1"
+    }
 }
 ```
 
@@ -235,83 +234,171 @@ Response:
 
 ```json
 {
-  "data": [{
-        "campaignId": "default",
-        "cost": 0,
-        "device": {
-            "mobile": false,
-            "desktop": true,
-            "tablet": false
-        },
-        "platform": {
-            "web": true,
-            "app": true
-        },
-        "connection": {
-            "ethernet": true,
-            "wifi": true,
-            "cellular": true
-        },
-        "os": [
-            "android",
-            "blackberry",
-            "ios",
-            "windows",
-            "windows mobile"
-        ],
-        "countries": [
-            "ALA"
-        ],
-        "sizes": [
-            {
-                "w": 336,
-                "h": 445
+    "data": [
+        {
+            "campaignId": "default",
+            "cost": 0,
+            "device": {
+                "mobile": false,
+                "desktop": true,
+                "tablet": false
             },
-            {
-                "w": 345,
-                "h": 333
-            }
-        ]
-    },
-    {
-        "campaignId": "cid-2234",
-        "cost": 0,
-        "device": {
-            "mobile": true,
-            "desktop": true,
-            "tablet": true
-        },
-        "platform": {
-            "web": true,
-            "app": true
-        },
-        "connection": {
-            "ethernet": true,
-            "wifi": true,
-            "cellular": true
-        },
-        "os": [
-            "android",
-            "ios",
-            "windows"
-        ],
-        "countries": [
-            "AUS",
-            "JAP",
-            "RUS",
-            "USA"
-        ],
-        "sizes": [
-            {
-                "w": 150,
-                "h": 150
+            "platform": {
+                "web": false,
+                "app": false
             },
-            {
-                "w": 300,
-                "h": 400
-            }
-        ]
-    }]
+            "connection": {
+                "ethernet": true,
+                "wifi": true,
+                "cellular": true
+            },
+            "os": [
+                "android",
+                "blackberry",
+                "ios",
+                "windows"
+            ],
+            "countries": [
+                "ALA",
+                "RUS"
+            ],
+            "sizes": [
+                {
+                    "w": 325,
+                    "h": 333
+                },
+                {
+                    "w": 336,
+                    "h": 445
+                },
+                {
+                    "w": 345,
+                    "h": 333
+                }
+            ],
+            "blockedPlatforms": [
+                {
+                    "type": "app",
+                    "source": "com.app.awesome"
+                },
+                {}
+            ]
+        },
+        {
+            "campaignId": "cid-1234",
+            "cost": 123.22,
+            "device": {
+                "mobile": false,
+                "desktop": true,
+                "tablet": false
+            },
+            "platform": {
+                "web": false,
+                "app": true
+            },
+            "connection": {
+                "ethernet": true,
+                "wifi": false,
+                "cellular": true
+            },
+            "os": [
+                "android",
+                "ios"
+            ],
+            "countries": [
+                "GBR",
+                "ITA",
+                "USA"
+            ],
+            "sizes": [
+                {
+                    "w": 320,
+                    "h": 50
+                },
+                {
+                    "w": 320,
+                    "h": 250
+                }
+            ]
+        },
+        {
+            "campaignId": "cid-2234",
+            "cost": 0,
+            "device": {
+                "mobile": true,
+                "desktop": true,
+                "tablet": true
+            },
+            "platform": {
+                "web": true,
+                "app": true
+            },
+            "connection": {
+                "ethernet": true,
+                "wifi": true,
+                "cellular": true
+            },
+            "os": [
+                "android",
+                "ios",
+                "windows"
+            ],
+            "countries": [
+                "AUS",
+                "JAP",
+                "RUS",
+                "USA"
+            ],
+            "sizes": [
+                {
+                    "w": 150,
+                    "h": 150
+                },
+                {
+                    "w": 300,
+                    "h": 400
+                }
+            ]
+        },
+        {
+            "campaignId": "cid1234",
+            "cost": 23452.4,
+            "device": {
+                "mobile": true,
+                "desktop": true,
+                "tablet": true
+            },
+            "platform": {
+                "web": true,
+                "app": true
+            },
+            "connection": {
+                "ethernet": false,
+                "wifi": false,
+                "cellular": false
+            },
+            "os": [
+                "blackberry",
+                "ios"
+            ],
+            "countries": [
+                "GBR",
+                "ITA",
+                "RUS",
+                "USA"
+            ],
+            "sizes": [
+                {
+                    "w": 320,
+                    "h": 250
+                },
+                {
+                    "w": 320,
+                    "h": 450
+                }
+            ]
+        }
+    ]
 }
 ```
 
@@ -382,6 +469,50 @@ Request
   "countries": ["USA", "RUS", "ITA", "GBR"]
 }]
 ```
+### Update default DSP campaign
+
+`PUT` /dsp/`:id`/campaigns/default
+
+Path params
+
+| Name         | Type | isRequired | Description   |
+| -------------| ---- | ---------- | ------------- |
+| id           | Int  | Yes        | Specific endpoint id. Example: `/21`
+
+Body params
+
+| Name         | Type    | isRequired | Description   |
+| -------------| ------- | ---------- | ------------- |
+| device       | Object  | No         | Device target
+| platform     | Object  | No         | Platform target
+| os           | Array   | No         | OS target. See suported os list (link).
+| countries    | Array   | No         | Country target. Array of ISO 3 country codes.
+| connection   | Object  | No         | Connection target. See connection object (link)
+| sizes        | Array   | No         | Size target. See size object.
+| blockedPlatforms  | Array   | No         | Array of platform blockage objects
+
+Platform blockage Object
+
+| Name         | Type    | isRequired | Description   |
+| -------------| ------- | ---------- | ------------- |
+| type         | String  | Yes        | Type of selected platform (`site`,`app`,`publisher`)
+| source       | String  | Yes        | Platform domain if type is `site`, application bundle or Apple App ID if type is `app`,
+publisher if if type is `publisher`
+
+Connection Object
+
+| Name         | Type    | isRequired | Description   |
+| -------------| ------- | ---------- | ------------- |
+| ethernet     | Bool    | No         | Allow ethernet connection. `true` by default
+| wifi         | Bool    | No         | Allow wi-fi connection. `true` by default
+| cellular     | Bool    | No         | Allow cellular connection. `true` by default
+
+Size Object
+
+| Name         | Type    | isRequired | Description   |
+| -------------| ------- | ---------- | ------------- |
+| w            | Int     | Yes        | Width. Example: `320`
+| h            | Int     | Yes        | Height. Example: `50`
 
 ### Delete DSP campaign target
 
@@ -571,7 +702,7 @@ Query params
 | from         | Date   | No        | Start date. If not set then current day will be chosen. Example: `&from=2018-01-01`
 | to           | Date   | No         | End date. Example: `&to=2018-01-10`
 | endpoint_id  | Int    | No         | Specific endpoint id. If the param is not specified, a full report will be created for all the endpoints of the company. Example: `&endpoint_id=21`
-| detailed     | int   | No         | Set to 1 if you want detailed data about bundle
+| detailed     | int   | No         | Set to 1 if you want detailed data about each bundle
 | limit        | Int    | No         | Number of rows in response. Default is 10
 
 Response
@@ -603,7 +734,6 @@ Path params
 | Name         | Type   | isRequired | Description   |
 | -------------| ------ | ---------- | ------------- |
 | domain       | String | Yes        | Domain for which you want to receive the report
-| limit        | Int    | No         | Number of rows in response. Default is 10
 
 Query params
 
@@ -612,6 +742,7 @@ Query params
 | from         | Date   | No        | Start date. If not set then current day will be chosen. Example: `&from=2018-01-01`
 | to           | Date   | No         | End date. Example: `&to=2018-01-10`
 | endpoint_id  | Int    | No         | Specific endpoint id. If the param is not specified, a full report will be created for all the endpoints of the company. Example: `&endpoint_id=21`
+| limit        | Int    | No         | Number of rows in response. Default is 10. Example `&limit=15`.
 
 ```json
 {
@@ -635,7 +766,6 @@ Path params
 | Name         | Type   | isRequired | Description   |
 | -------------| ------ | ---------- | ------------- |
 | bundle       | String | Yes        | Bundle for which you want to receive the report
-| limit        | Int    | No         | Number of rows in response. Default is 10
 
 Query params
 
@@ -644,6 +774,7 @@ Query params
 | from         | Date   | No        | Start date. If not set then current day will be chosen. Example: `&from=2018-01-01`
 | to           | Date   | No         | End date. Example: `&to=2018-01-10`
 | endpoint_id  | Int    | No         | Specific endpoint id. If the param is not specified, a full report will be created for all the endpoints of the company. Example: `&endpoint_id=21`
+| limit        | Int    | No         | Number of rows in response. Default is 10. Example `&limit=15`.
 
 ```json
 {
@@ -759,16 +890,16 @@ Query params
 | from         | Date   | No        | Start date. If not set then current day will be chosen. Example: `&from=2018-01-01`
 | to           | Date   | No         | End date. Example: `&to=2018-01-10`
 | endpoint_id  | Int    | No         | Specific endpoint id. If the param is not specified, a full report will be created for all the endpoints of the company. Example: `&endpoint_id=21`
-| limit        | Int    | No         | Number of rows in response. Default is 10
 
 Body Params
 
 | Name         | Type   | isRequired | Description   |
 | -------------| ------ | ---------- | ------------- |
 | adtype       | Object | No         | Adv object
-| platform     | Object | No         | Platfrom Object
+| platform     | Object | No         | Platform Object
 | device       | Object | No         | Device Object
 | select    | Object | No         | Selection Object
+| limit        | Int    | No         | Number of rows in response. Default is 10
 
 Adv object
 
