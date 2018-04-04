@@ -5,7 +5,7 @@
 * [Trends API](./trends)
 
 ## Api Endpoint
-DSP API: ``http://api.xendiz.com/dsp`` <br>SSP API: ``http://api.xendiz.com/ssp``
+DSP API: ``http://api.xendiz.com/dsp`` <br>SSP API: ``http://api.xendiz.com/ssp``<br>TRENDS API: ``http://api.xendiz.com/trends``
 
 ## Authorization
 
@@ -16,7 +16,7 @@ DSP API: ``http://api.xendiz.com/dsp`` <br>SSP API: ``http://api.xendiz.com/ssp`
 * Pass `api_key` which you received in previous step to authorization header and get access to API
 
 ```bash
-`curl -d '{"username": "demo", "password":"demo"}' -H "Content-Type: application/json" -X POST http://api.xendiz.com/auth`
+curl -d '{"username": "demo", "password":"demo"}' -H "Content-Type: application/json" -X POST http://api.xendiz.com/auth
 ```
 
 Response:
