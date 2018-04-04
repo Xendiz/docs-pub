@@ -3,6 +3,7 @@
 * [DSP API](./dsp)
 * [SSP API](./ssp)
 * [Trends API](./trends)
+* [Availables API](./availables)
 
 ## Api Endpoint
 DSP API: ``http://api.xendiz.com/dsp`` <br>SSP API: ``http://api.xendiz.com/ssp``<br>TRENDS API: ``http://api.xendiz.com/trends``

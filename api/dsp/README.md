@@ -3,9 +3,12 @@
 * [Profile](#profile-api)
   * [Company DSP endpoints](#company-dsp-endpoints) 
   * [DSP endpoint details](#dsp-endpoint-details)
-  * [Add item to block list](#add-item-to-block-list)
+  * [Add item to block list](#add-items-to-block-list)
+  * [Remove item from block list](#remove-items-from-block-list)
   * [DSP campaigns target](#dsp-campaigns-target)
   * [Add DSP campaign target](#add-dsp-campaign-target)
+  * [Update default DSP campaign](#update-default-dsp-campaign)
+  * [Update existing DSP campaign](#update-existing-dsp-campaign)
   * [Delete DSP campaign target](#delete-dsp-campaign-target)
   * [Change DSP endpoint URL](#change-dsp-endpoint-url)
 * [Financial](#financial-api)
@@ -189,7 +192,7 @@ Request:
 Response: 
 * STATUS CODE 204
 
-### Remove items to block list
+### Remove items from block list
 
 `DELETE` /dsp/`:id`/block
 
@@ -469,6 +472,90 @@ Request
   "countries": ["USA", "RUS", "ITA", "GBR"]
 }]
 ```
+
+### Update existing DSP campaign
+
+Path params
+
+| Name         | Type | isRequired | Description   |
+| -------------| ---- | ---------- | ------------- |
+| id           | Int  | Yes        | Specific endpoint id. Example: `/21`
+
+Body params
+
+| Name         | Type    | isRequired | Description   |
+| -------------| ------- | ---------- | ------------- |
+| campaignId   | String  | Yes        | Dsp specific campaign ID. Example: `cid-2234`
+| device       | Object  | No         | Device target
+| platform     | Object  | No         | Platform target
+| os           | Array   | No         | OS target. See suported os list (link).
+| countries    | Array   | No         | Country target. Array of ISO 3 country codes.
+| connection   | Object  | No         | Connection target. See connection object (link)
+| sizes        | Array   | No         | Size target. See size object.
+
+Connection Object
+
+| Name         | Type    | isRequired | Description   |
+| -------------| ------- | ---------- | ------------- |
+| ethernet     | Bool    | No         | Allow ethernet connection. `true` by default
+| wifi         | Bool    | No         | Allow wi-fi connection. `true` by default
+| cellular     | Bool    | No         | Allow cellular connection. `true` by default
+
+Size Object
+
+| Name         | Type    | isRequired | Description   |
+| -------------| ------- | ---------- | ------------- |
+| w            | Int     | Yes        | Width. Example: `320`
+| h            | Int     | Yes        | Height. Example: `50`
+
+`PUT` /dsp/`:id`/campaigns/
+
+Request:
+```json
+{
+            "campaignId": "cid1234",
+            "cost": 23452.4,
+            "device": {
+                "mobile": true,
+                "desktop": true,
+                "tablet": true
+            },
+            "platform": {
+                "web": true,
+                "app": true
+            },
+            "connection": {
+                "ethernet": false,
+                "wifi": false,
+                "cellular": false
+            },
+            "os": [
+                "ios",
+                "blackberry"
+            ],
+            "countries": [
+                "GBR",
+                "ITA",
+                "RUS",
+                "USA"
+            ],
+            "sizes": [
+                {
+                    "w": 320,
+                    "h": 450
+                },
+                {
+                    "w": 320,
+                    "h": 250
+                }
+            ]
+        }
+```
+
+Response:
+
+* STATUS CODE 200
+
 ### Update default DSP campaign
 
 `PUT` /dsp/`:id`/campaigns/default
@@ -525,6 +612,10 @@ Path params
 | id           | Int  | Yes        | Specific endpoint id. Example: `/21`
 | target_id    | Int  | Yes        | Dsp specific campaign ID. Example: `cid-2234`
 
+Response:
+
+* STATUS CODE 204
+
 ### Change DSP endpoint URL
 
 `PUT` /dsp/`:id`/endpoint
@@ -547,6 +638,10 @@ Request:
   "endpoint": "http://dsp.com/bid?s=1"
 }
 ```
+
+Response:
+
+* STATUS CODE 204
 
 ## Financial API
 `GET` /dsp/financial
