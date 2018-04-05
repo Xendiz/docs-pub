@@ -1,0 +1,31 @@
+# Glossary
+- RTB - 
+- Xendiz - 
+- DSP -
+- SSP -
+- API - 
+- Endpoint
+- Creative
+- Campaign
+- Format
+- Impression
+- Integration
+- Bid Request
+- Bid Response
+- Bundle
+- App
+- Site
+- Carrier
+- CPM 
+- Device
+- Publisher
+- Banner ads
+- Native ads
+- Video ads
+- Revenue
+- VAST
+- Cookie sync
+- Qps
+- Targeting 
+- Tracker
+...

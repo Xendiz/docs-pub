@@ -6,33 +6,14 @@
 * [Device](#device)
 
 ## Overview
+This section's methods main purpose - is to provide you data about trends on Xendiz platform.
 ### Ssp
 Trends are something that is popular inside the Xendiz Marketplace right now. Open this traffic and increase your trading volumes.
 ### Dsp
-Trading volumes and prices for the most popular traffic in real time. Set up your campaigns based on data.
-
-This section's methods main purpose - is to provide you data about trends on our platform
-All of methods are more or less self-descriptive:
-- If you want to get data on trending applications then you should use first method.
-- Second method is used when you want to get trends on sites.
-- Third method will provide you with data on what ad types are popular right now.
-- Fourth method will show you which platforms are currently trending.
-- Last method is used when you want to generate custom trends report
-  - First three parameters are send via URL and duplicate first three parameters for financial report:
-    - First parameter is `from` and it is used to set beginning of date interval in format `YYYY-MM-DD`. If not set then date for current day will be used.
-    - Second parameter is `to` and it is used to set end of date interval in format `YYYY-MM-DD`. If not set then date for current day will be used.
-
-  - Next parameters are sent via body of POST request:
-    - AdType is a parameter that describes platform that you want to do research for (site or application).
-    - Platform is an object that describes which platform-specific parameters you want to include to your report. All of it's fields are boolean-typed.
-    - Device is an object that describes which device-specific parameters you want to include to your report.  All of it's fields are boolean-typed.
-    - Select is an object that describes fields that you want to group by and select for your report.
-      - Almost all of it's parameters are boolean, exept for `price` - it's an object than has two fields: boolean flag which is used to add or remove this option from selection and second string-based one which describes function with which you want to aggregate your price by.
-      
-**Last method's difference between dates shouldn't be greater than 1 month**
+Trading volumes and prices for the most popular traffic in real time. Set up your campaigns based on data.<br>
 
 ## Applications
-Get the most trading applications.
+Get data on trending applications then you should use first method.
 
 `GET` /trends/app
 Response:
@@ -122,28 +103,26 @@ Response:
 
 ## Custom
 Generate custom trends report 
-
 `POST` /trends/custom
 
 Query params
 
 | Name         | Type   | isRequired | Description   |
 | -------------| ------ | ---------- | ------------- |
-| from         | Date   | No        | Start date. If not set then current day will be chosen. Example: `&from=2018-01-01`
+| from         | Date   | No         | Set beginning of date interval in format `YYYY-MM-DD`. If not set then date for current day will be used. Example: `&from=2018-01-01`
 | to           | Date   | No         | End date. Example: `&to=2018-01-10`
 
-**Date difference between from and to must be lesser than month**
-
-Body Params
+Body Params<br>
+All of it's fields are boolean-typed.
 
 | Name         | Type   | isRequired | Description   |
 | -------------| ------ | ---------- | ------------- |
-| adtype       | Object | No         | Adv object
-| platform     | Object | No         | Platform Object
-| device       | Object | No         | Device Object
-| select    | Object | No         | Selection Object
+| adtype       | Object | No         | Describes platform that you want to do research for (site or application). 
+| platform     | Object | No         | Describes which platform-specific parameters you want to include to your report.
+| device       | Object | No         | Describes which device-specific parameters you want to include to your report.
+| select       | Object | No         | Describes fields that you want to group by and select for your report.
 
-Adv object
+Adtype object
 
 | Name         | Type   | isRequired | Description   |
 | -------------| ------ | ---------- | ------------- |
@@ -187,7 +166,10 @@ Example request
 
 ```json
 {
-    "adType": "app",
+    "adtype": {
+      "app": true,
+      "site": false
+    },
     "platform": {
         "domain": false,
         "bundle": false,
