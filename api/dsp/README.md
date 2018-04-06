@@ -28,9 +28,9 @@
 This section of describes API routes for demand-side platforms.
 
 ### This part of API is divided into 3 general sections:
-- Profile-based data and is used for work with your endpoints
-- Financial report generation and is used for work with your endpoints.
-- Detailed report generation and is used for work with your endpoints.
+- Profile-based data and that used for work with your endpoints.
+- Financial report generation that is used when you want to get financial report of your company.
+- Detailed report generation that is used when you need to generate report with fields that interests you.
 
 ## Profile API
 
