@@ -28,77 +28,16 @@
 This section of describes API routes for demand-side platforms.
 
 ### This part of API is divided into 3 general sections:
-- Profile-based data
-- Financial report generation
-- Detailed report generation
-
-### First section is used for work with your endpoints
-- First method of this section helps you to see all of your company's endpoints
-- Second method is used when you need more detailed information for specific endpoint
-- Third and fourth methods are used to add new items and remove existing ones respectively to blacklist for specific endpoint. They receive two parameters in body of `POST` request:
-  - type - sets type of blocked item. Can be set to `app` to block bundle, `site` to block  domain or `publisher` to block publisher.
-  - source - that describes blocked entity and could be app bundle, site domain or Xendiz publisher ID
-- Fifth method is used to get list of all targeting campaigns for specific endpoint
-- Sixth method is used to add new targeting campaign for specific endpoint
-- Next two methods are used to update targeting campaign but first is used to update default target and next for existing ones.
-- Ninth method is used to delete existing targeting campaign.
-- Last method is used to change URL for selected DSP.
-
-### Second section is used when you want to get financial report of your company
-It's only method recieves up to 4 parameters which are fully optional
-- First parameter is `from` and it is used to set beginning of date interval in format `YYYY-MM-DD`. If not set then date for current day will be used.
-- Second parameter is `to` and it is used to set end of date interval in format `YYYY-MM-DD`. If not set then date for current day will be used.
-- Third parameter is `endpoint_id` which is used to choose one distinct endpoint for report generation. If not set then report will be generated based on all of your company's endpoints.
-- Fourth and last parameter is `hour` and it is used to switch report to hourly format
-
-All of these parameters are sent via URL.
-
-### Third section is used when you need to generate custom report with fields that interests you
-**All methods in this section are accepting optional url parameter which limits amount of rows in response, if not set then default value will be used (10 rows)**
-- First method of this section generates report based on your ad campaign
-  - The only required paramater here is `cid` - that is id of your campaign
-  - `from` and `to` parameters are optional and used to set beginning and end of date period for your report respectively in `YYYY-MM-DD` format. If either or both of them aren't set, then date for current day will be used.
-  - Last parameter, which is `endpoint_id` is used when you want to get report for specific enpoint. If not set, then full report for all of your endpoints will be generated.
-- Second method of this section generates report based on your creative identifier.
-  - The only required paramater here is `crid` - that is your creative identifier
-  - `from` and `to` parameters are optional and used to set beginning and end of date period for your report respectively in `YYYY-MM-DD` format. If either or both of them aren't set, then date for current day will be used.
-  - Last parameter, which is `endpoint_id` is used when you want to get report for specific enpoint. If not set, then full report for all of your endpoints will be generated.
-- Next two methods are used when you want to get report based on either your domains or bundles.
-  - Both methods may receive up to three parameters, all of them are fully optional.
-    - `from` and `to` parameters are optional and used to set beginning and end of date period for your report respectively in `YYYY-MM-DD` format. If either or both of them aren't set, then date for current day will be used.
-    - `endpoint_id` parameter is used to choose one distinct endpoint for report generation. If not set then report will be generated based on all of your company's endpoints.
-    - if you want to get detailed data about each bundle set url parameter `detailed` to 1
-- Next two methods are used when you want to get report based on either one specific domain or bundle.
-  - Necessary domain or bundle should be set in route's path
-  - As URL parameters you can set up to three parameters which are fully optional
-    - `from` and `to` parameters are optional and used to set beginning and end of date period for your report respectively in `YYYY-MM-DD` format. If either or both of them aren't set, then date for current day will be used.
-    - `endpoint_id` parameter is used to choose one distinct endpoint for report generation. If not set then report will be generated based on all of your company's endpoints.
-- Two following methods are used when you want to get report based on os or geo.
-  - Both methods may receive up to three parameters, all of them are fully optional.
-    - `from` and `to` parameters are optional and used to set beginning and end of date period for your report respectively in `YYYY-MM-DD` format. If either or both of them aren't set, then date for current day will be used.
-    - `endpoint_id` parameter is used to choose one distinct endpoint for report generation. If not set then report will be generated based on all of your company's endpoints.
-- Next method is used when you want to get report based on users.
-  - **To use this method you shoul integrate your cookie sync with Xendiz SSP**
-  - This method may receive up to three parameters, all of them are fully optional.
-    - `from` and `to` parameters are optional and used to set beginning and end of date period for your report respectively in `YYYY-MM-DD` format. If either or both of them aren't set, then date for current day will be used.
-    - `endpoint_id` parameter is used to choose one distinct endpoint for report generation. If not set then report will be generated based on all of your company's endpoints.
-- Last method is used when you need to generate custom report with fields that interests you
-  - First three parameters are send via URL and duplicate first three parameters for financial report:
-    - First parameter is `from` and it is used to set beginning of date interval in format `YYYY-MM-DD`. If not set then date for current day will be used.
-    - Second parameter is `to` and it is used to set end of date interval in format `YYYY-MM-DD`. If not set then date for current day will be used.
-    - Third parameter is `endpoint_id` which is used to choose one distinct endpoint for report generation. If not set then report will be generated based on all of your company's endpoints.
-
-  - Next parameters are sent via body of POST request:
-    - AdType is a parameter that describes platform that you want to do research for (site or application).
-    - Platform is an object that describes which platform-specific parameters you want to include to your report. All of it's fields are boolean-typed.
-    - Device is an object that describes which device-specific parameters you want to include to your report.  All of it's fields are boolean-typed.
-    - Select is an object that describes fields that you want to group by and select for your report.
-      - Almost all of it's parameters are boolean, exept for `price` - it's an object than has two fields: boolean flag which is used to add or remove this option from selection and second string-based one which describes function with which you want to aggregate your price by.
+- Profile-based data and is used for work with your endpoints
+- Financial report generation and is used for work with your endpoints.
+- Detailed report generation and is used for work with your endpoints.
 
 ## Profile API
 
 ### Company DSP endpoints 
 `GET` /dsp
+
+This route is used to fetch all company's DSP enpoints.
 
 Response:
 
@@ -122,6 +61,8 @@ Response:
 
 ### DSP endpoint details
 `GET` /dsp/`:id`
+
+This route is used to get more detailed info about specific endpoint.
 
 Path params
 
@@ -169,6 +110,9 @@ Response:
 
 `PUT` /dsp/`:id`/block
 
+This route is used to add new items to DSP's block list.
+Request's body must be array of objects. Each object's contents are listed below in `Body params` section.
+
 Path params
 
 | Name         | Type | isRequired | Description   |
@@ -200,6 +144,9 @@ Response:
 
 `DELETE` /dsp/`:id`/block
 
+This route is used to remove items from DSP's block list.
+Request's body must be array of objects. Each object's contents are listed below in `Body params` section.
+
 Path params
 
 | Name         | Type | isRequired | Description   |
@@ -230,6 +177,9 @@ Response:
 ### DSP campaigns target
 
 `GET` /dsp/`:id`/campaigns
+
+This route is used to fetch all target campaigns for selected DSP.
+First element of response array always will be default target for selected DSP.
 
 Path params
 
@@ -413,6 +363,9 @@ Response:
 
 `POST` /dsp/`:id`/campaigns
 
+This route is used to create new target campaigns for selected DSP.
+Request's body must be array of objects. Each object contents are specified in `Body params` table below.
+
 Path params
 
 | Name         | Type | isRequired | Description   |
@@ -479,6 +432,10 @@ Request
 
 ### Update existing DSP campaign
 
+`PUT` /dsp/`:id`/campaigns/
+
+Route is used to update target campaign for selected DSP.
+
 Path params
 
 | Name         | Type | isRequired | Description   |
@@ -512,7 +469,6 @@ Size Object
 | w            | Int     | Yes        | Width. Example: `320`
 | h            | Int     | Yes        | Height. Example: `50`
 
-`PUT` /dsp/`:id`/campaigns/
 
 Request:
 ```json
@@ -564,6 +520,8 @@ Response:
 
 `PUT` /dsp/`:id`/campaigns/default
 
+Use this route to update **default** campaign for selected DSP.
+
 Path params
 
 | Name         | Type | isRequired | Description   |
@@ -605,9 +563,59 @@ Size Object
 | w            | Int     | Yes        | Width. Example: `320`
 | h            | Int     | Yes        | Height. Example: `50`
 
+Request:
+```json
+{
+            "device": {
+                "mobile": false,
+                "desktop": true,
+                "tablet": false
+            },
+            "platform": {
+                "web": false,
+                "app": false
+            },
+            "connection": {
+                "ethernet": true,
+                "wifi": true,
+                "cellular": true
+            },
+            "os": [
+                "android",
+                "blackberry",
+                "ios",
+                "windows"
+            ],
+            "countries": [
+                "ALA",
+                "RUS"
+            ],
+            "sizes": [
+                {
+                    "w": 336,
+                    "h": 445
+                },
+                {}
+            ],
+            "blockedPlatforms": [
+                {
+                    "type": "app",
+                    "source": "com.app.awesome"
+                },
+                {}
+            ]
+        }
+```
+
+Response:
+
+* STATUS CODE 200
+
 ### Delete DSP campaign target
 
 `DELETE` /dsp/`:id`/campaigns/`:target_id`
+
+This route is used to delete target campaign with id `:targed_id` from selected DSP.
 
 Path params
 
@@ -623,6 +631,8 @@ Response:
 ### Change DSP endpoint URL
 
 `PUT` /dsp/`:id`/endpoint
+
+This route is used to update endpoint URL for selected DSP.
 
 Path params
 
@@ -650,6 +660,10 @@ Response:
 ## Financial API
 `GET` /dsp/financial
 
+This route is used to generate financial report based on either one specific endpoint id or all of your company's endpoints.
+
+* Date fields `from` and `to` must be in format `YYYY-MM-DD`
+
 Query params
 
 | Name         | Type | isRequired | Description   |
@@ -660,6 +674,7 @@ Query params
 | hour         | Bool | No         | Hour aggregated report. Example: `&hour=1`
 
 `GET` /dsp/financial/?from=2018-01-01&to=2018-02-02
+
 Response:
 
 ```json
@@ -703,6 +718,10 @@ Response:
 
 `GET` /dsp/detailed/cid
 
+This method is used generate detailed report based company's campaign id.
+
+* Date fields `from` and `to` must be in format `YYYY-MM-DD`
+
 Query params
 
 | Name         | Type   | isRequired | Description   |
@@ -732,6 +751,10 @@ Response:
 ### Creative report
 
 `GET` /dsp/detailed/crid
+
+This method is used generate detailed report based company's creative id.
+
+* Date fields `from` and `to` must be in format `YYYY-MM-DD`
 
 Query params
 
@@ -763,6 +786,10 @@ Response:
 
 `GET` /dsp/detailed/domains
 
+This method is used to generate detailed report about domains in your company based on either one specific `endpoint_id` or all of your company's endpoints.
+
+* Date fields `from` and `to` must be in format `YYYY-MM-DD`
+
 Query params
 
 | Name         | Type   | isRequired | Description   |
@@ -793,6 +820,10 @@ Response:
 ### Bundle list 
 
 `GET` /dsp/detailed/bundles
+
+This method is used to generate detailed report about bundles in your company based on either one specific `endpoint_id` or all of your company's endpoints.
+
+* Date fields `from` and `to` must be in format `YYYY-MM-DD`
 
 Query params
 
@@ -828,6 +859,10 @@ Response
 
 `GET` /dsp/detailed/domain/`:domain`
 
+This method is used to generate detailed report about specific domain in your company based on either one `endpoint_id` or all of your company's endpoints.
+
+* Date fields `from` and `to` must be in format `YYYY-MM-DD`
+
 Path params
 
 | Name         | Type   | isRequired | Description   |
@@ -859,6 +894,10 @@ Query params
 
 ### Specific bundle report
 `GET` /dsp/detailed/bundle/`:bundle`
+
+This method is used to generate detailed report about specific bundle in your company based on either one `endpoint_id` or all of your company's endpoints.
+
+* Date fields `from` and `to` must be in format `YYYY-MM-DD`
 
 Path params
 
@@ -893,6 +932,10 @@ Query params
 
 `GET` /dsp/detailed/os
 
+This method is used to generate detailed report about operational systems in your company based on either one specific `endpoint_id` or all of your company's endpoints.
+
+* Date fields `from` and `to` must be in format `YYYY-MM-DD`
+
 Query params
 
 | Name         | Type   | isRequired | Description   |
@@ -922,6 +965,10 @@ Query params
 
 `GET` /dsp/detailed/geo
 
+This method is used to generate detailed report about geos in your company based on either one specific `endpoint_id` or all of your company's endpoints.
+
+* Date fields `from` and `to` must be in format `YYYY-MM-DD`
+
 Query params
 
 | Name         | Type   | isRequired | Description   |
@@ -949,9 +996,13 @@ Query params
 
 ### User report
 
-You should intergate cookie sync with Xendiz SSP to use this method
+* You should intergate cookie sync with Xendiz SSP to use this method
 
 `GET` /dsp/detailed/users
+
+This method is used to generate detailed report about users in your company based on either one specific `endpoint_id` or all of your company's endpoints.
+
+* Date fields `from` and `to` must be in format `YYYY-MM-DD`
 
 Query params
 
@@ -982,11 +1033,15 @@ Query params
 
 `POST` /dsp/detailed/custom
 
+This method is used to generate custom detailed report for your company based on either one specific `endpoint_id` or all of your company's endpoints. Select which field to include to your report in body params object, their contents are specified below.
+
+* Date fields `from` and `to` must be in format `YYYY-MM-DD`
+
 Query params
 
 | Name         | Type   | isRequired | Description   |
 | -------------| ------ | ---------- | ------------- |
-| from         | Date   | No        | Start date. If not set then current day will be chosen. Example: `&from=2018-01-01`
+| from         | Date   | No         | Start date. If not set then current day will be chosen. Example: `&from=2018-01-01`
 | to           | Date   | No         | End date. Example: `&to=2018-01-10`
 | endpoint_id  | Int    | No         | Specific endpoint id. If the param is not specified, a full report will be created for all the endpoints of the company. Example: `&endpoint_id=21`
 
@@ -997,7 +1052,7 @@ Body Params
 | adtype       | Object | No         | Adv object
 | platform     | Object | No         | Platform Object
 | device       | Object | No         | Device Object
-| select    | Object | No         | Selection Object
+| select       | Object | No         | Selection Object
 | limit        | Int    | No         | Number of rows in response. Default is 10
 
 Adv object
