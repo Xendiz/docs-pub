@@ -215,11 +215,18 @@ Body Params
 
 | Name         | Type   | isRequired | Description   |
 | -------------| ------ | ---------- | ------------- |
-| adtype       | String | No         | Platfrom type. `app` or `site`
+| adtype       | Object | No         | Adv object
 | platform     | Object | No         | Platfrom Object
 | device       | Object | No         | Device Object
 | select       | Object | No         | Selection Object
 | limit        | Int    | No         | Number of rows in response. Default is 10
+
+Adv object
+
+| Name         | Type   | isRequired | Description   |
+| -------------| ------ | ---------- | ------------- |
+| site         | Bool   | No         | Advert in site
+| app          | Bool   | No         | Advert in bundle
 
 Platfrom Object
 
@@ -258,7 +265,10 @@ Example request
 
 ```json
 {
-    "adType": "app",
+    "adType": {
+      "app": true,
+      "site": true
+    },
     "platform": {
         "domain": false,
         "bundle": false,
@@ -267,23 +277,24 @@ Example request
     },
     "device": {
         "ip": false,
-        "os": true,
+        "os": false,
         "type": false,
         "vendor": false,
         "ct": true,
-        "country": false
+        "country": true
     },
     "select": {
-        "date": false,
+        "date": true,
         "size": true,
-        "campaign": false,
+        "campaign": true,
         "creative": false,
         "category": false,
         "price": {
-            "on": true,
+            "on": false,
             "value": "median"
         }
-    }
+    },
+    "limit": 10
 }
 ```
 

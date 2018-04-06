@@ -1103,7 +1103,10 @@ Example request
 
 ```json
 {
-    "adType": "app",
+    "adType": {
+      "app": true,
+      "site": true
+    },
     "platform": {
         "domain": false,
         "bundle": false,
@@ -1112,23 +1115,24 @@ Example request
     },
     "device": {
         "ip": false,
-        "os": true,
+        "os": false,
         "type": false,
         "vendor": false,
         "ct": true,
-        "country": false
+        "country": true
     },
     "select": {
-        "date": false,
+        "date": true,
         "size": true,
-        "campaign": false,
+        "campaign": true,
         "creative": false,
         "category": false,
         "price": {
-            "on": true,
+            "on": false,
             "value": "median"
         }
-    }
+    },
+    "limit": 10
 }
 ```
 
