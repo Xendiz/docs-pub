@@ -5,7 +5,9 @@
 * [Trends API](./trends)
 
 ## Api Endpoint
-DSP API: ``http://api.xendiz.com/dsp`` <br>SSP API: ``http://api.xendiz.com/ssp``<br>TRENDS API: ``http://api.xendiz.com/trends``
+DSP API: ``http://api.xendiz.com/dsp``  
+SSP API: ``http://api.xendiz.com/ssp``  
+TRENDS API: ``http://api.xendiz.com/trends``
 
 ## Authorization
 

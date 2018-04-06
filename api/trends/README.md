@@ -29,12 +29,13 @@ All of methods are more or less self-descriptive:
     - Select is an object that describes fields that you want to group by and select for your report.
       - Almost all of it's parameters are boolean, exept for `price` - it's an object than has two fields: boolean flag which is used to add or remove this option from selection and second string-based one which describes function with which you want to aggregate your price by.
       
-**Last method's difference between dates shouldn't be greater than 1 month**
+
 
 ## Applications
+`GET` /trends/app
+
 Get the most trading applications.
 
-`GET` /trends/app
 Response:
 ```json
 [{
@@ -67,9 +68,10 @@ Response:
 ```
 
 ## Sites
+`GET` /trends/site
+
 Get the most trading web sites.
 
-`GET` /trends/site
 Response:
 ```json
 [{
@@ -86,9 +88,10 @@ Response:
 ```
 
 ## Formats
+`GET` /trends/format
+
 Get the most trading ad formats.
 
-`GET` /trends/format
 Response:
 ```json
 [{
@@ -104,9 +107,10 @@ Response:
 ```
 
 ## Device
+`GET` /trends/device
+
 Get the most trading devices.
 
-`GET` /trends/device
 Response:
 ```json
 [{
@@ -121,9 +125,13 @@ Response:
 ```
 
 ## Custom
-Generate custom trends report 
-
 `POST` /trends/custom
+
+Get custom trends report.
+
+**Difference between dates shouldn't be greater than 1 month**  
+* Date fields `from` and `to` must be in format `YYYY-MM-DD`
+
 
 Query params
 

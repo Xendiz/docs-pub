@@ -1,6 +1,6 @@
 # Availables API
 
-`GET` /availables/os<br>
+`GET` /availables/os  
 Fetch list of available OS.
 
 Response
@@ -14,7 +14,7 @@ Response
 }
 ```
 
-`GET` /availables/size
+`GET` /availables/size  
 Fetch list of available sizes.
 
 Response
