@@ -548,8 +548,7 @@ Platform blockage Object
 | Name         | Type    | isRequired | Description   |
 | -------------| ------- | ---------- | ------------- |
 | type         | String  | Yes        | Type of selected platform (`site`,`app`,`publisher`)
-| source       | String  | Yes        | Platform domain if type is `site`, application bundle or Apple App ID if type is `app`,
-publisher if if type is `publisher`
+| source       | String  | Yes        | Platform domain if type is `site`, application bundle or Apple App ID if type is `app`, Xendiz publisher ID if type is `publisher`
 
 Connection Object
 
