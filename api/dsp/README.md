@@ -367,7 +367,7 @@ Response:
 
 This route is used to create new target campaigns for selected DSP.  
 Request's body must be array of objects. 
-Each object contents are specified in `Body params` table below.  
+Each object contents are specified below in `Body params` section.  
 
 Path params
 
