@@ -111,7 +111,10 @@ Response:
 `PUT` /dsp/`:id`/block
 
 This route is used to add new items to DSP's block list.
-Request's body must be array of objects. Each object's contents are listed below in `Body params` section.
+
+Request's body must be array of objects. 
+
+Each object's contents are listed below in `Body params` section.
 
 Path params
 
@@ -145,7 +148,10 @@ Response:
 `DELETE` /dsp/`:id`/block
 
 This route is used to remove items from DSP's block list.
-Request's body must be array of objects. Each object's contents are listed below in `Body params` section.
+
+Request's body must be array of objects.
+
+Each object's contents are listed below in `Body params` section.
 
 Path params
 
@@ -179,6 +185,7 @@ Response:
 `GET` /dsp/`:id`/campaigns
 
 This route is used to fetch all target campaigns for selected DSP.
+
 First element of response array always will be default target for selected DSP.
 
 Path params
@@ -364,7 +371,10 @@ Response:
 `POST` /dsp/`:id`/campaigns
 
 This route is used to create new target campaigns for selected DSP.
-Request's body must be array of objects. Each object contents are specified in `Body params` table below.
+
+Request's body must be array of objects. 
+
+Each object contents are specified in `Body params` table below.
 
 Path params
 
@@ -1033,7 +1043,9 @@ Query params
 
 `POST` /dsp/detailed/custom
 
-This method is used to generate custom detailed report for your company based on either one specific `endpoint_id` or all of your company's endpoints. Select which field to include to your report in body params object, their contents are specified below.
+This method is used to generate custom detailed report for your company based on either one specific `endpoint_id` or all of your company's endpoints.
+
+Select which field to include to your report in body params object, their contents are specified below.
 
 * Date fields `from` and `to` must be in format `YYYY-MM-DD`
 
