@@ -10,12 +10,12 @@ This section's methods main purpose - is to provide you data about trends on Xen
 ### Ssp
 Trends are something that is popular inside the Xendiz Marketplace right now. Open this traffic and increase your trading volumes.
 ### Dsp
-Trading volumes and prices for the most popular traffic in real time. Set up your campaigns based on data.<br>
+Trading volumes and prices for the most popular traffic in real time. Set up your campaigns based on data.
 
 ## Applications
+`GET` /trends/app
 Get data on trending applications then you should use first method.
 
-`GET` /trends/app
 Response:
 ```json
 [{
@@ -48,9 +48,10 @@ Response:
 ```
 
 ## Sites
+`GET` /trends/site
+
 Get the most trading web sites.
 
-`GET` /trends/site
 Response:
 ```json
 [{
@@ -67,9 +68,10 @@ Response:
 ```
 
 ## Formats
+`GET` /trends/format
+
 Get the most trading ad formats.
 
-`GET` /trends/format
 Response:
 ```json
 [{
@@ -85,9 +87,10 @@ Response:
 ```
 
 ## Device
+`GET` /trends/device
+
 Get the most trading devices.
 
-`GET` /trends/device
 Response:
 ```json
 [{
@@ -104,6 +107,9 @@ Response:
 ## Custom
 Generate custom trends report 
 `POST` /trends/custom
+
+Get custom trends report.
+* Date fields `from` and `to` must be in format `YYYY-MM-DD`
 
 Query params
 
