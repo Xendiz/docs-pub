@@ -6,16 +6,15 @@
 * [Device](#device)
 
 ## Overview
+This section's methods main purpose - is to provide you data about trends on Xendiz platform.
 ### Ssp
 Trends are something that is popular inside the Xendiz Marketplace right now. Open this traffic and increase your trading volumes.
-
 ### Dsp
 Trading volumes and prices for the most popular traffic in real time. Set up your campaigns based on data.
-  
+
 ## Applications
 `GET` /trends/app
-
-Get the most trading applications.
+Get data on trending applications then you should use first method.
 
 Response:
 ```json
@@ -106,33 +105,30 @@ Response:
 ```
 
 ## Custom
+Generate custom trends report 
 `POST` /trends/custom
 
 Get custom trends report.
-
-**Difference between dates shouldn't be greater than 1 month**  
 * Date fields `from` and `to` must be in format `YYYY-MM-DD`
-
 
 Query params
 
 | Name         | Type   | isRequired | Description   |
 | -------------| ------ | ---------- | ------------- |
-| from         | Date   | No        | Start date. If not set then current day will be chosen. Example: `&from=2018-01-01`
+| from         | Date   | No         | Set beginning of date interval in format `YYYY-MM-DD`. If not set then date for current day will be used. Example: `&from=2018-01-01`
 | to           | Date   | No         | End date. Example: `&to=2018-01-10`
 
-**Date difference between from and to must be lesser than month**
-
-Body Params
+Body Params<br>
+All of it's fields are boolean-typed.
 
 | Name         | Type   | isRequired | Description   |
 | -------------| ------ | ---------- | ------------- |
-| adtype       | Object | No         | Adv object
-| platform     | Object | No         | Platform Object
-| device       | Object | No         | Device Object
-| select    | Object | No         | Selection Object
+| adtype       | Object | No         | Describes platform that you want to do research for (site or application). 
+| platform     | Object | No         | Describes which platform-specific parameters you want to include to your report.
+| device       | Object | No         | Describes which device-specific parameters you want to include to your report.
+| select       | Object | No         | Describes fields that you want to group by and select for your report.
 
-Adv object
+Adtype object
 
 | Name         | Type   | isRequired | Description   |
 | -------------| ------ | ---------- | ------------- |
@@ -176,7 +172,10 @@ Example request
 
 ```json
 {
-    "adType": "app",
+    "adtype": {
+      "app": true,
+      "site": false
+    },
     "platform": {
         "domain": false,
         "bundle": false,
