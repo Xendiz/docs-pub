@@ -217,6 +217,7 @@ Body Params
 | -------------| ------ | ---------- | ------------- |
 | adtype       | Object | No         | Adv object
 | platform     | Object | No         | Platfrom Object
+| format       | Object | No         | Format Object
 | device       | Object | No         | Device Object
 | select       | Object | No         | Selection Object
 | limit        | Int    | No         | Number of rows in response. Default is 10
@@ -237,6 +238,14 @@ Platfrom Object
 | name         | Bool   | No         | Platfrom name
 | id           | Bool   | No         | Platfrom id
 
+Format object
+
+| Name         | Type   | isRequired | Description   |
+| -------------| ------ | ---------- | ------------- |
+| banner       | Bool   | No         | Banner format
+| native       | Bool   | No         | Native format
+| video        | Bool   | No         | Video format
+
 Device Object
 
 | Name         | Type   | isRequired | Description   |
@@ -253,13 +262,21 @@ Select
 | Name         | Type   | isRequired | Description   |
 | -------------| ------ | ---------- | ------------- |
 | date         | Bool   | No         | Date
-| size         | Bool   | No         | Size
+| size         | Object | No         | Size
 | campaign     | Bool   | No         | Dsp campaign
 | creative     | Bool   | No         | Dsp creative
 | category     | Bool   | No         | Content category
 | price        | Object | No         |
 | price.on     | Bool   | No         | Add cost to selection
 | price.value  | String | No         | Aggregate function: `median`, `sum`, `average`
+
+Size Object
+
+| Name         | Type   | isRequired | Description   |
+| -------------| ------ | ---------- | ------------- |
+| on           | Bool   | No         | Add size to selection
+| sizes        | Array  | No         | Array of strings in format `WxH` (e.g `350x70` etc.)
+
 
 Example request
 
@@ -268,6 +285,11 @@ Example request
     "adType": {
       "app": true,
       "site": true
+    },
+    "format": {
+      "banner": true,
+      "native": true,
+      "video": true
     },
     "platform": {
         "domain": false,
@@ -285,7 +307,10 @@ Example request
     },
     "select": {
         "date": true,
-        "size": true,
+        "size": {
+          "on": true,
+          "sizes": ["300x250","728x90","320x50"]
+        },
         "campaign": true,
         "creative": false,
         "category": false,
@@ -301,23 +326,24 @@ Example request
 Response
 ```json
 {
-    "fields": [
-        "OS",
-        "Connection Type",
-        "Date",
-        "Size",
-        "Price",
-        "Impressions"
-    ],
-    "data": [
-        [
-            "android",
-            "WIFI",
-            "320x50",
-            0.58792,
-            "290112"
+    "data": {
+        "fields": [
+            "Connection Type",
+            "Country",
+            "Date",
+            "Size",
+            "Impressions"
         ],
-        []
-    ]
+        "data": [
+            [
+                "Cellular Network - Unknown",
+                "USA",
+                "2018-03-14",
+                "320x50",
+                "2.037k"
+            ],
+            []
+        ]
+    }
 }
 ```
