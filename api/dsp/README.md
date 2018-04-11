@@ -1054,6 +1054,7 @@ Body Params
 | -------------| ------ | ---------- | ------------- |
 | adtype       | Object | No         | Adv object
 | platform     | Object | No         | Platform Object
+| format       | Object | No         | Format Object
 | device       | Object | No         | Device Object
 | select       | Object | No         | Selection Object
 | limit        | Int    | No         | Number of rows in response. Default is 10
@@ -1074,6 +1075,14 @@ Platfrom Object
 | bundle       | Bool   | No         | Platfrom bundle
 | name         | Bool   | No         | Platfrom name
 | id           | Bool   | No         | Platfrom id
+
+Format object
+
+| Name         | Type   | isRequired | Description   |
+| -------------| ------ | ---------- | ------------- |
+| banner       | Bool   | No         | Banner format
+| native       | Bool   | No         | Native format
+| video        | Bool   | No         | Video format
 
 Device Object
 
