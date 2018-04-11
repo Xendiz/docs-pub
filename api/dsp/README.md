@@ -206,6 +206,11 @@ Response:
                 "web": false,
                 "app": false
             },
+            "format": {
+                "banner": true,
+                "video": true,
+                "native": true
+            },
             "connection": {
                 "ethernet": true,
                 "wifi": true,
@@ -240,7 +245,34 @@ Response:
                     "type": "app",
                     "source": "com.app.awesome"
                 },
-                {}
+                {
+                    "type": "app",
+                    "source": "com.app.sampblock"
+                },
+                {
+                    "type": "app",
+                    "source": "com.app.test"
+                },
+                {
+                    "type": "app",
+                    "source": "com.app.wew"
+                },
+                {
+                    "type": "app",
+                    "source": "com.test.bundle"
+                },
+                {
+                    "type": "site",
+                    "source": "google.com"
+                },
+                {
+                    "type": "site",
+                    "source": "sample.domain"
+                },
+                {
+                    "type": "site",
+                    "source": "yandex.ru"
+                }
             ]
         },
         {
@@ -254,6 +286,11 @@ Response:
             "platform": {
                 "web": false,
                 "app": true
+            },
+            "format": {
+                "banner": true,
+                "native": false,
+                "video": false
             },
             "connection": {
                 "ethernet": true,
@@ -291,6 +328,11 @@ Response:
             "platform": {
                 "web": true,
                 "app": true
+            },
+            "format": {
+                "banner": true,
+                "native": false,
+                "video": false
             },
             "connection": {
                 "ethernet": true,
@@ -330,6 +372,11 @@ Response:
             "platform": {
                 "web": true,
                 "app": true
+            },
+            "format": {
+                "banner": true,
+                "native": false,
+                "video": false
             },
             "connection": {
                 "ethernet": false,
@@ -382,10 +429,34 @@ Body params
 | campaignId   | String  | Yes        | Dsp specific campaign ID. Example: `cid-2234`
 | device       | Object  | No         | Device target
 | platform     | Object  | No         | Platform target
+| format       | Object  | No         | Format target
 | os           | Array   | No         | OS target. See suported os list (link).
 | countries    | Array   | No         | Country target. Array of ISO 3 country codes.
 | connection   | Object  | No         | Connection target. See connection object (link)
 | sizes        | Array   | No         | Size target. See size object.
+
+Device Object
+
+| Name         | Type   | isRequired | Description   |
+| -------------| ------ | ---------- | ------------- |
+| mobile       | Bool   | No         | Mobile target
+| desktop      | Bool   | No         | Desktop target
+| tablet       | Bool   | No         | Tablet target
+
+Platform Object
+
+| Name         | Type   | isRequired | Description   |
+| -------------| ------ | ---------- | ------------- |
+| web          | Bool   | No         | Platform domain
+| app          | Bool   | No         | Platform bundle
+
+Format object
+
+| Name         | Type   | isRequired | Description   |
+| -------------| ------ | ---------- | ------------- |
+| banner       | Bool   | No         | Banner format
+| native       | Bool   | No         | Native format
+| video        | Bool   | No         | Video format
 
 Connection Object
 
@@ -406,20 +477,26 @@ Request
 
 ```json
 [{
-  "campaignId": "cid1234",
+  "campaignId": "cid22234",
+  "cost": 123.22,
   "device": {
-    "mobile": true,
+    "mobile": false,
     "desktop": true,
-    "tablet": true
+    "tablet": false
+  },
+  "format": {
+    "banner": true,
+    "video": false,
+    "native": false
   },
   "platform": {
-    "web": true,
+    "web": false,
     "app": true
   },
   "os": ["android", "ios"],
   "connection": {
     "ethernet": true,
-    "wifi": true,
+    "wifi": false,
     "cellular": true
   },
   "sizes": [{
@@ -429,7 +506,7 @@ Request
     "w": 320,
     "h": 50
   }],
-  "countries": ["USA", "RUS", "ITA", "GBR"]
+  "countries": ["USA", "RUR", "ITA", "GBR"]
 }]
 ```
 
@@ -452,10 +529,34 @@ Body params
 | campaignId   | String  | Yes        | Dsp specific campaign ID. Example: `cid-2234`
 | device       | Object  | No         | Device target
 | platform     | Object  | No         | Platform target
+| format       | Object  | No         | Format target
 | os           | Array   | No         | OS target. See suported os list (link).
 | countries    | Array   | No         | Country target. Array of ISO 3 country codes.
 | connection   | Object  | No         | Connection target. See connection object (link)
 | sizes        | Array   | No         | Size target. See size object.
+
+Device Object
+
+| Name         | Type   | isRequired | Description   |
+| -------------| ------ | ---------- | ------------- |
+| mobile       | Bool   | No         | Mobile target
+| desktop      | Bool   | No         | Desktop target
+| tablet       | Bool   | No         | Tablet target
+
+Platform Object
+
+| Name         | Type   | isRequired | Description   |
+| -------------| ------ | ---------- | ------------- |
+| web          | Bool   | No         | Platform domain
+| app          | Bool   | No         | Platform bundle
+
+Format object
+
+| Name         | Type   | isRequired | Description   |
+| -------------| ------ | ---------- | ------------- |
+| banner       | Bool   | No         | Banner format
+| native       | Bool   | No         | Native format
+| video        | Bool   | No         | Video format
 
 Connection Object
 
@@ -476,43 +577,48 @@ Size Object
 Request:
 ```json
 {
-            "campaignId": "cid1234",
-            "cost": 23452.4,
-            "device": {
-                "mobile": true,
-                "desktop": true,
-                "tablet": true
+        "campaignId": "cid1234",
+        "cost": 23452.4,
+        "device": {
+            "mobile": true,
+            "desktop": true,
+            "tablet": true
+        },
+        "platform": {
+            "web": true,
+            "app": true
+        },
+        "format": {
+            "banner": true,
+            "native": true,
+            "video": true
+        },
+        "connection": {
+            "ethernet": false,
+            "wifi": false,
+            "cellular": false
+        },
+        "os": [
+            "blackberry",
+            "ios"
+        ],
+        "countries": [
+            "GBR",
+            "ITA",
+            "RUS",
+            "USA"
+        ],
+        "sizes": [
+            {
+                "w": 320,
+                "h": 250
             },
-            "platform": {
-                "web": true,
-                "app": true
-            },
-            "connection": {
-                "ethernet": false,
-                "wifi": false,
-                "cellular": false
-            },
-            "os": [
-                "ios",
-                "blackberry"
-            ],
-            "countries": [
-                "GBR",
-                "ITA",
-                "RUS",
-                "USA"
-            ],
-            "sizes": [
-                {
-                    "w": 320,
-                    "h": 450
-                },
-                {
-                    "w": 320,
-                    "h": 250
-                }
-            ]
-        }
+            {
+                "w": 320,
+                "h": 450
+            }
+        ]
+    }
 ```
 
 Response:
@@ -537,11 +643,35 @@ Body params
 | -------------| ------- | ---------- | ------------- |
 | device       | Object  | No         | Device target
 | platform     | Object  | No         | Platform target
+| format       | Object  | No         | Format target
 | os           | Array   | No         | OS target. See suported os list (link).
 | countries    | Array   | No         | Country target. Array of ISO 3 country codes.
 | connection   | Object  | No         | Connection target. See connection object (link)
 | sizes        | Array   | No         | Size target. See size object.
 | blockedPlatforms  | Array   | No         | Array of platform blockage objects
+
+Device Object
+
+| Name         | Type   | isRequired | Description   |
+| -------------| ------ | ---------- | ------------- |
+| mobile       | Bool   | No         | Mobile target
+| desktop      | Bool   | No         | Desktop target
+| tablet       | Bool   | No         | Tablet target
+
+Platform Object
+
+| Name         | Type   | isRequired | Description   |
+| -------------| ------ | ---------- | ------------- |
+| web          | Bool   | No         | Platform domain
+| app          | Bool   | No         | Platform bundle
+
+Format object
+
+| Name         | Type   | isRequired | Description   |
+| -------------| ------ | ---------- | ------------- |
+| banner       | Bool   | No         | Banner format
+| native       | Bool   | No         | Native format
+| video        | Bool   | No         | Video format
 
 Platform blockage Object
 
@@ -568,45 +698,48 @@ Size Object
 Request:
 ```json
 {
-            "device": {
-                "mobile": false,
-                "desktop": true,
-                "tablet": false
-            },
-            "platform": {
-                "web": false,
-                "app": false
-            },
-            "connection": {
-                "ethernet": true,
-                "wifi": true,
-                "cellular": true
-            },
-            "os": [
-                "android",
-                "blackberry",
-                "ios",
-                "windows"
-            ],
-            "countries": [
-                "ALA",
-                "RUS"
-            ],
-            "sizes": [
-                {
-                    "w": 336,
-                    "h": 445
-                },
-                {}
-            ],
-            "blockedPlatforms": [
-                {
-                    "type": "app",
-                    "source": "com.app.awesome"
-                },
-                {}
-            ]
+    "device": {
+        "mobile": false,
+        "desktop": true,
+        "tablet": false
+    },
+    "platform": {
+        "web": false,
+        "app": false
+    },
+    "format": {
+        "banner": true,
+        "video": false,
+        "native": false
+    },
+    "connection": {
+        "ethernet": true,
+        "wifi": true,
+        "cellular": true
+    },
+    "os": [
+        "android",
+        "blackberry",
+        "ios",
+        "windows"
+    ],
+    "countries": [
+        "ALA",
+        "RUS"
+    ],
+    "sizes": [
+        {
+            "w": 325,
+            "h": 333
         }
+    ],
+    "blockedPlatforms": [
+        {
+            "type": "app",
+            "source": "com.app.awesome"
+        }
+    ]
+}
 ```
 
 Response:
@@ -1067,14 +1200,14 @@ Adv object
 | app          | Bool   | No         | Advert in bundle
 
 
-Platfrom Object
+Platform Object
 
 | Name         | Type   | isRequired | Description   |
 | -------------| ------ | ---------- | ------------- |
-| domain       | Bool   | No         | Platfrom domain
-| bundle       | Bool   | No         | Platfrom bundle
-| name         | Bool   | No         | Platfrom name
-| id           | Bool   | No         | Platfrom id
+| domain       | Bool   | No         | Platform domain
+| bundle       | Bool   | No         | Platform bundle
+| name         | Bool   | No         | Platform name
+| id           | Bool   | No         | Platform id
 
 Format object
 
