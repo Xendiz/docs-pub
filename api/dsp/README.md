@@ -511,7 +511,7 @@ Request
 
 ### Update DSP campaign
 
-`PUT` /dsp/`:id`/campaigns/
+`PUT` /dsp/`:id`/campaigns/`:target_id`
 
 This route is used to update target campaign for selected DSP.
 
