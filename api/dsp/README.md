@@ -409,7 +409,7 @@ Response:
 
 ### Add DSP campaign target
 
-`POST` /dsp/`:id`/campaigns/
+`POST` /dsp/`:id`/campaigns
 
 This route is used to create new target campaigns for selected DSP.  
 Request's body must be array of objects. 
