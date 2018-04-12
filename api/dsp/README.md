@@ -7,8 +7,7 @@
   * [Remove item from block list](#remove-items-from-block-list)
   * [DSP campaigns target](#dsp-campaigns-target)
   * [Add DSP campaign target](#add-dsp-campaign-target)
-  * [Update default DSP campaign](#update-default-dsp-campaign)
-  * [Update existing DSP campaign](#update-existing-dsp-campaign)
+  * [Update DSP campaign](#update-dsp-campaign)
   * [Delete DSP campaign target](#delete-dsp-campaign-target)
   * [Change DSP endpoint URL](#change-dsp-endpoint-url)
 * [Financial](#financial-api)
@@ -510,9 +509,9 @@ Request
 }]
 ```
 
-### Update existing DSP campaign
+### Update DSP campaign
 
-`PUT` /dsp/`:id`/campaigns/
+`PUT` /dsp/`:id`/campaigns/`:target_id`
 
 This route is used to update target campaign for selected DSP.
 
@@ -521,12 +520,12 @@ Path params
 | Name         | Type | isRequired | Description   |
 | -------------| ---- | ---------- | ------------- |
 | id           | Int  | Yes        | Specific endpoint id. Example: `/21`
+| target_id    | String  | Yes        | Dsp specific campaign ID. Example: `cid-2234`
 
 Body params
 
 | Name         | Type    | isRequired | Description   |
 | -------------| ------- | ---------- | ------------- |
-| campaignId   | String  | Yes        | Dsp specific campaign ID. Example: `cid-2234`
 | device       | Object  | No         | Device target
 | platform     | Object  | No         | Platform target
 | format       | Object  | No         | Format target
@@ -575,127 +574,8 @@ Size Object
 
 
 Request:
-```json
-{
-        "campaignId": "cid1234",
-        "cost": 23452.4,
-        "device": {
-            "mobile": true,
-            "desktop": true,
-            "tablet": true
-        },
-        "platform": {
-            "web": true,
-            "app": true
-        },
-        "format": {
-            "banner": true,
-            "native": true,
-            "video": true
-        },
-        "connection": {
-            "ethernet": false,
-            "wifi": false,
-            "cellular": false
-        },
-        "os": [
-            "blackberry",
-            "ios"
-        ],
-        "countries": [
-            "GBR",
-            "ITA",
-            "RUS",
-            "USA"
-        ],
-        "sizes": [
-            {
-                "w": 320,
-                "h": 250
-            },
-            {
-                "w": 320,
-                "h": 450
-            }
-        ]
-    }
-```
 
-Response:
-
-* STATUS CODE 200
-
-### Update default DSP campaign
-
-`PUT` /dsp/`:id`/campaigns/default
-
-Use this route to update **default** campaign for selected DSP.
-
-Path params
-
-| Name         | Type | isRequired | Description   |
-| -------------| ---- | ---------- | ------------- |
-| id           | Int  | Yes        | Specific endpoint id. Example: `/21`
-
-Body params
-
-| Name         | Type    | isRequired | Description   |
-| -------------| ------- | ---------- | ------------- |
-| device       | Object  | No         | Device target
-| platform     | Object  | No         | Platform target
-| format       | Object  | No         | Format target
-| os           | Array   | No         | OS target. See suported os list (link).
-| countries    | Array   | No         | Country target. Array of ISO 3 country codes.
-| connection   | Object  | No         | Connection target. See connection object (link)
-| sizes        | Array   | No         | Size target. See size object.
-| blockedPlatforms  | Array   | No         | Array of platform blockage objects
-
-Device Object
-
-| Name         | Type   | isRequired | Description   |
-| -------------| ------ | ---------- | ------------- |
-| mobile       | Bool   | No         | Mobile target
-| desktop      | Bool   | No         | Desktop target
-| tablet       | Bool   | No         | Tablet target
-
-Platform Object
-
-| Name         | Type   | isRequired | Description   |
-| -------------| ------ | ---------- | ------------- |
-| web          | Bool   | No         | Platform domain
-| app          | Bool   | No         | Platform bundle
-
-Format object
-
-| Name         | Type   | isRequired | Description   |
-| -------------| ------ | ---------- | ------------- |
-| banner       | Bool   | No         | Banner format
-| native       | Bool   | No         | Native format
-| video        | Bool   | No         | Video format
-
-Platform blockage Object
-
-| Name         | Type    | isRequired | Description   |
-| -------------| ------- | ---------- | ------------- |
-| type         | String  | Yes        | Type of selected platform (`site`,`app`,`publisher`)
-| source       | String  | Yes        | Platform domain if type is `site`, application bundle or Apple App ID if type is `app`, Xendiz publisher ID if type is `publisher`
-
-Connection Object
-
-| Name         | Type    | isRequired | Description   |
-| -------------| ------- | ---------- | ------------- |
-| ethernet     | Bool    | No         | Allow ethernet connection. `true` by default
-| wifi         | Bool    | No         | Allow wi-fi connection. `true` by default
-| cellular     | Bool    | No         | Allow cellular connection. `true` by default
-
-Size Object
-
-| Name         | Type    | isRequired | Description   |
-| -------------| ------- | ---------- | ------------- |
-| w            | Int     | Yes        | Width. Example: `320`
-| h            | Int     | Yes        | Height. Example: `50`
-
-Request:
+`/dsp/1/campaigns/default`
 ```json
 {
     "device": {
@@ -740,6 +620,50 @@ Request:
         }
     ]
 }
+```
+
+
+`/dsp/1/campaigns/cid1234`
+
+```json
+{
+        "cost": 23452.4,
+        "device": {
+            "mobile": true,
+            "desktop": true,
+            "tablet": true
+        },
+        "platform": {
+            "web": true,
+            "app": true
+        },
+        "format": {
+            "banner": true,
+            "native": true,
+            "video": true
+        },
+        "connection": {
+            "ethernet": false,
+            "wifi": false,
+            "cellular": false
+        },
+        "os": [
+            "blackberry",
+            "ios"
+        ],
+        "countries": [
+            "GBR",
+            "ITA",
+            "RUS",
+            "USA"
+        ],
+        "sizes": [
+            {
+                "w": 320,
+                "h": 250
+            }
+        ]
+    }
 ```
 
 Response:
