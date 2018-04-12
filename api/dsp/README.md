@@ -576,7 +576,7 @@ Size Object
 Request:
 
 `/dsp/1/campaigns/default`
-
+```json
 {
     "device": {
         "mobile": false,
@@ -620,6 +620,8 @@ Request:
         }
     ]
 }
+```
+
 
 `/dsp/1/campaigns/cid1234`
 
