@@ -901,12 +901,23 @@ Response
   "data": [{
     "date": "2018-01-01",
     "bundle": "com.test.bundle",
+    "app": {
+        "bundle": "com.test.bundle",
+        "name": "Testing Bundle",
+        "price": 0,
+        "score": 4.5,
+        "store_url": "url",
+        "icon_url": "url-to-icon"
+    },
     "name": "Test bundle",
     "spend": 40.21,
     "impressions": 1293811
-  }, {
+    }, {
     "date": "2018-01-01",
     "bundle": "com.test.bundle2",
+    "app": {
+
+    },
     "name": "Test bundle",
     "spend": 22.21,
     "impressions": 13371337
