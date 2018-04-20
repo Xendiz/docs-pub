@@ -25,6 +25,7 @@ Response:
 ```json
 {
   "data": {
+    "name": "Demo Company",
     "apiKey": "01bde69ca3b11b8eaac505b63562hd0a",
     "Ssps": [
       {
