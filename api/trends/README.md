@@ -115,20 +115,21 @@ Query params
 
 | Name         | Type   | isRequired | Description   |
 | -------------| ------ | ---------- | ------------- |
-| from         | Date   | No         | Set beginning of date interval in format `YYYY-MM-DD`. If not set then date for current day will be used. Example: `&from=2018-01-01`
+| from         | Date   | No         | Start date. If not set then current day will be chosen. Example: `&from=2018-01-01`
 | to           | Date   | No         | End date. Example: `&to=2018-01-10`
 
-Body Params<br>
-All of it's fields are boolean-typed.
+Body Params
 
 | Name         | Type   | isRequired | Description   |
 | -------------| ------ | ---------- | ------------- |
-| adtype       | Object | No         | Describes platform that you want to do research for (site or application). 
-| platform     | Object | No         | Describes which platform-specific parameters you want to include to your report.
-| device       | Object | No         | Describes which device-specific parameters you want to include to your report.
-| select       | Object | No         | Describes fields that you want to group by and select for your report.
+| adtype       | Object | No         | Adv object
+| platform     | Object | No         | Platform Object
+| format       | Object | No         | Format Object
+| device       | Object | No         | Device Object
+| select       | Object | No         | Selection Object
+| limit        | Int    | No         | Number of rows in response. Default is 10
 
-Adtype object
+Adv object
 
 | Name         | Type   | isRequired | Description   |
 | -------------| ------ | ---------- | ------------- |
@@ -136,19 +137,28 @@ Adtype object
 | app          | Bool   | No         | Advert in bundle
 
 
-Platfrom Object
+Platform Object
 
 | Name         | Type   | isRequired | Description   |
 | -------------| ------ | ---------- | ------------- |
-| domain       | Bool   | No         | Platfrom domain
-| bundle       | Bool   | No         | Platfrom bundle
-| name         | Bool   | No         | Platfrom name
-| id           | Bool   | No         | Platfrom id
+| domain       | Bool   | No         | Platform domain
+| bundle       | Bool   | No         | Platform bundle
+| name         | Bool   | No         | Platform name
+| id           | Bool   | No         | Platform id
+
+Format object
+
+| Name         | Type   | isRequired | Description   |
+| -------------| ------ | ---------- | ------------- |
+| banner       | Bool   | No         | Banner format
+| native       | Bool   | No         | Native format
+| video        | Bool   | No         | Video format
 
 Device Object
 
 | Name         | Type   | isRequired | Description   |
 | -------------| ------ | ---------- | ------------- |
+| ip           | Bool   | No         | Device ip
 | os           | Bool   | No         | Device os
 | type         | Bool   | No         | Device type
 | vendor       | Bool   | No         | Device vendor
@@ -160,7 +170,7 @@ Select
 | Name         | Type   | isRequired | Description   |
 | -------------| ------ | ---------- | ------------- |
 | date         | Bool   | No         | Date
-| size         | Bool   | No         | Size
+| size         | Object | No         | Size
 | campaign     | Bool   | No         | Dsp campaign
 | creative     | Bool   | No         | Dsp creative
 | category     | Bool   | No         | Content category
@@ -168,13 +178,25 @@ Select
 | price.on     | Bool   | No         | Add cost to selection
 | price.value  | String | No         | Aggregate function: `median`, `sum`, `average`
 
+Size Object
+
+| Name         | Type   | isRequired | Description   |
+| -------------| ------ | ---------- | ------------- |
+| on           | Bool   | No         | Add size to selection
+| sizes        | Array  | No         | Array of strings in format `WxH` (e.g `350x70` etc.)
+
 Example request
 
 ```json
 {
-    "adtype": {
+    "adType": {
       "app": true,
-      "site": false
+      "site": true
+    },
+    "format": {
+        "banner": true,
+        "native": true,
+        "video": true
     },
     "platform": {
         "domain": false,
@@ -184,20 +206,23 @@ Example request
     },
     "device": {
         "ip": false,
-        "os": true,
+        "os": false,
         "type": false,
         "vendor": false,
         "ct": true,
-        "country": false
+        "country": true
     },
     "select": {
-        "date": false,
-        "size": true,
-        "campaign": false,
+        "date": true,
+        "size": {
+            "on": true,
+            "sizes": ["728x90"]
+        },
+        "campaign": true,
         "creative": false,
         "category": false,
         "price": {
-            "on": true,
+            "on": false,
             "value": "median"
         }
     }
@@ -207,23 +232,24 @@ Example request
 Response
 ```json
 {
-    "fields": [
-        "OS",
-        "Connection Type",
-        "Date",
-        "Size",
-        "Price",
-        "Impressions"
-    ],
-    "data": [
-        [
-            "android",
-            "WIFI",
-            "320x50",
-            0.58792,
-            "290112"
+    "data": {
+        "fields": [
+            "Connection Type",
+            "Country",
+            "Date",
+            "Campaign",
+            "Impressions"
         ],
-        []
-    ]
+        "data": [
+            [
+                "Ethernet",
+                "RUS",
+                "2018-03-20",
+                "crid",
+                "2.32M"
+            ],
+            []
+        ]
+    }
 }
 ```
