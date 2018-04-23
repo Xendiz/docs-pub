@@ -111,6 +111,8 @@ Generate custom trends report
 Get custom trends report.
 * Date fields `from` and `to` must be in format `YYYY-MM-DD`
 
+**Difference between start and end should be lesser than one month**
+ 
 Query params
 
 | Name         | Type   | isRequired | Description   |
