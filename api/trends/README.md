@@ -127,7 +127,6 @@ Body Params
 | format       | Object | No         | Format Object
 | device       | Object | No         | Device Object
 | select       | Object | No         | Selection Object
-| limit        | Int    | No         | Number of rows in response. Default is 10
 
 Adv object
 
