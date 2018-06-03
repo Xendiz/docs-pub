@@ -12,12 +12,12 @@
   * [Manage transactions](./dsp/api#account-transactions)
   * [Manage campaigns](./dsp/api#campaigns)
   * [Manage creatives](./dsp/api#creatives)
-  * [Lists]
+  * Lists
     * [OS](/dsp/api#available-os)
     * [Creative size](/dsp/api#available-sizes)
     * [ISP](/dsp/api#available-isp)
     * [City](/dsp/api#cities)
-  * [Reports]
+  * Reports
     * [Financial](/dsp/api#financial)
     * [Custom](/dsp/api#custom-report)
     * [Inventory Overview](/dsp/api#inventory-overview)
