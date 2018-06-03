@@ -8,7 +8,7 @@
 * [Web UI]()
 * Integration
   * [FAQ](./dsp/integration/faq.md)
-  * [Macros list]('./dsp/integration/macros.md')
+  * [Macros list](./dsp/integration/macros.md)
 
 # Xendiz Marketplace
 * [Cookie sync](./marketplace/cookie_sync)
