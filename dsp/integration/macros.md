@@ -2,7 +2,7 @@
 These Macros allow you to pass info to the advertiser with the click or impression.
 
 | Macro           | Type    | Description
-| -------------   | :-----: | :-------------:  
+| -------------   | -----   | -------------
 `{SEAT}`          | String  | Xendiz Advertiser ID (e.g. "1292")
 `{IMP_ID}`        | String  | Impression ID (e.g. "H1xjIoDVvz")
 `{CLICK_ID}`      | String  | Click ID (e.g. "SyeGTfQIrG")
@@ -23,8 +23,7 @@ These Macros allow you to pass info to the advertiser with the click or impressi
 `{LAT}`           | Float   | Latitude from -90.0 to +90.0, where negative is south.
 `{LON}`           | Float   | Longitude from -180.0 to +180.0, where negative is west.
 `{COUNTRY}`       | String  | Country code using ISO-3166-1-alpha-3. (e.g. "USA")
-`{CITY}`          | String  | City using United Nations Code for Trade & Transport
-Locations. 
+`{CITY}`          | String  | City using United Nations Code for Trade & Transport Locations. 
 `{IPSHA1}`        | String  | Device IP, hashed via SHA1.
 `{IFA}`           | String  | ID sanctioned for advertiser use in the clear (i.e., not hashed).
 `{DPIDSHA1}`      | String  | Platform device ID (e.g., Android ID); hashed via SHA1.
