@@ -4,7 +4,23 @@
 * [Terms of use](https://xendiz.com/terms-of-use)
 
 # Xendiz DSP
-* [API]()
+* [API](./dsp/api)
+  * [Overview](./dsp/api)
+  * [Auth](./dsp/api#auth)
+  * [Dashboard API](./dsp/api#dashboard)
+  * [Manage accounts](./dsp/api#accounts)
+  * [Manage transactions](./dsp/api#account-transactions)
+  * [Manage campaigns](./dsp/api#campaigns)
+  * [Manage creatives](./dsp/api#creatives)
+  * [Lists]
+    * [OS](/dsp/api#available-os)
+    * [Creative size](/dsp/api#available-sizes)
+    * [ISP](/dsp/api#available-isp)
+    * [City](/dsp/api#cities)
+  * [Reports]
+    * [Financial](/dsp/api#financial)
+    * [Custom](/dsp/api#custom-report)
+    * [Inventory Overview](/dsp/api#inventory-overview)
 * [Web UI]()
 * Integration
   * [FAQ](./dsp/integration/faq.md)

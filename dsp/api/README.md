@@ -202,7 +202,7 @@ Request:
 Response:
 * STATUS CODE 204
 
-## Accounts Transactions
+## Account Transactions
 ### List
 
 `GET` /transactions/list
