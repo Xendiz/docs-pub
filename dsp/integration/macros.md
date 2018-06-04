@@ -6,6 +6,7 @@ These Macros allow you to pass info to the advertiser with the click or impressi
 `{SEAT}`          | String  | Xendiz Advertiser ID (e.g. "1292")
 `{IMP_ID}`        | String  | Impression ID (e.g. "H1xjIoDVvz")
 `{CLICK_ID}`      | String  | Click ID (e.g. "SyeGTfQIrG")
+`{AUCTION_PRICE}` | String  | Auction second price
 `{EXCHANGE}`      | String  | Exchange name (e.g. "Xendiz")
 `{CREATIVE_ID}`   | Integer | Creative ID (e.g. "121131")
 `{CAMPAIGN_ID}`   | Integer | Campaign ID (e.g. "244314")
