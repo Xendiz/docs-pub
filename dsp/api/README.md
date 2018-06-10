@@ -6,6 +6,44 @@ http://dsp-front-1.xendiz.com
 ```
 
 ## Auth
+`POST` /auth
+
+Response:
+```json
+{   
+    "data":{
+        "token": "token",
+        "user": {
+            "id": 1,
+            "status": 1,
+            "company_name": "Demo",
+            "username": "test",
+            "name": "Demo Account",
+            "api_key": "123",
+            "balance": 100.5,
+            "spend_today": 0,
+            "defaults": null,
+            "timestamp": "2018-04-13T05:14:36.000Z",
+            "campaigns": [
+                1,
+                2,
+                3,
+                4,
+                14,
+                15,
+                16,
+                17,
+                18,
+                19,
+                20,
+                22,
+                23,
+                26
+            ]
+        }
+    }
+}
+```
 
 ## Dashboard
 ### Top Os
@@ -38,7 +76,6 @@ Response:
 }
 ```
 ### Top Geo
-
 `GET` /top/geo
 
 * Date fields `from` and `to` must be in format `YYYY-MM-DD`
@@ -99,9 +136,42 @@ Response:
                 "store_url": "url.com",
                 "icon_url": "url.com"
             },
-            "impressions": "9",
-            "clicks": "9",
+            "impressions": 9,
+            "clicks": 1,
             "spend": 0.01899000210687518
+        }
+    ]
+}
+```
+
+### Top Spend
+`GET` /top/spend
+
+* Date fields `from` and `to` must be in format `YYYY-MM-DD`
+
+Query params
+
+| Name         | Type | isRequired | Description   |
+| -------------| ---- | ---------- | ------------- |
+| from         | Date | No         | Start date. If not set then current day will be chosen. Example: `&from=2018-01-01`
+| to           | Date | No         | End date. Example: `&to=2018-01-10`
+
+* First element in array comes as sum of params between `from` date minus difference between `from` and `to`
+* Second elemtent in array comes as sum of params between `from` and `to`
+
+Response:
+```json
+{
+    "data": [
+        {
+            "impressions": 5692095,
+            "clicks": 110,
+            "spend": 713.7676296234131
+        },
+        {
+            "impressions": 14132395,
+            "clicks": 990,
+            "spend": 5369.667516874037
         }
     ]
 }
@@ -119,7 +189,7 @@ Response:
         "status": 1,
         "company_name": "Demo",
         "username": "demo",
-        "name": "Demo User",
+        "name": "Demo Account",
         "email": "email@xendiz.com",
         "country": "EST",
         "api_key": "us-east-1.mgmuqofj9m0zwch257b9",
@@ -127,58 +197,6 @@ Response:
         "spend_today": 0,
         "defaults": null,
         "timestamp": "2018-01-13T06:14:36.000Z"
-    }
-}
-```
-
-### List
-`GET` /accounts/list
-
-Response:
-```json
-{
-    "data": [
-        {
-            "id": 1,
-            "name": "Name Surname",
-            "email": "email@domain.com"
-        },
-        {
-            "id": 2,
-            "name": "Test Account",
-            "email": "email@domain.com"
-        }
-    ]
-}
-```
-
-### Create
-`POST` /accounts
-
-Request:
-```json
-{
-    "company_name": "Demo",
-    "name": "Demo User",
-    "username": "test",
-    "password": "pass",
-    "email": "mail@domain.com",
-    "country": "EST"
-}
-```
-Response:
-```json
-{
-    "data": {
-        "api_key": "49c2e273d075a1031c7600a20fcdbff8",
-        "balance": 0,
-        "spend_today": 0,
-        "id": 3,
-        "company_name": "Demo",
-        "name": "Demo User",
-        "username": "test",
-        "email": "mail@domain.com",
-        "country": "EST"
     }
 }
 ```
@@ -191,18 +209,18 @@ Request:
 ```json
 {
     "company_name": "Demo",
-    "name": "Demo User",
+    "name": "DEM",
     "username": "test",
     "password": "123",
     "email": "mail@domain.com",
-    "country": "EST"
+    "country": "UKR"
 }
 ```
 
 Response:
 * STATUS CODE 204
 
-## Account Transactions
+## Accounts Transactions
 ### List
 
 `GET` /transactions/list
@@ -225,7 +243,7 @@ Response:
 
 ## Campaigns
 ### List
-`GET` /campaigns/list
+`GET` /campaigns
 
 Response:
 ```json
@@ -275,19 +293,26 @@ Response:
 }
 ```
 
-### Enable
-`PUT` /campaigns/`:id`/enable
+### Tiny List
+`GET` /campaigns/tiny
 
 Response:
-* STATUS CODE 204
+```json
+{
+    "data" :[
+        {
+            "id": 10449,
+            "name": "demo camp"
+        },
+        {
+            "id": 10450,
+            "name": "demo camp"
+        }
+    ]
+}
+```
 
-### Disable
-`PUT` /campaigns/`:id`/disable
-
-Response:
-* STATUS CODE 204
-
-### Get
+### Fetch 
 
 `GET` /campaigns/:id
 
@@ -418,6 +443,18 @@ Response:
 }
 ```
 
+### Enable
+`PUT` /campaigns/`:id`/enable
+
+Response:
+* STATUS CODE 204
+
+### Disable
+`PUT` /campaigns/`:id`/disable
+
+Response:
+* STATUS CODE 204
+
 ### Create
 
 `POST` /campaigns
@@ -426,6 +463,7 @@ Request:
 ```json
 {
     "name": "123",
+    "status": 1,
     "labels": "123,321",
     "adomain": "google.com",
     "bundle": null,
@@ -434,10 +472,6 @@ Request:
     "max_cpm": 5,
     "daily_budget": 100,
     "total_budget": 1000,
-    "spend_today": 0,
-    "spend_total": 0,
-    "clicks_today": 0,
-    "clicks_total": 1123,
     "imp_frequency": 3,
     "inventory": { "web": true, "inapp": true },
     "device": { "phone": true, "tablet": true, "desktop": true, "other": false },
@@ -480,9 +514,9 @@ Response:
         "daily_budget": 100,
         "total_budget": 1000,
         "imp_frequency": 3,
-        "inventory": "{\"web\":true,\"inapp\":true}",
-        "device": "{\"phone\":true,\"tablet\":true,\"desktop\":true,\"other\":false}",
-        "connection": "{\"wifi\":true,\"cellular\":true,\"other\":true}",
+        "inventory": {"web": true, "inapp": true},
+        "device": {"phone": true, "tablet": true, "desktop": true, "other": false},
+        "connection": {"wifi": true, "cellular": true, "other": true},
         "start_date": "2018-04-10",
         "end_date": "2018-04-15"
     }
@@ -504,10 +538,6 @@ Request:
     "max_cpm": 5,
     "daily_budget": 100,
     "total_budget": 1000,
-    "spend_today": 0,
-    "spend_total": 0,
-    "clicks_today": 0,
-    "clicks_total": 1123,
     "imp_frequency": 3,
     "inventory": { "web": true, "inapp": true },
     "device": { "phone": true, "tablet": true, "desktop": true, "other": false },
@@ -526,7 +556,7 @@ Request:
     "allowedBundles": ["com.best.app"],
     "languages": ["en", "es", "uk"],
     "os": [{"os_name": "ios", "os_min": 1, "os_max": 11}, {"os_name": "android", "os_min": 1, "os_max": 6}],
-    "schedules": [{"day": 3, "hours": [0, 1, 3, 4, 5, 10, 15, 20, 21, 22, 23]}]
+    "schedules": [{"day": 3, "hours": [0, 1, 2]}]
 }
 ```
 
@@ -568,7 +598,7 @@ Response:
 ## Creatives
 ### List
 
-`GET` /creatives/list
+`GET` /creatives
 
 Response:
 ```json
@@ -617,6 +647,30 @@ Response:
             ]
         },
         {}
+    ]
+}
+```
+
+### Tiny List
+
+`GET` /creatives/tiny
+
+Response:
+```json
+{
+    "data": [
+        {
+            "id": 12,
+            "name": "somename"
+        },
+        {
+            "id": 13,
+            "name": "somename"
+        },
+        {
+            "id": 14,
+            "name": "somename"
+        }
     ]
 }
 ```
@@ -678,9 +732,10 @@ Response:
 
 Request:
 ```json
-{
+{   
+    "name": "somename",
     "campaign_id": 16,
-    "source": "<img src=\"https://res.cloudinary.com/xendiz-com/image/upload/v1525946050/nqtbgrq9xvf7fkkeocbc.jpg\" width=\"300\" height=\"250\">",
+    "source": "<file>",
     "size_code": "320x50"
 }
 ```
@@ -694,14 +749,31 @@ Response:
 
 Request:
 ```json
-{
+{   
+    "name": "somename",
     "source": "<h1 style=\"background-color: red; padding: 15px;\">TAG</h1>",
     "size_code": "300x250"
 }
 ```
 
 Response:
-* STATUS CODE 200
+* STATUS CODE 204
+
+### Update banner
+
+`PUT` /creatives/:id
+
+Request:
+```json
+{   
+    "name": "somename",
+    "source": "file",
+    "size_code": "300x250"
+}
+```
+
+Response:
+* STATUS CODE 204
 
 ### Disable
 
@@ -759,29 +831,60 @@ Response:
 
 `GET` /available/isp
 
+Request:
+
+`GET` /available/isp?query=1
+
 Response:
 ```json
 {
     "data": [
         {
-            "id": 1,
-            "name": "Google"
+            "id": 12046,
+            "name": "# 1 Firma Handlowa Giga Arkadiusz Kocma"
         },
         {
-            "id": 2,
-            "name": "China Telecom fujian"
+            "id": 6151,
+            "name": "#1 Tele 2 Nederland B.V."
+        }
+    ]
+}
+```
+
+## Available cities
+
+### List
+
+`GET` /available/cities
+
+Query params
+
+| Name         | Type | isRequired | Description   |
+| -------------| ---- | ---------- | ------------- |
+| country      | String | Yes         | Country code in ISO-3166-1-alpha-3. Example: `&country=USA`
+
+Request:  
+`GET` /available/cities?country=USA
+
+Response:
+```json
+{
+    "data": [
+        {
+            "id": 639765,
+            "name": "Aaron"
         },
         {
-            "id": 3,
-            "name": "China Telecom Guangdong"
+            "id": 404642,
+            "name": "Aaronsburg"
         },
         {
-            "id": 4,
-            "name": "i2ts,inc."
+            "id": 395813,
+            "name": "Abbeville"
         },
         {
-            "id": 5,
-            "name": "TOT"
+            "id": 502367,
+            "name": "Abbot"
         }
     ]
 }
@@ -860,16 +963,16 @@ Response:
                 "2018-05-01",
                 2,
                 4,
-                "5692095",
-                "110",
+                5692095,
+                110,
                 713.7676296234131
             ],
             [
                 "2018-05-02",
                 2,
                 4,
-                "4924540",
-                "130",
+                4924540,
+                130,
                 565.6175422668457
             ]
         ]
@@ -918,8 +1021,8 @@ Response:
                 0,
                 2,
                 4,
-                "280104",
-                "0",
+                280104,
+                100,
                 36.56417465209961
             ],
             [
@@ -927,8 +1030,8 @@ Response:
                 1,
                 2,
                 4,
-                "259380",
-                "0",
+                259380,
+                462,
                 31.8701229095459
             ],
             [
@@ -936,50 +1039,12 @@ Response:
                 2,
                 2,
                 4,
-                "235356",
-                "0",
+                235356,
+                123,
                 27.657794952392575
             ]
         ]
     }
-}
-```
-## Cities
-
-### List
-
-`GET` /cities
-
-Query params
-
-| Name         | Type | isRequired | Description   |
-| -------------| ---- | ---------- | ------------- |
-| country      | String | Yes         | Country code in ISO-3166-1-alpha-3. Example: `&country=USA`
-
-Request:  
-`GET` /cities?country=USA
-
-Response:
-```json
-{
-    "data": [
-        {
-            "id": 639765,
-            "name": "Aaron"
-        },
-        {
-            "id": 404642,
-            "name": "Aaronsburg"
-        },
-        {
-            "id": 395813,
-            "name": "Abbeville"
-        },
-        {
-            "id": 502367,
-            "name": "Abbot"
-        }
-    ]
 }
 ```
 
@@ -1268,18 +1333,9 @@ Response
                 "Clean Master- Space Cleaner and Antivirus",
                 "com.cleanmaster.mguard",
                 "2018-05-07",
-                "13",
-                "13",
-                "13"
-            ],
-            [
-                "1006458",
-                "Clean Master- Space Cleaner and Antivirus",
-                "com.cleanmaster.mguard",
-                "2018-05-09",
-                "1",
-                "1",
-                "1"
+                130,
+                1,
+                0.1
             ]
         ]
     }
