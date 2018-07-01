@@ -2,7 +2,7 @@
 
 ## Endpoint
 ```bash
-http://dsp-front-1.xendiz.com
+https://dsp-front-1.xendiz.com
 ```
 
 ## Auth
@@ -14,11 +14,11 @@ Response:
     "data":{
         "token": "token",
         "user": {
-            "id": 1,
+            "id": 2,
             "status": 1,
             "company_name": "Demo",
             "username": "test",
-            "name": "Demo Account",
+            "name": "Name Surname",
             "api_key": "123",
             "balance": 100.5,
             "spend_today": 0,
@@ -67,8 +67,8 @@ Response:
 {
     "data": [
         {
-            "impressions": "9",
-            "clicks": "9",
+            "impressions": 9,
+            "clicks": 9,
             "os": "android",
             "spend": 0.01899000210687518
         }
@@ -76,6 +76,7 @@ Response:
 }
 ```
 ### Top Geo
+
 `GET` /top/geo
 
 * Date fields `from` and `to` must be in format `YYYY-MM-DD`
@@ -97,8 +98,8 @@ Response:
     "data": [
         {
             "countryCode": "JPN",
-            "impressions": "9",
-            "clicks": "9",
+            "impressions": 9,
+            "clicks": 9,
             "spend": 0.01899000210687518
         }
     ]
@@ -137,7 +138,7 @@ Response:
                 "icon_url": "url.com"
             },
             "impressions": 9,
-            "clicks": 1,
+            "clicks": 9,
             "spend": 0.01899000210687518
         }
     ]
@@ -148,6 +149,7 @@ Response:
 `GET` /top/spend
 
 * Date fields `from` and `to` must be in format `YYYY-MM-DD`
+* Fields `bundle`, `name`, `os` always will be in response
 
 Query params
 
@@ -155,9 +157,11 @@ Query params
 | -------------| ---- | ---------- | ------------- |
 | from         | Date | No         | Start date. If not set then current day will be chosen. Example: `&from=2018-01-01`
 | to           | Date | No         | End date. Example: `&to=2018-01-10`
+| camp_id  | Int  | No         | Specific campaign id. If the param is not specified, a full report will be created for all the campaigns. Example: `&camp_id=21`
+| crid_id  | Int  | No         | Specific creative id. If the param is not specified, a full report will be created for all the creatives. Example: `&crid_id=21`
 
-* First element in array comes as sum of params between `from` date minus difference between `from` and `to`
-* Second elemtent in array comes as sum of params between `from` and `to`
+* First elemtent in array comes as sum of params between `from` and `to`
+* Second element in array comes as sum of params between `from` date minus difference between `from` and `to`
 
 Response:
 ```json
@@ -170,12 +174,13 @@ Response:
         },
         {
             "impressions": 14132395,
-            "clicks": 990,
+            "clicks": "990",
             "spend": 5369.667516874037
         }
     ]
 }
 ```
+
 
 ## Accounts
 ### Get
@@ -189,10 +194,10 @@ Response:
         "status": 1,
         "company_name": "Demo",
         "username": "demo",
-        "name": "Demo Account",
+        "name": "Fisrt Last",
         "email": "email@xendiz.com",
         "country": "EST",
-        "api_key": "us-east-1.mgmuqofj9m0zwch257b9",
+        "api_key": "us-east-1.mgmuqofj9m0zwch257b1",
         "balance": 337.404,
         "spend_today": 0,
         "defaults": null,
@@ -203,15 +208,15 @@ Response:
 
 ### Update
 
-`PUT` /accounts
+`PUT` /accounts/me
 
 Request:
 ```json
 {
     "company_name": "Demo",
-    "name": "DEM",
+    "name": "First Last",
     "username": "test",
-    "password": "123",
+    "password": "qwerty",
     "email": "mail@domain.com",
     "country": "UKR"
 }
@@ -230,20 +235,21 @@ Response:
 {
     "data": [
         {
-            "id": 2,
-            "account_id": 2,
-            "volume": 100.5,
-            "method": 1,
-            "timestamp": "2018-04-19T07:25:16.000Z"
-        },
-        {}
+            "id": 32,
+            "account_id": 1,
+            "order_id": 39,
+            "volume": 120.5,
+            "method": "worldhand",
+            "timestamp": "2018-06-06T06:44:48.000Z",
+            "getaway": "paysera"
+        }
     ]
 }
 ```
 
 ## Campaigns
 ### List
-`GET` /campaigns
+`GET` /campaigns/list[?all=1]
 
 Response:
 ```json
@@ -294,7 +300,7 @@ Response:
 ```
 
 ### Tiny List
-`GET` /campaigns/tiny
+`GET` /campaigns/tiny[?all=1]
 
 Response:
 ```json
@@ -312,7 +318,19 @@ Response:
 }
 ```
 
-### Fetch 
+### Enable
+`PUT` /campaigns/`:id`/enable
+
+Response:
+* STATUS CODE 204
+
+### Disable
+`PUT` /campaigns/`:id`/disable
+
+Response:
+* STATUS CODE 204
+
+### Get
 
 `GET` /campaigns/:id
 
@@ -402,16 +420,16 @@ Response:
         ],
         "cities": [
             {
-                "cityId": 5,
-                "cityName": "Bloemfontein"
+                "id": 5,
+                "name": "Bloemfontein"
             },
             {
-                "cityId": 6,
-                "cityName": "Durban"
+                "id": 6,
+                "name": "Durban"
             },
             {
-                "cityId": 1234,
-                "cityName": "Tonkawa"
+                "id": 1234,
+                "name": "Tonkawa"
             }
         ],
         "blockedPublishers": [
@@ -431,29 +449,40 @@ Response:
         ],
         "isps": [
             {
-                "ispId": 4,
-                "ispName": "i2ts,inc."
+                "id": 4,
+                "name": "i2ts,inc."
             },
             {
-                "ispId": 5,
-                "ispName": "TOT"
+                "id": 5,
+                "name": "TOT"
             }
         ]
     }
 }
 ```
 
-### Enable
-`PUT` /campaigns/`:id`/enable
+### Creatives list
+
+`GET` /campaigns/:id/creatives
 
 Response:
-* STATUS CODE 204
-
-### Disable
-`PUT` /campaigns/`:id`/disable
-
-Response:
-* STATUS CODE 204
+```json
+{
+    "id": 1,
+    "creatives": [
+        {
+            "id": 62,
+            "name": "banner 728x90",
+            "source": "<img src='http://res.cloudinary.com/xendiz-com/image/upload/c_fill,h_90,w_728/bhwjvoycmw14rix9g3ii' height='90' width='728'/>",
+            "type": "banner",
+            "size": {
+                "id": 4,
+                "size_code": "728x90"
+            }
+        }
+    ]
+}
+```
 
 ### Create
 
@@ -514,9 +543,9 @@ Response:
         "daily_budget": 100,
         "total_budget": 1000,
         "imp_frequency": 3,
-        "inventory": {"web": true, "inapp": true},
-        "device": {"phone": true, "tablet": true, "desktop": true, "other": false},
-        "connection": {"wifi": true, "cellular": true, "other": true},
+        "inventory": "{\"web\":true,\"inapp\":true}",
+        "device": "{\"phone\":true,\"tablet\":true,\"desktop\":true,\"other\":false}",
+        "connection": "{\"wifi\":true,\"cellular\":true,\"other\":true}",
         "start_date": "2018-04-10",
         "end_date": "2018-04-15"
     }
@@ -556,11 +585,25 @@ Request:
     "allowedBundles": ["com.best.app"],
     "languages": ["en", "es", "uk"],
     "os": [{"os_name": "ios", "os_min": 1, "os_max": 11}, {"os_name": "android", "os_min": 1, "os_max": 6}],
-    "schedules": [{"day": 3, "hours": [0, 1, 2]}]
+    "schedules": [{"day": 3, "hours": [0, 1, 3, 4, 5, 10, 15, 20, 21, 22, 23]}]
 }
 ```
 
 Response:
+* STATUS CODE 204
+
+### Archive
+
+`PATCH` /campaigns/:id/archive
+
+Respinse:
+* STATUS CODE 204
+
+### Unarchive
+
+`PATCH` /campaigns/:id/unarchive
+
+Respinse:
 * STATUS CODE 204
 
 ### Link
@@ -598,7 +641,7 @@ Response:
 ## Creatives
 ### List
 
-`GET` /creatives
+`GET` /creatives/list[?all=1]
 
 Response:
 ```json
@@ -653,7 +696,7 @@ Response:
 
 ### Tiny List
 
-`GET` /creatives/tiny
+`GET` /creatives/tiny[?source=1&size=1&type=1&all=1]
 
 Response:
 ```json
@@ -717,11 +760,17 @@ Response:
     "data": {
         "status": 2,
         "is_secure": 0,
-        "id": 17,
+        "id": 136,
+        "name": "demo",
         "type": "tag",
         "source": "<h1 style=\"background-color: red; padding: 15px;\"><a href=\"http://google.com\" target=\"_blank\">Google</a></h1>",
         "size_id": 1,
-        "account_id": 1
+        "account_id": 2,
+        "hashed_id": "71a3a594a",
+        "size": {
+            "id": 1,
+            "size_code": "320x50"
+        }
     }
 }
 ```
@@ -735,13 +784,31 @@ Request:
 {   
     "name": "somename",
     "campaign_id": 16,
-    "source": "<file>",
+    "source": "file",
     "size_code": "320x50"
 }
 ```
 
 Response:
-* STATUS CODE 200
+```json
+{
+    "data": {
+        "status": 2,
+        "id": 135,
+        "name": "test_post",
+        "type": "banner",
+        "source": "<img src='link.com' height='250' width='300'/>",
+        "size_id": 2,
+        "account_id": 2,
+        "is_secure": 1,
+        "hashed_id": "7c01f4189",
+        "size": {
+            "id": 2,
+            "size_code": "300x250"
+        }
+    }
+}
+```
 
 ### Update
 
@@ -761,7 +828,7 @@ Response:
 
 ### Update banner
 
-`PUT` /creatives/:id
+`PUT` /creatives/:id/banner
 
 Request:
 ```json
@@ -778,6 +845,20 @@ Response:
 ### Disable
 
 `PUT` /creatives/:id/disable
+
+Response:
+* STATUS CODE 200
+
+### Archive
+
+`PATCH` /creatives/:id/archive
+
+Response:
+* STATUS CODE 200
+
+### Unarchive
+
+`PATCH` /creatives/:id/unarchive
 
 Response:
 * STATUS CODE 200
@@ -861,30 +942,23 @@ Query params
 
 | Name         | Type | isRequired | Description   |
 | -------------| ---- | ---------- | ------------- |
-| country      | String | Yes         | Country code in ISO-3166-1-alpha-3. Example: `&country=USA`
+| country      | String | Yes         | Country name to search divided by `,`. Example: `&country=USA,UKR`
+| query      | String | Yes         | City name to search. Example: `&query=br`
 
 Request:  
-`GET` /available/cities?country=USA
+`GET` /available/cities?query=br&country=USA,UKR,RUS
 
 Response:
 ```json
 {
     "data": [
         {
-            "id": 639765,
-            "name": "Aaron"
+            "id": 27,
+            "name": "Braamfontein"
         },
         {
-            "id": 404642,
-            "name": "Aaronsburg"
-        },
-        {
-            "id": 395813,
-            "name": "Abbeville"
-        },
-        {
-            "id": 502367,
-            "name": "Abbot"
+            "id": 132,
+            "name": "Bryanston"
         }
     ]
 }
@@ -910,6 +984,7 @@ Selection object
 | -------------| ---- | ---------- | ------------- |
 | date    | Int | Yes         | Add date to report
 | hour  | Int  | Yes         | Add by hour grouping to report
+| all_day  | Int  | Yes         | Search on span of previous 24h if both `hour` and this field are selected.
 | camp_id    | Int | Yes         | Add campaign id to report
 | crid_id  | Int  | Yes         | Add creative id to report
 
@@ -932,16 +1007,17 @@ Request:
 {
     "selection": {
         "date": 1, 
-        "hour": 0, 
+        "hour": 1,
+        "all_day": 0,
         "camp_id": 1, 
         "crid_id": 1
         
     },
     "search": {
         "from": "2018-05-01",
-        "to": "2018-05-02",
-        "camp_id": 2,
-        "crid_id": 4
+        "to": "2018-05-10",
+        "camp_id": 1,
+        "crid_id": 2
     }
 }
 ```
@@ -963,16 +1039,16 @@ Response:
                 "2018-05-01",
                 2,
                 4,
-                5692095,
-                110,
+                "5692095",
+                "110",
                 713.7676296234131
             ],
             [
                 "2018-05-02",
                 2,
                 4,
-                4924540,
-                130,
+                "4924540",
+                "130",
                 565.6175422668457
             ]
         ]
@@ -1021,8 +1097,8 @@ Response:
                 0,
                 2,
                 4,
-                280104,
-                100,
+                "280104",
+                "0",
                 36.56417465209961
             ],
             [
@@ -1030,8 +1106,8 @@ Response:
                 1,
                 2,
                 4,
-                259380,
-                462,
+                "259380",
+                "0",
                 31.8701229095459
             ],
             [
@@ -1039,8 +1115,8 @@ Response:
                 2,
                 2,
                 4,
-                235356,
-                123,
+                "235356",
+                "0",
                 27.657794952392575
             ]
         ]
@@ -1256,7 +1332,6 @@ Device Object
 
 | Name         | Type   | isRequired | Description   |
 | -------------| ------ | ---------- | ------------- |
-| ip           | Bool   | No         | Device ip
 | os           | Bool   | No         | Device os
 | type         | Bool   | No         | Device type
 | vendor       | Bool   | No         | Device vendor
@@ -1265,15 +1340,14 @@ Device Object
 | ct           | Bool   | No         | Device connection type
 | country      | Bool   | No         | Device country
 | city      | Bool   | No         | Device city
-| ifa      | Bool   | No         | Device ifa
-| dpid      | Bool   | No         | Device dpid
-| did      | Bool   | No         | Device did
 
 Select
 
 | Name         | Type   | isRequired | Description   |
 | -------------| ------ | ---------- | ------------- |
 | date         | Bool   | No         | Date
+| price         | Object   | No         | Price
+| size         | Object   | No         | Size
 
 Example request
 
@@ -1294,7 +1368,6 @@ Example request
         "id": true
     },
     "device": {
-        "ip": false,
         "os": false,
         "type": false,
         "vendor": false,
@@ -1302,13 +1375,12 @@ Example request
         "carrier": false,
         "ct": false,
         "country": false,
-        "city": false,
-        "ifa": false,
-        "dpid": false,
-        "did": false
+        "city": false
     },
     "select": {
-        "date": true
+        "date": true,
+        "price": {"on": true, "fn": "sum"},
+        "size": {"on": true, "sizes": ["...id"]}
     },
     "limit": 10
 }
@@ -1333,9 +1405,18 @@ Response
                 "Clean Master- Space Cleaner and Antivirus",
                 "com.cleanmaster.mguard",
                 "2018-05-07",
-                130,
-                1,
-                0.1
+                "13",
+                "13",
+                "13"
+            ],
+            [
+                "1006458",
+                "Clean Master- Space Cleaner and Antivirus",
+                "com.cleanmaster.mguard",
+                "2018-05-09",
+                "1",
+                "1",
+                "1"
             ]
         ]
     }
