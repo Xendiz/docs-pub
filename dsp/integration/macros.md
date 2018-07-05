@@ -15,6 +15,7 @@ These Macros allow you to pass info to the advertiser with the click or impressi
 `{SITE_DOMAIN}`   | String  | Site domain (e.g. "msn.com")
 `{SITE_PAGEURL}`  | String  | Site page url (e.g. "https://www.msn.com/en-us/news/world/syrian-president-to-meet-kim-jong-un-in-north-korea-report-says/ar-AAyaeOb?li=BBnbfcL")
 `{APP_BUNDLE}`    | String  | Application bundle (e.g "591560124")
+`{APP_NAME}`      | String  | Application name (e.g "Musi - Simple Music Streaming")
 `{DEVICE_TYPE}`   | String  | OpenRTB Device Type (e.g "2")
 `{DEVICE_VENDOR}` | String  | OpenRTB Device Type (e.g "Apple")
 `{DEVICE_MODEL}`  | String  | Device model (e.g. "iPhone")
