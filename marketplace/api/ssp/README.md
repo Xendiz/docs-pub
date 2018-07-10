@@ -67,6 +67,7 @@ Response:
     "sumReq": 123420199321,
     "sumRes": 221342132,
     "sumImp": 200210,
+    "spendToday": 102.121
     "manager": {
       "name": "John Doe",
       "email": "john.doe@xendiz.com"
