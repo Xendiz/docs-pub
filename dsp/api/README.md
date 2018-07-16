@@ -8,6 +8,14 @@ https://dsp-front-1.xendiz.com
 ## Auth
 `POST` /auth
 
+Request:
+```json
+{
+    "username": "name",
+    "password": "pass"
+}
+```
+
 Response:
 ```json
 {   
@@ -67,10 +75,22 @@ Response:
 {
     "data": [
         {
-            "impressions": 9,
-            "clicks": 9,
             "os": "android",
-            "spend": 0.01899000210687518
+            "impressions": 93193458,
+            "clicks": 1984422,
+            "spend": 0
+        },
+        {
+            "os": "ios",
+            "impressions": 92861639,
+            "clicks": 1984529,
+            "spend": 24507.05
+        },
+        {
+            "os": "windows",
+            "impressions": 92845239,
+            "clicks": 1982675,
+            "spend": 24502.64
         }
     ]
 }
@@ -97,10 +117,10 @@ Response:
 {
     "data": [
         {
-            "countryCode": "JPN",
-            "impressions": 9,
-            "clicks": 9,
-            "spend": 0.01899000210687518
+            "country": "Georgia",
+            "impressions": 28045935,
+            "clicks": 593115,
+            "spend": 7401.56
         }
     ]
 }
@@ -127,19 +147,19 @@ Response:
 ```json
 {
     "data": [
-        {   
+        {
             "app": {
-                "bundle": "com.cleanmaster.mguard",
-                "name": "com.cleanmaster.mguard",
+                "bundle": "com.outfit7.mytalkingtomfree",
                 "os": "android",
-                "price": 123,
-                "score": 4.5,
-                "store_url": "url.com",
-                "icon_url": "url.com"
+                "name": "My Talking Tom",
+                "price": 0,
+                "score": 4.48421,
+                "store_url": "https://play.google.com/store/apps/details?id=com.outfit7.mytalkingtomfree&hl=en&gl=us",
+                "icon_url": "https://lh3.googleusercontent.com/3s2Ll-HtFiscV33KBhqJj5IOPAUi9XN_TiNZLV1jWHYJZFeLDrwie_lw4HwFCek26g"
             },
-            "impressions": 9,
-            "clicks": 9,
-            "spend": 0.01899000210687518
+            "impressions": 580577,
+            "clicks": 12636,
+            "spend": 153.22
         }
     ]
 }
@@ -168,19 +188,39 @@ Response:
 {
     "data": [
         {
-            "impressions": 5692095,
-            "clicks": 110,
-            "spend": 713.7676296234131
+            "impressions": 243231480,
+            "clicks": 5281702,
+            "spend": 64152.309198914096
         },
         {
-            "impressions": 14132395,
-            "clicks": "990",
-            "spend": 5369.667516874037
+            "impressions": 77078925,
+            "clicks": 1681492,
+            "spend": 20329.56853437424
         }
     ]
 }
 ```
 
+## Signup
+### Post
+
+`POST` /signup
+
+Request:
+```json
+{
+    "firstName": "first",
+    "lastName": "last",
+    "companyName": "Xendiz",
+    "username": "test",
+    "password": "test123",
+    "email": "demo@xendiz.com",
+    "country": "EST"
+}
+```
+
+Response:
+* Status code 200
 
 ## Accounts
 ### Get
@@ -194,10 +234,10 @@ Response:
         "status": 1,
         "company_name": "Demo",
         "username": "demo",
-        "name": "Fisrt Last",
+        "name": "Demo User",
         "email": "email@xendiz.com",
         "country": "EST",
-        "api_key": "us-east-1.mgmuqofj9m0zwch257b1",
+        "api_key": "us-east-1.mgmuqofj9m0zwch257b9",
         "balance": 337.404,
         "spend_today": 0,
         "defaults": null,
@@ -206,17 +246,69 @@ Response:
 }
 ```
 
-### Update
+### List
+`GET` /accounts/list
 
-`PUT` /accounts/me
+Response:
+```json
+{
+    "data": [
+        {
+            "id": 1,
+            "name": "Name Surname",
+            "email": "email@domain.com"
+        },
+        {
+            "id": 2,
+            "name": "Test Account",
+            "email": "email@domain.com"
+        }
+    ]
+}
+```
+
+### Create
+`POST` /accounts
 
 Request:
 ```json
 {
     "company_name": "Demo",
-    "name": "First Last",
+    "name": "DEM",
     "username": "test",
-    "password": "qwerty",
+    "password": "pass",
+    "email": "mail@domain.com",
+    "country": "UKR"
+}
+```
+Response:
+```json
+{
+    "data": {
+        "api_key": "49c2e273d075a1031c7600a20fcdbff8",
+        "balance": 0,
+        "spend_today": 0,
+        "id": 3,
+        "company_name": "Demo",
+        "name": "DEM",
+        "username": "test",
+        "email": "mail@domain.com",
+        "country": "UKR"
+    }
+}
+```
+
+### Update
+
+`PUT` /accounts
+
+Request:
+```json
+{
+    "company_name": "Demo",
+    "name": "DEM",
+    "username": "test",
+    "password": "123",
     "email": "mail@domain.com",
     "country": "UKR"
 }
@@ -648,48 +740,28 @@ Response:
 {
     "data": [
         {
-            "id": 1,
-            "status": 0,
-            "name": "asdf",
+            "id": 132,
+            "hashed_id": "fde1d6e00",
+            "status": 1,
+            "archived": 0,
+            "approved": 1,
+            "name": "test_post_new_banners",
+            "is_secure": 1,
+            "timestamp": "2018-06-19T10:43:39.000Z",
+            "account_id": 2,
             "type": "banner",
-            "size_id": 1,
-            "source": "<h1 style=\"background-color: red; padding: 15px;\"><a href=\"http://google.com\" target=\"_blank\">Google</a></h1>",
             "size": {
-                "id": 1,
-                "size_code": "320x50"
+                "id": 2,
+                "size_code": "300x250"
             },
-            "timestamp": "2012-02-24T09:51:39.000Z",
             "campaigns": [
                 {
-                    "id": 1,
-                    "name": "test",
-                    "CampaignCreatives": {
-                        "camp_id": 1,
-                        "creative_id": 1,
-                        "bid_order": 0
-                    }
-                },
-                {
-                    "id": 2,
-                    "name": "test2",
-                    "CampaignCreatives": {
-                        "camp_id": 2,
-                        "creative_id": 1,
-                        "bid_order": 0
-                    }
-                },
-                {
-                    "id": 3,
-                    "name": "test3",
-                    "CampaignCreatives": {
-                        "camp_id": 3,
-                        "creative_id": 1,
-                        "bid_order": 0
-                    }
+                    "id": 70,
+                    "name": "dsad",
+                    "spend_today": 0
                 }
             ]
-        },
-        {}
+        }
     ]
 }
 ```
@@ -726,15 +798,21 @@ Response:
 ```json
 {
     "data": {
-        "id": 9,
-        "status": 0,
-        "name": "asdf",
+        "id": 151,
+        "hashed_id": "a457a3302",
+        "status": 1,
+        "archived": 0,
+        "approved": 0,
+        "name": "qwerty2",
+        "is_secure": 1,
+        "timestamp": "2018-06-27T07:20:27.000Z",
         "account_id": 2,
-        "type": "banner",
-        "size_id": 1,
-        "timestamp": "2012-02-24T09:51:39.000Z",
-        "source": "<h1 style=\"background-color: red; padding: 15px;\"><a href=\"http://google.com\" target=\"_blank\">Google</a></h1>",
-        "size": "320x50"
+        "type": "tag",
+        "source": "<h1>Lorem Ipsum Dolor Sit Amet</h1>",
+        "size": {
+            "id": 2,
+            "size_code": "300x250"
+        }
     }
 }
 ```
@@ -746,7 +824,7 @@ Response:
 Request:
 ```json
 {
-    "campaign_id": 16,
+    "campaign_id": [16,17],
     "name": "asdf",
     "source": "<h1 style=\"background-color: red; padding: 15px;\"><a href=\"http://google.com\" target=\"_blank\">Google</a></h1>",
     "is_secure": 1,
@@ -783,7 +861,7 @@ Request:
 ```json
 {   
     "name": "somename",
-    "campaign_id": 16,
+    "campaign_id": [16,17],
     "source": "file",
     "size_code": "320x50"
 }
@@ -812,7 +890,7 @@ Response:
 
 ### Update
 
-`PUT` /creatives/:id
+`PUT` /creatives/`:id`
 
 Request:
 ```json
@@ -828,7 +906,7 @@ Response:
 
 ### Update banner
 
-`PUT` /creatives/:id/banner
+`PUT` /creatives/`:id`/banner
 
 Request:
 ```json
@@ -844,28 +922,143 @@ Response:
 
 ### Disable
 
-`PUT` /creatives/:id/disable
+`PUT` /creatives/`:id`/disable
 
 Response:
 * STATUS CODE 200
 
 ### Archive
 
-`PATCH` /creatives/:id/archive
+`PATCH` /creatives/`:id`/archive
 
 Response:
 * STATUS CODE 200
 
 ### Unarchive
 
-`PATCH` /creatives/:id/unarchive
+`PATCH` /creatives/`:id`/unarchive
 
 Response:
 * STATUS CODE 200
 
 ### Delete
 
-`DELETE` /creatives/:id
+`DELETE` /creatives/`:id`
+
+Response:
+* STATUS CODE 204
+
+### Link
+
+`PUT` /creatives/:id/link
+
+Request: 
+```json
+{
+    "cid": [
+        { "id": 1, "order": 0  },
+        { "id": 2, "order": 0  },
+        { "id": 3, "order": 0  },
+        { "id": 4, "order": 0  }
+    ]
+}
+```
+
+Response:
+* STATUS CODE 204
+
+### Unlink
+
+`PUT` /creatives/:id/unlink
+
+Request: 
+```json
+{
+    "cid": [1,2,3,4]
+}
+```
+Response:
+* STATUS CODE 204
+
+## Lists
+
+`GET` /lists
+
+Response:
+```json
+{
+    "data": [
+        {
+            "id": 2,
+            "name": "New List"
+        }
+    ]
+}
+```
+
+`POST` /lists
+
+Request:
+```json
+{
+    "name": "New List"
+}
+```
+
+Response:
+```json
+{
+    "data": {
+        "id": 4,
+        "name": "New List"
+    }
+}
+```
+
+`PUT` /lists/`:id`
+
+Request:
+```json
+{
+    "name": "New Name"
+}
+```
+
+Response:
+* STATUS CODE 204
+
+`DELETE` /lists/`:id`
+
+Response:
+* STATUS CODE 204
+
+`GET` /lists/`:id`
+
+Response:
+```json
+{
+    "data": [
+        {
+            "id": 2,
+            "text": "This is testing entry"
+        }
+    ]
+}
+```
+
+`PUT` /lists/`:id`/`:entry_id`
+
+Request:
+```json
+{
+    "text": "Lorem Ipsum"
+}
+```
+
+Response:
+* STATUS CODE 204
+
+`DELETE` /lists/`:id`/`:entry_id`
 
 Response:
 * STATUS CODE 204
@@ -1268,9 +1461,9 @@ Response
                 "Clean Master- Space Cleaner and Antivirus",
                 "com.cleanmaster.mguard",
                 "2018-05-07",
-                "9",
-                "9",
-                "9"
+                9,
+                9,
+                9
             ]
         ]
     }
@@ -1405,18 +1598,18 @@ Response
                 "Clean Master- Space Cleaner and Antivirus",
                 "com.cleanmaster.mguard",
                 "2018-05-07",
-                "13",
-                "13",
-                "13"
+                13,
+                13,
+                13
             ],
             [
                 "1006458",
                 "Clean Master- Space Cleaner and Antivirus",
                 "com.cleanmaster.mguard",
                 "2018-05-09",
-                "1",
-                "1",
-                "1"
+                1,
+                1,
+                1
             ]
         ]
     }
