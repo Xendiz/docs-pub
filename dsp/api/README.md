@@ -5,8 +5,72 @@
 https://dsp-front-1.xendiz.com
 ```
 
+# Xendiz DSP API
+
+## Overview
+  * [Auth](#auth)
+  * [Dashboard](#dashboard)
+    * [List top os](#top-os)
+    * [List top geo](#top-geo)
+    * [List top apps](#top-apps)
+    * [List top spend](#top-spend)
+  * [Manage accounts](#accounts)
+    * [Get account info](#get)
+    * [Create new account](#create)
+    * [Update account info](#update)
+  * [Manage transactions](#accounts-transactions)
+    * [Get account transactions list](#list)
+  * [Manage campaigns](#campaigns)
+    * [Get account's campaigns list](#list-1)
+    * [Get account's campaigns tiny list](#tiny-list)
+    * [Enable campaign](#enable)
+    * [Disable campaign](#disable)
+    * [Get campaign info](#get-1)
+    * [Get linked creatives list for campaign](#creatives-list)
+    * [Create new campaign](#create-1)
+    * [Create campaign's copy](#make-copy)
+    * [Update campaign](#update-1)
+    * [Archive campaign](#archive)
+    * [Unarchive campaign](#unarchive)
+    * [Link creatives to campaign](#link)
+    * [Unlink creatives from campaign](#unlink)
+  * [Manage creatives](#creatives)
+    * [Get account's creatives list](#list-2)
+    * [Get account's creatives tiny list](#tiny-list-1)
+    * [Get creative info](#get-2)
+    * [Create new tag creative](#create-tag)
+    * [Create new banner creative](#create-banner)
+    * [Create new video creative](#create-video)
+    * [Update tag creative](#update-2)
+    * [Update banner](#update-banner)
+    * [Update video](#update-video)
+    * [Disable creative](#disable-1)
+    * [Archive creative](#archive-1)
+    * [Unarchive creative](#unarchive-1)
+    * [Delete creative](#delete)
+    * [Link creative to campaigns](#link-1)
+    * [Unlink creative from campaigns](#unlink-1)
+  * [User lists management](#lists)
+    * [Get all lists](#get-all-account-lists)
+    * [Create new list](#create-new-list)
+    * [Work with list in bulk](#bulk-work)
+    * [Update list name](#update-list)
+    * [Delete list](#delete-list)
+    * [Delete list entries](#delete-entry)
+  * Availables
+    * [OS](#available-os)
+    * [Creative size](#available-sizes)
+    * [ISP](#available-isp)
+    * [City](#available-cities)
+  * Reports
+    * [Financial](#financial)
+    * [Custom](#custom-report)
+    * [Inventory Overview](#inventory-overview)
+
 ## Auth
 `POST` /auth
+
+Authorization on Xendiz DSP  
 
 Request:
 ```json
@@ -24,12 +88,12 @@ Response:
         "user": {
             "id": 2,
             "status": 1,
-            "company_name": "Demo",
+            "companyName": "Demo",
             "username": "test",
             "name": "Name Surname",
-            "api_key": "123",
+            "apiKey": "123",
             "balance": 100.5,
-            "spend_today": 0,
+            "spendToday": 0,
             "defaults": null,
             "timestamp": "2018-04-13T05:14:36.000Z",
             "campaigns": [
@@ -53,6 +117,15 @@ Response:
 }
 ```
 
+Possible error responses:
+
+Each 4XX error response is provided with `message` property which describes error nature.
+
+| Code         | Message      |Description   |
+| -------------|------------- |------------- |
+| 403          | Invalid username or password | Wrong username or password
+| 403          | Account deactivated          |Account with provided credentials has been deactivated
+
 ## Dashboard
 ### Top Os
 `GET` /top/os
@@ -65,8 +138,8 @@ Query params
 | -------------| ---- | ---------- | ------------- |
 | from         | Date | No         | Start date. If not set then current day will be chosen. Example: `&from=2018-01-01`
 | to           | Date | No         | End date. Example: `&to=2018-01-10`
-| camp_id  | Int  | No         | Specific campaign id. If the param is not specified, a full report will be created for all the campaigns. Example: `&camp_id=21`
-| crid_id  | Int  | No         | Specific creative id. If the param is not specified, a full report will be created for all the creatives. Example: `&crid_id=21`
+| campId       | Int  | No         | Specific campaign id. If the param is not specified, a full report will be created for all the campaigns. Example: `&campId=21`
+| cridId       | Int  | No         | Specific creative id. If the param is not specified, a full report will be created for all the creatives. Example: `&cridId=21`
 
 `GET` /top/os?from=2018-05-07
 
@@ -107,8 +180,8 @@ Query params
 | -------------| ---- | ---------- | ------------- |
 | from         | Date | No         | Start date. If not set then current day will be chosen. Example: `&from=2018-01-01`
 | to           | Date | No         | End date. Example: `&to=2018-01-10`
-| camp_id  | Int  | No         | Specific campaign id. If the param is not specified, a full report will be created for all the campaigns. Example: `&camp_id=21`
-| crid_id  | Int  | No         | Specific creative id. If the param is not specified, a full report will be created for all the creatives. Example: `&crid_id=21`
+| campId       | Int  | No         | Specific campaign id. If the param is not specified, a full report will be created for all the campaigns. Example: `&campId=21`
+| cridId       | Int  | No         | Specific creative id. If the param is not specified, a full report will be created for all the creatives. Example: `&cridId=21`
 
 `GET` /top/geo?from=2018-05-07
 
@@ -138,8 +211,8 @@ Query params
 | -------------| ---- | ---------- | ------------- |
 | from         | Date | No         | Start date. If not set then current day will be chosen. Example: `&from=2018-01-01`
 | to           | Date | No         | End date. Example: `&to=2018-01-10`
-| camp_id  | Int  | No         | Specific campaign id. If the param is not specified, a full report will be created for all the campaigns. Example: `&camp_id=21`
-| crid_id  | Int  | No         | Specific creative id. If the param is not specified, a full report will be created for all the creatives. Example: `&crid_id=21`
+| campId       | Int  | No         | Specific campaign id. If the param is not specified, a full report will be created for all the campaigns. Example: `&campId=21`
+| cridId       | Int  | No         | Specific creative id. If the param is not specified, a full report will be created for all the creatives. Example: `&cridId=21`
 
 `GET` /top/apps?from=2018-05-07
 
@@ -154,8 +227,8 @@ Response:
                 "name": "My Talking Tom",
                 "price": 0,
                 "score": 4.48421,
-                "store_url": "https://play.google.com/store/apps/details?id=com.outfit7.mytalkingtomfree&hl=en&gl=us",
-                "icon_url": "https://lh3.googleusercontent.com/3s2Ll-HtFiscV33KBhqJj5IOPAUi9XN_TiNZLV1jWHYJZFeLDrwie_lw4HwFCek26g"
+                "storeUrl": "https://play.google.com/store/apps/details?id=com.outfit7.mytalkingtomfree&hl=en&gl=us",
+                "iconUrl": "https://lh3.googleusercontent.com/3s2Ll-HtFiscV33KBhqJj5IOPAUi9XN_TiNZLV1jWHYJZFeLDrwie_lw4HwFCek26g"
             },
             "impressions": 580577,
             "clicks": 12636,
@@ -177,8 +250,8 @@ Query params
 | -------------| ---- | ---------- | ------------- |
 | from         | Date | No         | Start date. If not set then current day will be chosen. Example: `&from=2018-01-01`
 | to           | Date | No         | End date. Example: `&to=2018-01-10`
-| camp_id  | Int  | No         | Specific campaign id. If the param is not specified, a full report will be created for all the campaigns. Example: `&camp_id=21`
-| crid_id  | Int  | No         | Specific creative id. If the param is not specified, a full report will be created for all the creatives. Example: `&crid_id=21`
+| campId       | Int  | No         | Specific campaign id. If the param is not specified, a full report will be created for all the campaigns. Example: `&campId=21`
+| cridId       | Int  | No         | Specific creative id. If the param is not specified, a full report will be created for all the creatives. Example: `&cridId=21`
 
 * First elemtent in array comes as sum of params between `from` and `to`
 * Second element in array comes as sum of params between `from` date minus difference between `from` and `to`
@@ -206,6 +279,21 @@ Response:
 
 `POST` /signup
 
+Sign Up on Xendiz DSP  
+
+Body params
+
+| Name         | Type | isRequired | Description   |
+| -------------| ---- | ---------- | ------------- |
+| firstName    | String | No       | Users's first name
+| lastName     | String | No       | User's last name
+| companyName  | String | No       | User's company name  
+| username     | String | Yes      | Username
+| password     | String | Yes      | Preferrable password        
+| email        | String | Yes      | User's email
+| country      | String | No       | User's county in ISO-3166-1-alpha-3 format e.g `EST for Estonia`
+
+
 Request:
 ```json
 {
@@ -214,7 +302,7 @@ Request:
     "companyName": "Xendiz",
     "username": "test",
     "password": "test123",
-    "email": "demo@xendiz.com",
+    "email": "email@test.com",
     "country": "EST"
 }
 ```
@@ -222,9 +310,21 @@ Request:
 Response:
 * Status code 200
 
+Possible error responses:
+
+Each 4XX error response is provided with `message` property which describes error nature.
+
+| Code         | Message      |Description   |
+| -------------|------------- |------------- |
+| 400          | Missing one or more required fields | Request missing one or more of following fields: `firstName`, `lastName`, `password`
+| 400          | Missing login information           | Request should at least have `email` property filled
+| 400          | Account with provided email or username already exists | As stated in message
+
 ## Accounts
 ### Get
 `GET` /accounts/me
+
+Get data about currently logged in account  
 
 Response:
 ```json
@@ -232,48 +332,42 @@ Response:
     "data": {
         "id": 1,
         "status": 1,
-        "company_name": "Demo",
+        "companyName": "Demo",
         "username": "demo",
-        "name": "Demo User",
+        "name": "Dima Shirokov",
         "email": "email@xendiz.com",
         "country": "EST",
-        "api_key": "us-east-1.mgmuqofj9m0zwch257b9",
+        "apiKey": "us-east-1.mgmuqofj9m0zwch257b9",
         "balance": 337.404,
-        "spend_today": 0,
+        "spendToday": 0,
         "defaults": null,
+        "regId": null,
         "timestamp": "2018-01-13T06:14:36.000Z"
     }
-}
-```
-
-### List
-`GET` /accounts/list
-
-Response:
-```json
-{
-    "data": [
-        {
-            "id": 1,
-            "name": "Name Surname",
-            "email": "email@domain.com"
-        },
-        {
-            "id": 2,
-            "name": "Test Account",
-            "email": "email@domain.com"
-        }
-    ]
 }
 ```
 
 ### Create
 `POST` /accounts
 
+Create new account  
+* Note that you need to relogin to update created account data or act on it's behalf
+
+Body params
+
+| Name         | Type | isRequired | Description   |
+| -------------| ---- | ---------- | ------------- |
+| companyName  | String | No       | Account's company name
+| name         | String | No       | Account's name
+| username     | String | No       | Account's username that will be used to log in  
+| password     | String | Yes      | Account's password
+| email        | String | Yes      | Account's email
+| country      | String | No       | User's county in ISO-3166-1-alpha-3 format e.g `EST for Estonia`
+
 Request:
 ```json
 {
-    "company_name": "Demo",
+    "companyName": "Demo",
     "name": "DEM",
     "username": "test",
     "password": "pass",
@@ -285,11 +379,11 @@ Response:
 ```json
 {
     "data": {
-        "api_key": "49c2e273d075a1031c7600a20fcdbff8",
+        "apiKey": "49c2e273d075a1031c7600a20fcdbff8",
         "balance": 0,
-        "spend_today": 0,
+        "spendToday": 0,
         "id": 3,
-        "company_name": "Demo",
+        "companyName": "Demo",
         "name": "DEM",
         "username": "test",
         "email": "mail@domain.com",
@@ -298,9 +392,30 @@ Response:
 }
 ```
 
+Possible error responses:
+
+Each 4XX error response is provided with `message` property which describes error nature.
+
+| Code         | Message      |Description   |
+| -------------|------------- |------------- |
+| 400          | Missing one or more required fields | Request missing one or more of following fields: `company_name`, `name`, `username`, `password`
+
 ### Update
 
 `PUT` /accounts
+
+Update data of currently logged in account  
+
+Body params
+
+| Name         | Type | isRequired | Description   |
+| -------------| ---- | ---------- | ------------- |
+| companyName  | String | No       | Account's company name
+| name         | String | No       | Account's name
+| username     | String | No       | Account's username that will be used to log in  
+| password     | String | Yes      | Account's password
+| email        | String | Yes      | Account's email
+| country      | String | No       | User's county in ISO-3166-1-alpha-3 format e.g `EST for Estonia`
 
 Request:
 ```json
@@ -322,14 +437,16 @@ Response:
 
 `GET` /transactions/list
 
+Get list of transactions on this account  
+
 Response:
 ```json
 {
     "data": [
         {
             "id": 32,
-            "account_id": 1,
-            "order_id": 39,
+            "accountId": 1,
+            "orderId": 39,
             "volume": 120.5,
             "method": "worldhand",
             "timestamp": "2018-06-06T06:44:48.000Z",
@@ -343,30 +460,38 @@ Response:
 ### List
 `GET` /campaigns/list[?all=1]
 
+Get list of this account's campaigns  
+
+Query params
+
+| Name         | Type | isRequired | Description   |
+| -------------| ---- | ---------- | ------------- |
+| all          | Int  | No         | Toggle to show or don't show archived campaigns
+
 Response:
 ```json
 {
     "data": [
         {
             "id": 2,
-            "account_id": 2,
+            "accountId": 2,
             "name": "test2",
             "labels": "",
             "status": 1,
             "adomain": "google.com",
             "bundle": null,
-            "click_url": "http://google.com",
-            "min_cpm": 0.8,
-            "max_cpm": 2,
-            "daily_budget": 100,
-            "total_budget": 1000,
-            "spend_today": 100,
-            "spend_total": 1000,
-            "clicks_today": 4347005,
-            "clicks_total": 4347113,
-            "imps_today": 217743548,
-            "imps_total": 217773778,
-            "imp_frequency": 10,
+            "clickUrl": "http://google.com",
+            "minCpm": 0.8,
+            "maxCpm": 2,
+            "dailyBudget": 100,
+            "totalBudget": 1000,
+            "spendToday": 100,
+            "spendTotal": 1000,
+            "clicksToday": 4347005,
+            "clicksTotal": 4347113,
+            "impsToday": 217743548,
+            "impsTotal": 217773778,
+            "impFrequency": 10,
             "inventory": {
                 "web": true,
                 "inapp": true
@@ -382,17 +507,24 @@ Response:
                 "cellular": true,
                 "other": true
             },
-            "start_date": "2018-04-10",
-            "end_date": null,
+            "startDate": "2018-04-10",
+            "endDate": null,
             "timestamp": "2017-11-14T15:20:44.000Z"
-        },
-        {}
+        }
     ]
 }
 ```
 
 ### Tiny List
 `GET` /campaigns/tiny[?all=1]
+
+Get minified version (id and name) of this account's campaigns
+
+Query params
+
+| Name         | Type | isRequired | Description   |
+| -------------| ---- | ---------- | ------------- |
+| all          | Int  | No         | Toggle to show or dont show archived campaigns
 
 Response:
 ```json
@@ -413,42 +545,65 @@ Response:
 ### Enable
 `PUT` /campaigns/`:id`/enable
 
+Enable campaign
+
 Response:
 * STATUS CODE 204
+
+Possible error responses:
+
+Each 4XX error response is provided with `message` property which describes error nature.
+
+| Code         | Message      |Description   |
+| -------------|------------- |------------- |
+| 403          | Campaign unavailable    | Currently logged in account doesn't have access to campaign with provided id
+| 400          | Archived campaign cannot be enabled | You can't set archived campaign active
 
 ### Disable
 `PUT` /campaigns/`:id`/disable
 
+Disable campaign  
+
 Response:
 * STATUS CODE 204
+
+Possible error responses:
+
+Each 4XX error response is provided with `message` property which describes error nature.
+
+| Code         | Message      |Description   |
+| -------------|------------- |------------- |
+| 403          | Campaign unavailable    | Currently logged in account doesn't have access to campaign with provided id
 
 ### Get
 
 `GET` /campaigns/:id
+
+Get data about campaign  
 
 Response:
 ```json
 {
     "data": {
         "id": 45,
-        "account_id": 1,
+        "accountId": 1,
         "name": "test",
         "labels": "lorem,ipsum",
         "status": 1,
         "adomain": "google.com",
         "bundle": null,
-        "click_url": "http://google.com",
-        "min_cpm": 1,
-        "max_cpm": 5,
-        "daily_budget": 100,
-        "total_budget": 1000,
-        "spend_today": 0,
-        "spend_total": 0,
-        "clicks_today": 0,
-        "clicks_total": 0,
-        "imps_today": 0,
-        "imps_total": 0,
-        "imp_frequency": 3,
+        "clickUrl": "http://google.com",
+        "minCpm": 1,
+        "maxCpm": 5,
+        "dailyBudget": 100,
+        "totalBudget": 1000,
+        "spendToday": 0,
+        "spendTotal": 0,
+        "clicksToday": 0,
+        "clicksTotal": 0,
+        "impsToday": 0,
+        "impsTotal": 0,
+        "impFrequency": 3,
         "inventory": {
             "web": true,
             "inapp": true
@@ -464,8 +619,8 @@ Response:
             "cellular": true,
             "other": true
         },
-        "start_date": "2018-04-10",
-        "end_date": "2018-04-15",
+        "startDate": "2018-04-10",
+        "endDate": "2018-04-15",
         "timestamp": "2018-05-31T09:33:38.000Z",
         "classification": [
             "IAB1",
@@ -488,14 +643,9 @@ Response:
         ],
         "os": [
             {
-                "os_name": "android",
-                "os_max": 6,
-                "os_min": 1
-            },
-            {
-                "os_name": "ios",
-                "os_max": 11,
-                "os_min": 1
+                "name": "android",
+                "max": 6,
+                "min": 1
             }
         ],
         "schedules": [
@@ -553,9 +703,19 @@ Response:
 }
 ```
 
+Possible error responses:
+
+Each 4XX error response is provided with `message` property which describes error nature.
+
+| Code         | Message      |Description   |
+| -------------|------------- |------------- |
+| 403          | Campaign unavailable    | Currently logged in account doesn't have access to campaign with provided id
+
 ### Creatives list
 
 `GET` /campaigns/:id/creatives
+
+Get creatives list for campaign  
 
 Response:
 ```json
@@ -565,20 +725,105 @@ Response:
         {
             "id": 62,
             "name": "banner 728x90",
-            "source": "<img src='http://res.cloudinary.com/xendiz-com/image/upload/c_fill,h_90,w_728/bhwjvoycmw14rix9g3ii' height='90' width='728'/>",
+            "source": "http://res.cloudinary.com/xendiz-com/image/upload/c_fill,h_90,w_728/bhwjvoycmw14rix9g3ii",
             "type": "banner",
             "size": {
                 "id": 4,
-                "size_code": "728x90"
+                "code": "728x90"
             }
         }
     ]
 }
 ```
 
+Possible error responses:
+
+Each 4XX error response is provided with `message` property which describes error nature.
+
+| Code         | Message      |Description   |
+| -------------|------------- |------------- |
+| 403          | Campaign unavailable    | Currently logged in account doesn't have access to campaign with provided id
+
 ### Create
 
 `POST` /campaigns
+
+Create new campaign  
+
+Body params
+
+| Name         | Type | isRequired | Description   |
+| -------------| ---- | ---------- | ------------- |
+| name             | String | Yes       | Campaign's name
+| status           | Int    | Yes       | Set if campaign will be active right after creation
+| labels           | String | Yes       | Optional field used for campaign search and grouping
+| adomain          | String | Yes       | Advertiser's domain
+| bundle           | String | Yes       | 
+| clickUrl         | String | Yes       | Campaign's redirect url
+| minCpm           | Int    | Yes       | Minimal CPM value
+| maxCpm           | Int    | Yes       | Maximal CPM value
+| dailyBudget      | Int    | Yes       | Daily campaign's budget
+| totalBudget      | Int    | Yes       | Total campaign's budget
+| impFrequency     | Int    | Yes       | The number of times (frequency) a specific visitor to a website/application is shown a particular advertisement
+| inventory        | Object | Yes       | Campaign's inventory targeting settings
+| device           | Object | Yes       | Campaign's device targeting settings
+| connection       | Object | Yes       | Campaign's connection targeting settings
+| startDate        | Date   | Yes       | Campaign's start date in `YYYY-MM-DD` format
+| endDate          | Date   | Yes       | Campaign's end date in `YYYY-MM-DD` format
+| classifications  | Array  | Yes       | Campaign's classification in format specified by IAB OpenRTB specification (List 5.1)
+| categories       | Array  | Yes       | Campaign's targeting categories in format specified by IAB OpenRTB specification (List 5.1)
+| countries        | Array  | Yes       | Campaign's country targeting
+| cities           | Array  | Yes       | Campaign's city targeting in format of array of integers. Cities ID's you can fetch via [this](#available-isp) route
+| isps             | Array  | Yes       | Campaign's ISP targeting in format of array of integers. ISP ID's you can fetch via [this](#available-cities) route
+| blockedBundles   | Array  | Yes       | Blacklist of bundles formatted as array of bundle names
+| blockedDomains   | Array  | Yes       | Blacklist of domains formatted as array of domain names
+| blockedPublishers| Array  | Yes       | Blacklist of publishers formatted as array of publisher ids
+| allowedDomains   | Array  | Yes       | Whitelist of domains formatted as array of domain names
+| allowedBundles   | Array  | Yes       | Whitelist of bundles formatted as array of bundle names
+| languages        | Array  | Yes       | Campaign's language targeting formatted as array of ISO 639-1 Code formatted strings
+| os               | Array  | Yes       | Array of objects that describe campaign OS targeting
+| schedules        | Array  | Yes       | Array of objects that describe campaign scheduling
+
+Inventory object
+
+| Name         | Type | isRequired | Description   |
+| -------------| ---- | ---------- | ------------- |
+| web          | Bool | Yes        | Enable web traffic targeting
+| inapp        | Bool | Yes        | Enable in-app traffic targeting
+
+Device object
+
+| Name         | Type | isRequired | Description   |
+| -------------| ---- | ---------- | ------------- |
+| phone        | Bool | Yes        | Enable phone devices targeting
+| tablet       | Bool | Yes        | Enable tablet devices targeting
+| desktop      | Bool | Yes        | Enable desktop devices targeting
+| other        | Bool | Yes        | Enable targeting on devices types that differ from three mentioned above
+
+Inventory object
+
+| Name         | Type | isRequired | Description   |
+| -------------| ---- | ---------- | ------------- |
+| wifi         | Bool | Yes        | Enable targeting to devices that are connected to internet via wifi network
+| cellular     | Bool | Yes        | Enable targeting to devices that are connected to internet via cellular network
+| other        | Bool | Yes        | Enable targeting to devices that are connected to internet via other means
+
+OS object
+
+| Name         | Type | isRequired | Description   |
+| -------------| ---- | ---------- | ------------- |
+| name         | String | Yes      | Campaign's targeting os name
+| min          | Int    | Yes      | Minimal OS version
+| max          | Int    | Yes      | Maximal OS version
+
+Schedule object
+
+| Name         | Type | isRequired | Description   |
+| -------------| ---- | ---------- | ------------- |
+| day          | Int   | Yes       | Campaign's enable week day where 1 is Monday, 2 is Tuesday etc.
+| hours        | Array | Yes       | Array of hours in which campaing will be active where 0 is 00:00 and 23 is 23:00
+
+
 
 Request:
 ```json
@@ -588,17 +833,17 @@ Request:
     "labels": "123,321",
     "adomain": "google.com",
     "bundle": null,
-    "click_url": "http://google.com",
-    "min_cpm": 1,
-    "max_cpm": 5,
-    "daily_budget": 100,
-    "total_budget": 1000,
-    "imp_frequency": 3,
+    "clickUrl": "http://google.com",
+    "minCpm": 1,
+    "maxCpm": 5,
+    "dailyBudget": 100,
+    "totalBudget": 1000,
+    "impFrequency": 3,
     "inventory": { "web": true, "inapp": true },
     "device": { "phone": true, "tablet": true, "desktop": true, "other": false },
     "connection": { "wifi": true, "cellular": true, "other": true },
-    "start_date": "2018-04-10",
-    "end_date": "2018-04-15",
+    "startDate": "2018-04-10",
+    "endDate": "2018-04-15",
     "classification": ["IAB1", "IAB2", "IAB2-1"],
     "categories": ["IAB1", "IAB2", "IAB2-1"],
     "countries": ["USA", "UKR"],
@@ -610,7 +855,7 @@ Request:
     "allowedDomains": ["xendiz.com"],
     "allowedBundles": ["com.best.app"],
     "languages": ["en", "es", "uk"],
-    "os": [{"os_name": "ios", "os_min": 1, "os_max": 11}, {"os_name": "android", "os_min": 1, "os_max": 6}],
+    "os": [{"name": "ios", "min": 1, "max": 11}],
     "schedules": [{"day": 3, "hours": [0, 1, 3, 4, 5, 10, 15, 20, 21, 22, 23]}]
 }
 ```
@@ -619,33 +864,183 @@ Response:
 ```json
 {
     "data": {
-        "spend_total": 0,
-        "clicks_total": 0,
-        "imps_total": 0,
+        "spendTotal": 0,
+        "clicksTotal": 0,
+        "impsTotal": 0,
         "id": 46,
-        "account_id": 1,
+        "accountId": 1,
         "name": "123",
         "labels": "123,321",
         "status": 1,
         "adomain": "google.com",
         "bundle": null,
-        "click_url": "http://google.com",
-        "min_cpm": 1,
-        "max_cpm": 5,
-        "daily_budget": 100,
-        "total_budget": 1000,
-        "imp_frequency": 3,
+        "clickUrl": "http://google.com",
+        "minCpm": 1,
+        "maxCpm": 5,
+        "dailyBudget": 100,
+        "totalBudget": 1000,
+        "impFrequency": 3,
         "inventory": "{\"web\":true,\"inapp\":true}",
         "device": "{\"phone\":true,\"tablet\":true,\"desktop\":true,\"other\":false}",
         "connection": "{\"wifi\":true,\"cellular\":true,\"other\":true}",
-        "start_date": "2018-04-10",
-        "end_date": "2018-04-15"
+        "startDate": "2018-04-10",
+        "endDate": "2018-04-15"
     }
 }
 ```
+
+Possible error responses:
+
+Each 4XX error response is provided with `message` property which describes error nature.
+
+| Code         | Message      |Description   |
+| -------------|------------- |------------- |
+| 400          | Budget preferences must be a number | Fields `daily_budget` and `total_budget` should be provided as numbers
+| 400          | Budged preferences should be greater than 0 | Fields `daily_budget` and `total_budget` should be greated than 0
+| 400          | Campaign should have name | Field `name` is required
+| 400          | Missing campaign urls | Fields `adomain` and `click_url` are required
+| 400          | Missing min/max cpm preferences | Fields `min_cpm` and `max_cpm` are required
+| 400          | Missing campaign settings objects | Fields `inventory`, `connection` and `device` are required
+| 400          | Validation Error: Wrong object format | Fields `inventory`, `connection` and `device` must be compiled as described above
+| 400          | You provided doubling or unexisting entries | Request fields `cities` and `isps` are expected to be arrays of unique ids that you can get [here](#available-cities) and [here](#available-isp) respectively
+
+### Make Copy
+
+`GET` /campaigns/`:id`/copy
+
+Makes campaign's copy  
+
+Response:
+```json
+{
+    "data": {
+        "archived": 0,
+        "spendToday": 0,
+        "spendTotal": 0,
+        "clicksToday": 0,
+        "clicksTotal": 0,
+        "impsToday": 0,
+        "impsTotal": 0,
+        "id": 0,
+        "accountId": 2,
+        "name": "test copy",
+        "labels": "lorem,ipsum",
+        "status": 0,
+        "adomain": "google.com",
+        "bundle": null,
+        "clickUrl": "http://google.com",
+        "minCpm": 1,
+        "maxCpm": 5,
+        "dailyBudget": 100,
+        "totalBudget": 1000,
+        "impFrequency": 3,
+        "inventory": {
+            "web": true,
+            "inapp": true
+        },
+        "device": {
+            "phone": true,
+            "tablet": true,
+            "desktop": true,
+            "other": false
+        },
+        "connection": {
+            "wifi": true,
+            "cellular": true,
+            "other": true
+        },
+        "startDate": "2018-06-22",
+        "endDate": null
+    }
+}
+```
+
+Possible error responses:
+
+Each 4XX error response is provided with `message` property which describes error nature.
+
+| Code         | Message      |Description   |
+| -------------|------------- |------------- |
+| 403          | Campaign unavailable    | Currently logged in account doesn't have access to campaign with provided id
+
 ### Update
 
 `PUT` /campaigns/:id
+
+Update campaign
+
+Body params
+
+| Name         | Type | isRequired | Description   |
+| -------------| ---- | ---------- | ------------- |
+| name             | String | Yes       | Campaign's name
+| status           | Int    | Yes       | Set if campaign will be active right after creation
+| labels           | String | No        | Optional field used for campaign search and grouping
+| adomain          | String | Yes       | Advertiser's domain
+| bundle           | String | No        | 
+| clickUrl         | String | Yes       | Campaign's redirect url
+| minCpm           | Int    | Yes       | Minimal CPM value
+| maxCpm           | Int    | Yes       | Maximal CPM value
+| dailyBudget      | Int    | Yes       | Daily campaign's budget
+| totalBudget      | Int    | Yes       | The number of times (frequency) a specific visitor to a website/application is shown a particular advertisement
+| impFrequency     | Int    | Yes       | Campaign's impressions frequency
+| inventory        | Object | Yes       | Campaign's inventory targeting settings
+| device           | Object | Yes       | Campaign's device targeting settings
+| connection       | Object | Yes       | Campaign's connection targeting settings
+| startDate        | Date   | Yes       | Campaign's start date in `YYYY-MM-DD` format
+| endDate          | Date   | Yes       | Campaign's end date in `YYYY-MM-DD` format
+| classifications  | Array  | Yes       | Campaign's classification in format specified by IAB OpenRTB specification (List 5.1)
+| categories       | Array  | Yes       | Campaign's targeting categories in format specified by IAB OpenRTB specification (List 5.1)
+| countries        | Array  | Yes       | Campaign's country targeting
+| cities           | Array  | Yes       | Campaign's city targeting in format of array of integers. Cities ID's you can fetch via [this](#available-isp) route
+| isps             | Array  | Yes       | Campaign's ISP targeting in format of array of integers. ISP ID's you can fetch via [this](#available-cities) route
+| blockedBundles   | Array  | Yes       | Blacklist of bundles in format of array of bundle names
+| blockedDomains   | Array  | Yes       | Blacklist of domains in format of array of domain names
+| blockedPublishers| Array  | Yes       | Blacklist of publishers in format of array of publisher ids
+| allowedDomains   | Array  | Yes       | Whitelist of domains in format of array of domain names
+| allowedBundles   | Array  | Yes       | Whitelist of bundles in format of array of bundle names
+| languages        | Array  | Yes       | Campaign's language targeting in format of array of ISO 639-1 Code formatted strings
+| os               | Array  | Yes       | Array of objects that describe campaign OS targeting
+| schedules        | Array  | Yes       | Array of objects that describe campaign scheduling
+
+Inventory object
+
+| Name         | Type | isRequired | Description   |
+| -------------| ---- | ---------- | ------------- |
+| web          | Bool | Yes        | Enable Web traffic
+| inapp        | Bool | Yes        | Enable In-App traffic
+
+Device object
+
+| Name         | Type | isRequired | Description   |
+| -------------| ---- | ---------- | ------------- |
+| phone        | Bool | Yes        | Enable phone devices targeting
+| tablet       | Bool | Yes        | Enable tablet devices targeting
+| desktop      | Bool | Yes        | Enable desktop devices targeting
+| other        | Bool | Yes        | Enable targeting on devices that differ from three mentioned above
+
+Inventory object
+
+| Name         | Type | isRequired | Description   |
+| -------------| ---- | ---------- | ------------- |
+| wifi         | Bool | Yes        | Enable targeting to devices that are connected to internet via wifi network
+| cellular     | Bool | Yes        | Enable targeting to devices that are connected to internet via cellular network
+| other        | Bool | Yes        | Enable targeting to devices that are connected to internet via other means
+
+OS object
+
+| Name         | Type | isRequired | Description   |
+| -------------| ---- | ---------- | ------------- |
+| name      | String | Yes        | Campaign's targeting os name
+| min       | Int    | Yes        | Minimal OS version
+| max       | Int    | Yes        | Maximal OS version
+
+Schedule object
+
+| Name         | Type | isRequired | Description   |
+| -------------| ---- | ---------- | ------------- |
+| day          | Int   | Yes       | Campaign's enable week day where 1 is Monday, 2 is Tuesday etc.
+| hours        | Array | Yes       | Array of hours in which campaing will be active where 0 is 00:00 and 23 is 23:00
 
 Request:
 ```json
@@ -654,17 +1049,17 @@ Request:
     "labels": "lorem,ipsum",
     "adomain": "google.com",
     "bundle": null,
-    "click_url": "http://google.com",
-    "min_cpm": 1,
-    "max_cpm": 5,
-    "daily_budget": 100,
-    "total_budget": 1000,
-    "imp_frequency": 3,
+    "clickUrl": "http://google.com",
+    "minCpm": 1,
+    "maxCpm": 5,
+    "dailyBudget": 100,
+    "totalBudget": 1000,
+    "impFrequency": 3,
     "inventory": { "web": true, "inapp": true },
     "device": { "phone": true, "tablet": true, "desktop": true, "other": false },
     "connection": { "wifi": true, "cellular": true, "other": true },
-    "start_date": "2018-04-10",
-    "end_date": "2018-04-15",
+    "startDate": "2018-04-10",
+    "endDate": "2018-04-15",
     "classification": ["IAB1", "IAB2", "IAB2-1"],
     "categories": ["IAB123", "IAB21", "IAB2-12"],
     "countries": ["USA", "UKR"],
@@ -676,36 +1071,81 @@ Request:
     "allowedDomains": ["xendiz.com"],
     "allowedBundles": ["com.best.app"],
     "languages": ["en", "es", "uk"],
-    "os": [{"os_name": "ios", "os_min": 1, "os_max": 11}, {"os_name": "android", "os_min": 1, "os_max": 6}],
+    "os": [{"name": "ios", "min": 1, "max": 11}],
     "schedules": [{"day": 3, "hours": [0, 1, 3, 4, 5, 10, 15, 20, 21, 22, 23]}]
 }
 ```
+
+Possible error responses:
+
+Each 4XX error response is provided with `message` property which describes error nature.
+
+| Code         | Message      |Description   |
+| -------------|------------- |------------- |
+| 403          | Campaign unavailable    | Currently logged in account doesn't have access to campaign with provided id
+| 400          | You provided doubling or unexisting entries | Request fields `cities` and `isps` are expected to be arrays of unique ids that you can get [here](#available-cities) and [here](#available-isp) respectively
 
 Response:
 * STATUS CODE 204
 
 ### Archive
 
-`PATCH` /campaigns/:id/archive
+`PUT` /campaigns/:id/archive
 
-Respinse:
+Archive campaign
+
+Response:
 * STATUS CODE 204
+
+Possible error responses:
+
+Each 4XX error response is provided with `message` property which describes error nature.
+
+| Code         | Message      |Description   |
+| -------------|------------- |------------- |
+| 403          | Campaign unavailable    | Currently logged in account doesn't have access to campaign with provided id
+| 400          | Cannot archive enabled campaign    | As stated in message
 
 ### Unarchive
 
-`PATCH` /campaigns/:id/unarchive
+`PUT` /campaigns/:id/unarchive
+
+Unarchive campaign
 
 Respinse:
 * STATUS CODE 204
+
+Possible error responses:
+
+Each 4XX error response is provided with `message` property which describes error nature.
+
+| Code         | Message      |Description   |
+| -------------|------------- |------------- |
+| 403          | Campaign unavailable    | Currently logged in account doesn't have access to campaign with provided id
 
 ### Link
 
 `PUT` /campaigns/:id/link
 
+Link creatives to campaign
+
+Body parameters
+
+| Name         | Type | isRequired | Description   |
+| -------------| ---- | ---------- | ------------- |
+| creatives    | Array| Yes        | Array of creative objects
+
+Creative object
+
+| Name         | Type | isRequired | Description   |
+| -------------| ---- | ---------- | ------------- |
+| id           | Int  | Yes        | Creative ID
+| order        | Int  | Yes        | 
+
 Request: 
 ```json
 {
-    "crid": [
+    "creatives": [
         { "id": 1, "order": 0  },
         { "id": 2, "order": 0  },
         { "id": 3, "order": 0  },
@@ -717,23 +1157,61 @@ Request:
 Response:
 * STATUS CODE 204
 
+Possible error responses:
+
+Each 4XX error response is provided with `message` property which describes error nature.
+
+| Code         | Message      |Description   |
+| -------------|------------- |------------- |
+| 403          | Campaign unavailable    | Currently logged in account doesn't have access to campaign with provided id
+| 400          | Creatives array missing | Crid is required to be in request and must be an array
+| 400          | Creatives array is empty | Crids array should have at least one valid entry
+| 400          | You provided doubling or unexisting entries | `id` property of each object should be unique and lead to existing creative
+
 ### Unlink
 
 `PUT` /campaigns/:id/unlink
 
+Unlink creatives from campaign
+
+Body parameters
+
+| Name         | Type | isRequired | Description   |
+| -------------| ---- | ---------- | ------------- |
+| creatives    | Array| Yes        | Array of creative IDs as numbers
+
 Request: 
 ```json
 {
-    "crid": [1,2,3,4]
+    "creatives": [1,2,3,4]
 }
 ```
 Response:
 * STATUS CODE 204
 
+Possible error responses:
+
+Each 4XX error response is provided with `message` property which describes error nature.
+
+| Code         | Message      |Description   |
+| -------------|------------- |------------- |
+| 403          | Campaign unavailable    | Currently logged in account doesn't have access to campaign with provided id
+| 400          | Creatives array missing | Crid is required to be in request and must be an array
+| 400          | Creatives array is empty | Crids array should have at least one valid entry
+
 ## Creatives
 ### List
 
-`GET` /creatives/list[?all=1]
+`GET` /creatives/list[?all=1&adType=(tag|video|banner)]
+
+Get this account's creatives list  
+
+Query parameters
+
+| Name         | Type | isRequired | Description   |
+| -------------| ---- | ---------- | ------------- |
+| all          | Int  | No         | Toggle to show archived creatives. Defaults to 0
+| adType       | String | No         | Select which creative type to show. This URL parameter supports multiple, comma separated, types entry e.g `&type=video,banner,tag`
 
 Response:
 ```json
@@ -741,24 +1219,24 @@ Response:
     "data": [
         {
             "id": 132,
-            "hashed_id": "fde1d6e00",
+            "hashedId": "fde1d6e00",
             "status": 1,
             "archived": 0,
             "approved": 1,
             "name": "test_post_new_banners",
-            "is_secure": 1,
+            "isSecure": 1,
             "timestamp": "2018-06-19T10:43:39.000Z",
-            "account_id": 2,
+            "accountId": 2,
             "type": "banner",
             "size": {
                 "id": 2,
-                "size_code": "300x250"
+                "code": "300x250"
             },
             "campaigns": [
                 {
                     "id": 70,
                     "name": "dsad",
-                    "spend_today": 0
+                    "spendToday": 0
                 }
             ]
         }
@@ -768,7 +1246,19 @@ Response:
 
 ### Tiny List
 
-`GET` /creatives/tiny[?source=1&size=1&type=1&all=1]
+`GET` /creatives/tiny[?source=1&size=1&type=1&all=1&adType=(tag|video|banner)]
+
+Get minified version of this account's creatives list
+
+Query parameters
+
+| Name         | Type | isRequired | Description   |
+| -------------| ---- | ---------- | ------------- |
+| source       | Int  | No         | Toggle to add creative source to response. Defaults to 0
+| size         | Int  | No         | Toggle to add creative size to response. Defaults to 0
+| type         | Int  | No         | Toggle to add creative type to response. Defaults to 0
+| all          | Int  | No         | Toggle to add archived creatives to response. Defaults to 0
+| adType       | String | No       | Select which creative type to show. This URL parameter supports multiple, comma separated, types entry e.g `&type=video,banner,tag`
 
 Response:
 ```json
@@ -794,41 +1284,99 @@ Response:
 
 `GET` /creatives/`:id`
 
+Get data about creative  
+* Second example is for video creatives  
+
 Response:
 ```json
 {
     "data": {
         "id": 151,
-        "hashed_id": "a457a3302",
+        "hashedId": "a457a3302",
         "status": 1,
         "archived": 0,
         "approved": 0,
         "name": "qwerty2",
-        "is_secure": 1,
+        "isSecure": 1,
         "timestamp": "2018-06-27T07:20:27.000Z",
-        "account_id": 2,
+        "accountId": 2,
         "type": "tag",
         "source": "<h1>Lorem Ipsum Dolor Sit Amet</h1>",
         "size": {
             "id": 2,
-            "size_code": "300x250"
+            "code": "300x250"
         }
     }
 }
 ```
 
+```json
+{
+    "data": {
+        "id": 1,
+        "hashedId": "f7edbfd8a",
+        "status": 1,
+        "archived": 0,
+        "approved": 0,
+        "name": "erw",
+        "isSecure": 1,
+        "timestamp": "2018-08-29T12:00:58.000Z",
+        "accountId": 2,
+        "type": "video",
+        "source": "URL-to-video",
+        "size": {
+            "id": 0,
+            "code": "0x0"
+        },
+        "assets": [
+            {
+                "name": "test",
+                "id": 1,
+                "source": "URL-to-asset",
+                "type": "companion",
+                "size": {
+                    "id": 2,
+                    "code": "300x250"
+                }
+            }
+        ]
+    }
+}
+```
+
+Possible error responses:
+
+Each 4XX error response is provided with `message` property which describes error nature.
+
+| Code         | Message      |Description   |
+| -------------|------------- |------------- |
+| 400          | Specified creative does no exist or you don't have access to it | As stated by message
+
 ### Create tag
 
 `POST` /creatives
 
+Create creative with `tag` type
+
+Body parameters
+
+| Name         | Type | isRequired | Description   |
+| -------------| ---- | ---------- | ------------- |
+| campaigns    | Array  | No       | Array of campaign IDs to link this creative to
+| name         | String | No       | Creative name. If not set then generated based on creative data
+| source       | String | Yes      | Creative source code
+| isSecure     | Int    | Yes      | 
+| size         | String | Yes      | Creative size code. You can get it [here](#available-sizes)
+
+
 Request:
 ```json
 {
-    "campaign_id": [16,17],
+    "campaigns": [16,17],
     "name": "asdf",
     "source": "<h1 style=\"background-color: red; padding: 15px;\"><a href=\"http://google.com\" target=\"_blank\">Google</a></h1>",
-    "is_secure": 1,
-    "size_code": "320x50"
+    "isSecure": 1,
+    "size": "320x50"
 }
 ```
 
@@ -836,34 +1384,66 @@ Response:
 ```json
 {
     "data": {
-        "status": 2,
-        "is_secure": 0,
-        "id": 136,
+        "status": 0,
+        "archived": 0,
+        "approved": 0,
+        "isSecure": 0,
+        "id": 237,
         "name": "demo",
         "type": "tag",
         "source": "<h1 style=\"background-color: red; padding: 15px;\"><a href=\"http://google.com\" target=\"_blank\">Google</a></h1>",
-        "size_id": 1,
-        "account_id": 2,
-        "hashed_id": "71a3a594a",
+        "accountId": 2,
+        "hashedId": "31613a26f",
+        "campaigns": [
+            {
+                "id": 53,
+                "name": "test"
+            },
+            {
+                "id": 65,
+                "name": "Qwerty"
+            }
+        ],
         "size": {
             "id": 1,
-            "size_code": "320x50"
+            "code": "320x50"
         }
     }
 }
 ```
 
+Possible error responses:
+
+Each 4XX error response is provided with `message` property which describes error nature.
+
+| Code         | Message      |Description   |
+| -------------|------------- |------------- |
+| 400          | Invalid size | You provided size code that isn't supported in Xendiz DSP
+| 400          | You provided doubling or unexisting entries | Request field `campaigns` is expected to be array of unique ids that lead to existing campaign
+
+
 ### Create banner
 
 `POST` /creatives/banner<br>
+
+Create new creative with `banner` type
+
+Body parameters
+
+| Name         | Type | isRequired | Description   |
+| -------------| ---- | ---------- | ------------- |
+| campaigns    | Array  | No       | Array of campaign IDs to link this creative to
+| name         | String | No       | Creative name. If not set then generated based on creative data
+| source       | File   | Yes      | Banner image
+| size         | String | Yes      | Creative size code. You can get it [here](#available-sizes)
 
 Request:
 ```json
 {   
     "name": "somename",
-    "campaign_id": [16,17],
+    "campaigns": [16,17],
     "source": "file",
-    "size_code": "320x50"
+    "size": "320x50"
 }
 ```
 
@@ -876,74 +1456,283 @@ Response:
         "name": "test_post",
         "type": "banner",
         "source": "<img src='link.com' height='250' width='300'/>",
-        "size_id": 2,
-        "account_id": 2,
-        "is_secure": 1,
-        "hashed_id": "7c01f4189",
+        "accountId": 2,
+        "isSecure": 1,
+        "hashedId": "7c01f4189",
+        "campaigns": [
+            {
+                "id": 16,
+                "name": "name"
+            }
+        ],
         "size": {
             "id": 2,
-            "size_code": "300x250"
+            "code": "300x250"
         }
     }
 }
 ```
 
+Possible error responses:
+
+Each 4XX error response is provided with `message` property which describes error nature.
+
+| Code         | Message      |Description   |
+| -------------|------------- |------------- |
+| 400          | Missing image data | File is requeired in request
+| 400          | Invalid size | You provided size code that isn't supported in Xendiz DSP
+| 400          | You provided doubling or unexisting entries | Request field `campaigns` is expected to be array of unique ids that lead to existing campaign
+
+### Create video
+
+`POST` /creatives/video
+
+Create new creative with `video` type
+
+Body parameters
+
+| Name         | Type | isRequired | Description   |
+| -------------| ---- | ---------- | ------------- |
+| campaigns    | Array  | No       | Array of campaign IDs to link this creative to
+| name         | String | No       | Creative name. If not set then generated based on creative data
+| source       | File   | Yes      | Video file
+| assets       | Array  | Yes      | Array of objects that describes video companion ads
+
+Assets object  
+
+| Name         | Type | isRequired | Description   |
+| -------------| ---- | ---------- | ------------- |
+| id           | Int  | Yes        | Banner ID to attach as companion
+| type         | String | Yes      | Companion type. Currently only `companion` type supported
+
+Request:
+```json
+{
+    "source": "file",
+    "name": "Test",
+    "assets": "[{id: \"1\", type: \"companion\"}]",
+    "campaigns": "[1,2,3,4]"
+}
+```
+
+Response:
+```json
+{
+    "data": {
+        "status": 0,
+        "archived": 0,
+        "approved": 0,
+        "isSecure": 1,
+        "id": 1,
+        "name": "123video",
+        "accountId": 2,
+        "type": "video",
+        "hashedId": "1111111",
+        "source": "URL-to-video",
+        "size": {
+            "id": 0,
+            "code": "0x0"
+        },
+        "assets": [
+            {
+                "name": "test",
+                "id": 1,
+                "source": "URL-to-asset",
+                "type": "companion",
+                "size": {
+                    "id": 2,
+                    "code": "300x250"
+                }
+            }
+        ],
+        "campaigns": [
+            {
+                "id": 1,
+                "name": "test"
+            }
+        ]
+    }
+}
+```
+
+Possible error responses:
+
+Each 4XX error response is provided with `message` property which describes error nature.
+
+| Code         | Message      |Description   |
+| -------------|------------- |------------- |
+| 400          | Missing video data | File is requeired in request
+| 400          | Video should be shorter than 30s | Video ad duration is limited to 30 seconds
+| 400          | You provided doubling or unexisting entries | Request fields `campaigns` and `assets` is expected to be array with unique ids that lead to existing entities
+
 ### Update
 
-`PUT` /creatives/`:id`
+`PUT` /creatives/`:id/tag`
+
+Update creative with `tag` type  
+
+Body parameters
+
+| Name         | Type | isRequired | Description   |
+| -------------| ---- | ---------- | ------------- |
+| isSecure     | Int    | No       | 
+| name         | String | No       | Creative name. If not set then generated based on creative data
+| source       | String | No       | Creative source code
 
 Request:
 ```json
 {   
+    "isSecure": 0,
     "name": "somename",
-    "source": "<h1 style=\"background-color: red; padding: 15px;\">TAG</h1>",
-    "size_code": "300x250"
+    "source": "<h1 style=\"background-color: red; padding: 15px;\">TAG</h1>"
 }
 ```
 
 Response:
 * STATUS CODE 204
 
+Possible error responses:
+
+Each 4XX error response is provided with `message` property which describes error nature.
+
+| Code         | Message      |Description   |
+| -------------|------------- |------------- |
+| 400          | Creative not found | Creative with provided id doesn't exist in Xendiz DSP
+
 ### Update banner
 
 `PUT` /creatives/`:id`/banner
+
+Update creative with `banner` type  
+
+Body parameters
+
+| Name         | Type | isRequired | Description   |
+| -------------| ---- | ---------- | ------------- |
+| name         | String | No       | Creative name. If not set then generated based on creative data
+| source       | File   | Yes      | New image
 
 Request:
 ```json
 {   
     "name": "somename",
     "source": "file",
-    "size_code": "300x250"
+    "size": "size_code"
 }
 ```
 
 Response:
 * STATUS CODE 204
 
+Possible error responses:
+
+Each 4XX error response is provided with `message` property which describes error nature.
+
+| Code         | Message      |Description   |
+| -------------|------------- |------------- |
+| 400          | Creative not found | Creative with provided id doesn't exist in Xendiz DSP
+| 400          | Invalid size | You provided size code that isn't supported in Xendiz DSP
+
+### Update video
+
+`PUT` /creatives/`:id`/video
+
+Update creative with `video` type  
+
+Body parameters
+
+| Name         | Type | isRequired | Description   |
+| -------------| ---- | ---------- | ------------- |
+| name         | String | No       | Creative name. If not set then generated based on creative data
+| source       | File   | No      | New video ad
+| assets       | Array  | No      | Array of objects that describes video companion ads
+
+Assets object  
+
+| Name         | Type | isRequired | Description   |
+| -------------| ---- | ---------- | ------------- |
+| id           | Int  | Yes        | Banner ID to attach as companion
+| type         | String | Yes      | Companion type. Currently only `companion` type supported
+
+Request:
+```json
+{
+    "source": "file",
+    "name": "Test",
+    "assets": "[{id: \"1\", type: \"companion\"}]"
+}
+```
+
+Response
+
+* STATUS CODE 204
+
+Possible error responses:
+
+Each 4XX error response is provided with `message` property which describes error nature.
+
+| Code         | Message      |Description   |
+| -------------|------------- |------------- |
+| 400          | Video should be shorter than 30s | Video ad duration is limited to 30 seconds
+| 400          | You provided doubling or unexisting entries | Request fields `assets` is expected to be array of objects with unique ids that lead to existing entities
+
 ### Disable
 
 `PUT` /creatives/`:id`/disable
 
+Disable creative  
+
 Response:
 * STATUS CODE 200
+
+Possible error responses:
+
+Each 4XX error response is provided with `message` property which describes error nature.
+
+| Code         | Message      |Description   |
+| -------------|------------- |------------- |
+| 400          | Creative not found | Creative with provided id doesn't exist in Xendiz DSP
 
 ### Archive
 
 `PATCH` /creatives/`:id`/archive
 
+Archive creative  
+
 Response:
 * STATUS CODE 200
 
+Possible error responses:
+
+Each 4XX error response is provided with `message` property which describes error nature.
+
+| Code         | Message      |Description   |
+| -------------|------------- |------------- |
+| 400          | Creative not found | Creative with provided id doesn't exist in Xendiz DSP
+| 400          | Cannot archive enabled creative | As stated in message
+
 ### Unarchive
+
+Unarchive creative  
 
 `PATCH` /creatives/`:id`/unarchive
 
 Response:
 * STATUS CODE 200
 
+Possible error responses:
+
+Each 4XX error response is provided with `message` property which describes error nature.
+
+| Code         | Message      |Description   |
+| -------------|------------- |------------- |
+| 400          | Creative not found | Creative with provided id doesn't exist in Xendiz DSP
+
 ### Delete
 
 `DELETE` /creatives/`:id`
+
+Delete creative  
 
 Response:
 * STATUS CODE 204
@@ -952,10 +1741,25 @@ Response:
 
 `PUT` /creatives/:id/link
 
+Link creative to provided campaigns
+
+Body parameters
+
+| Name         | Type | isRequired | Description   |
+| -------------| ---- | ---------- | ------------- |
+| campaigns    | Array| Yes        | Array of campaign objects
+
+Campaign object
+
+| Name         | Type | isRequired | Description   |
+| -------------| ---- | ---------- | ------------- |
+| id           | Int  | Yes        | Campaign ID
+| order        | Int  | Yes        | Set to 0   
+
 Request: 
 ```json
 {
-    "cid": [
+    "campaigns": [
         { "id": 1, "order": 0  },
         { "id": 2, "order": 0  },
         { "id": 3, "order": 0  },
@@ -967,20 +1771,53 @@ Request:
 Response:
 * STATUS CODE 204
 
+Possible error responses:
+
+Each 4XX error response is provided with `message` property which describes error nature.
+
+| Code         | Message      |Description   |
+| -------------|------------- |------------- |
+| 400          | Creative not found | Creative with provided id doesn't exist in Xendiz DSP
+| 400          | Campaigns array missing | Cid is required to be in request and must be an array
+| 400          | Campaigns array is empty | Cids array should have at least one valid entry
+| 400          | You provided doubling or unexisting entries | `id` property of each object should be unique and lead to existing campaign
+
+
 ### Unlink
 
 `PUT` /creatives/:id/unlink
 
+Unlink creative from provided campaigns  
+
+Body parameters
+
+| Name         | Type | isRequired | Description   |
+| -------------| ---- | ---------- | ------------- |
+| campaigns    | Array| Yes        | Array of campaign IDs
+
+
 Request: 
 ```json
 {
-    "cid": [1,2,3,4]
+    "campaigns": [1,2,3,4]
 }
 ```
 Response:
 * STATUS CODE 204
 
+Possible error responses:
+
+Each 4XX error response is provided with `message` property which describes error nature.
+
+| Code         | Message      |Description   |
+| -------------|------------- |------------- |
+| 400          | Creative not found | Creative with provided id doesn't exist in Xendiz DSP
+| 400          | Campaigns array missing | Cid is required to be in request and must be an array
+| 400          | Campaigns array is empty | Cids array should have at least one valid entry
+
 ## Lists
+
+### Get all account lists
 
 `GET` /lists
 
@@ -990,18 +1827,57 @@ Response:
     "data": [
         {
             "id": 2,
-            "name": "New List"
+            "name": "New List",
+            "entries": [
+                {
+                    "id": 2,
+                    "text": "This is testing entry"
+                }
+            ]
+        },
+        {
+            "id": 3,
+            "name": "New List",
+            "entries": []
+        },
+        {
+            "id": 4,
+            "name": "New List",
+            "entries": []
         }
     ]
 }
 ```
 
+### Create new list
+
 `POST` /lists
+
+Body parameters
+
+| Name         | Type | isRequired | Description   |
+| -------------| ---- | ---------- | ------------- |
+| name         | Array  | Yes        | New list name
+| entries      | Object | Yes        | Array of entry objects
+
+Creative object
+
+| Name         | Type | isRequired | Description   |
+| -------------| ---- | ---------- | ------------- |
+| text         | String | Yes        | Entry text
 
 Request:
 ```json
 {
-    "name": "New List"
+  "name": "New List",
+  "entries": [
+    { "text": "Samp List creation text" },
+    { "text": "Samp List creation text" },
+    { "text": "Samp List creation text" },
+    { "text": "Samp List creation text" },
+    { "text": "Samp List creation text" },
+    { "text": "Samp List creation text" }
+  ]
 }
 ```
 
@@ -1009,13 +1885,109 @@ Response:
 ```json
 {
     "data": {
-        "id": 4,
-        "name": "New List"
+        "id": 13,
+        "name": "New List",
+        "entries": [
+            {
+                "id": 129,
+                "text": "Samp List creation text"
+            }
+        ]
     }
 }
 ```
 
+Possible error responses:
+
+Each 4XX error response is provided with `message` property which describes error nature.
+
+| Code         | Message      |Description   |
+| -------------|------------- |------------- |
+| 400          | List name required | As stated in message
+
+
+### Bulk work
+
+`POST` /lists/`id`/bulk
+
+Method to work with list entries in bulk mode.
+
+Body parameters
+
+| Name         | Type | isRequired | Description   |
+| -------------| ---- | ---------- | ------------- |
+| data         | Array | Yes        | Array of entry objects
+
+Body parameters
+
+| Name         | Type | isRequired | Description   |
+| -------------| ---- | ---------- | ------------- |
+| id           | Int    | Yes        | Entry ID. Set to 0 if this is new entry
+| text         | String | Yes        | Entry text
+
+Request:
+```json
+{
+    "data": [
+        {
+            "id": 13,
+            "text": "Bulk Sample text 13"
+        },
+        {
+            "id": 14,
+            "text": "Bulk Sample text 14"
+        },
+        {
+            "id": 15,
+            "text": "Bulk Sample text 15"
+        },
+        {
+            "id": 0,
+            "text": "Lorem Ipsum"
+        },
+        {
+            "id": 0,
+            "text": "Dolor Sit Amet"
+        }
+    ]
+}
+```
+
+Response:
+```json
+{
+    "data": [
+        {
+            "id": 18,
+            "text": "Lorem Ipsum"
+        },
+        {
+            "id": 19,
+            "text": "Dolor Sit Amet"
+        }
+    ]
+}
+```
+
+Possible error responses:
+
+Each 4XX error response is provided with `message` property which describes error nature.
+
+| Code         | Message      |Description   |
+| -------------|------------- |------------- |
+| 400          | Jobs array missing | Request property `data` should be present in request and be an array
+| 400          | Jobs array empty | Request property `data` is empty or doesn't have any valid entries
+| 400          | List not found   | List with provided id doesn't exist
+
+### Update list
+
 `PUT` /lists/`:id`
+
+Body parameters
+
+| Name         | Type | isRequired | Description   |
+| -------------| ---- | ---------- | ------------- |
+| name         | String | Yes        | New list name
 
 Request:
 ```json
@@ -1027,38 +1999,40 @@ Request:
 Response:
 * STATUS CODE 204
 
+Possible error responses:
+
+Each 4XX error response is provided with `message` property which describes error nature.
+
+| Code         | Message      |Description   |
+| -------------|------------- |------------- |
+| 400          | List name required | As stated in message
+
+### Delete list
+
 `DELETE` /lists/`:id`
 
 Response:
 * STATUS CODE 204
 
-`GET` /lists/`:id`
+### Delete entry
 
-Response:
+`DELETE` /lists/`:id`/entries
+
+Delete list entries
+
+Body parameters
+
+| Name         | Type | isRequired | Description   |
+| -------------| ---- | ---------- | ------------- |
+| entries      | Array | Yes        | Array of entry IDs to delete
+
+
+Request: 
 ```json
 {
-    "data": [
-        {
-            "id": 2,
-            "text": "This is testing entry"
-        }
-    ]
+    "entries": [2,13,14,15]
 }
 ```
-
-`PUT` /lists/`:id`/`:entry_id`
-
-Request:
-```json
-{
-    "text": "Lorem Ipsum"
-}
-```
-
-Response:
-* STATUS CODE 204
-
-`DELETE` /lists/`:id`/`:entry_id`
 
 Response:
 * STATUS CODE 204
@@ -1068,17 +2042,18 @@ Response:
 
 `GET` /available/os
 
+Get list of all available OS names with minimal and maximal versions in Xendiz DSP
+
 Response:
 ```json
 {
     "data": [
         {
             "id": 1,
-            "os_name": "android",
-            "os_min": 0,
-            "os_max": 0
-        },
-        {}
+            "name": "android",
+            "min": 0,
+            "max": 0
+        }
     ]
 }
 ```
@@ -1088,15 +2063,16 @@ Response:
 
 `GET` /available/sizes
 
+Get list of all available sizes supported by Xendiz DSP
+
 Response:
 ```json
 {
     "data": [
         {
             "id": 1,
-            "size_code": "320x50"
-        },
-        {}
+            "code": "320x50"
+        }
     ]
 }
 ```
@@ -1104,6 +2080,14 @@ Response:
 ## Available ISP
 
 `GET` /available/isp
+
+Get list of ISP names along with ID that match your provided string
+
+Query parameters
+
+| Name         | Type | isRequired | Description   |
+| -------------| ---- | ---------- | ------------- |
+| query        | Array | Yes        | Word to search ISP by
 
 Request:
 
@@ -1135,7 +2119,7 @@ Query params
 
 | Name         | Type | isRequired | Description   |
 | -------------| ---- | ---------- | ------------- |
-| country      | String | Yes         | Country name to search divided by `,`. Example: `&country=USA,UKR`
+| country      | String | Yes         | Country name in ISO-3166-1-alpha-3 format to search divided by `,`. Example: `&country=USA,UKR`
 | query      | String | Yes         | City name to search. Example: `&query=br`
 
 Request:  
@@ -1157,6 +2141,14 @@ Response:
 }
 ```
 
+Possible error responses:
+
+Each 4XX error response is provided with `message` property which describes error nature.
+
+| Code         | Message      |Description   |
+| -------------|------------- |------------- |
+| 400          | Country name and city string search are required | Both `country` and `query` parameters are required
+
 ## Financial
 ### Report
 
@@ -1177,9 +2169,9 @@ Selection object
 | -------------| ---- | ---------- | ------------- |
 | date    | Int | Yes         | Add date to report
 | hour  | Int  | Yes         | Add by hour grouping to report
-| all_day  | Int  | Yes         | Search on span of previous 24h if both `hour` and this field are selected.
-| camp_id    | Int | Yes         | Add campaign id to report
-| crid_id  | Int  | Yes         | Add creative id to report
+| allDay  | Int  | Yes         | Search on span of previous 24h if both `hour` and this field are selected.
+| campId    | Int | Yes         | Add campaign id to report
+| cridId  | Int  | Yes         | Add creative id to report
 
 Search object
 
@@ -1187,8 +2179,8 @@ Search object
 | -------------| ---- | ---------- | ------------- |
 | from     | String | No         | Exact date to begin search from (e.g `2018-05-01`, defaults to today's date)
 | to       | String  | No         | Exact date where search must stop (e.g `2018-05-02`, defaults to today's date)
-| camp_id    | Int | No         | Search by specific campaign id
-| crid_id  | Int  | No         | Search by specific creative id
+| campId    | Int | No         | Search by specific campaign id
+| cridId  | Int  | No         | Search by specific creative id
 
 
 Example:
@@ -1201,16 +2193,16 @@ Request:
     "selection": {
         "date": 1, 
         "hour": 1,
-        "all_day": 0,
-        "camp_id": 1, 
-        "crid_id": 1
+        "allDay": 0,
+        "campId": 1, 
+        "cridId": 1
         
     },
     "search": {
         "from": "2018-05-01",
         "to": "2018-05-10",
-        "camp_id": 1,
-        "crid_id": 2
+        "campId": 1,
+        "cridId": 2
     }
 }
 ```
@@ -1220,29 +2212,25 @@ Response:
 {
     "data": {
         "fields": [
-            "date",
-            "camp_id",
-            "crid_id",
+            "Date",
+            "Hour of Day",
+            "Campaign",
+            "Creative",
             "impressions",
             "clicks",
+            "CTR",
             "spend"
         ],
         "data": [
             [
-                "2018-05-01",
-                2,
-                4,
-                "5692095",
-                "110",
-                713.7676296234131
-            ],
-            [
-                "2018-05-02",
-                2,
-                4,
-                "4924540",
-                "130",
-                565.6175422668457
+                "2018-07-10",
+                "0:00 UTC",
+                "test (id3)",
+                "Demo tag 320x480 (id3)",
+                79290,
+                1824,
+                "2.30%",
+                "$ 20.91"
             ]
         ]
     }
@@ -1257,15 +2245,15 @@ Request:
     "selection": {
         "date": 1, 
         "hour": 1, 
-        "camp_id": 1, 
-        "crid_id": 1
+        "campId": 1, 
+        "cridId": 1
         
     },
     "search": {
         "from": "2018-05-01",
         "to": "2018-05-02",
-        "camp_id": 2,
-        "crid_id": 4
+        "campId": 2,
+        "cridId": 4
     }
 }
 ```
@@ -1276,41 +2264,25 @@ Response:
 {
     "data": {
         "fields": [
-            "date",
-            "hour",
-            "camp_id",
-            "crid_id",
+            "Date",
+            "Hour of Day",
+            "Campaign",
+            "Creative",
             "impressions",
             "clicks",
+            "CTR",
             "spend"
         ],
         "data": [
             [
-                "2018-05-01",
-                0,
-                2,
-                4,
-                "280104",
-                "0",
-                36.56417465209961
-            ],
-            [
-                "2018-05-01",
-                1,
-                2,
-                4,
-                "259380",
-                "0",
-                31.8701229095459
-            ],
-            [
-                "2018-05-01",
-                2,
-                2,
-                4,
-                "235356",
-                "0",
-                27.657794952392575
+                "2018-07-10",
+                "0:00 UTC",
+                "test (id3)",
+                "Demo tag 320x480 (id3)",
+                79290,
+                1824,
+                "2.30%",
+                "$ 20.91"
             ]
         ]
     }
@@ -1395,7 +2367,7 @@ Select
 | campaign     | Bool   | No         | Dsp campaign
 | creative     | Bool   | No         | Dsp creative
 | category     | Bool   | No         | Content category
-| Adpos        | Bool   | No         | Ad position
+| adpos        | Bool   | No         | Ad position
 
 Example request
 
