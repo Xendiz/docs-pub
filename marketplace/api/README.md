@@ -14,11 +14,11 @@ TRENDS API: ``http://api.xendiz.com/trends``
 `POST` /authtoken
 
 * Send json with your username and password
-* Receive your `api_key` and list with ids and names of your company SSPs and DSPs
-* Pass `api_key` which you received in previous step to authorization header and get access to API
+* Receive your `token` and list with ids and names of your company SSPs and DSPs
+* Pass `token` which you received in previous step to authorization header and get access to API
 
 ```bash
-curl -d '{"username": "demo", "password":"demo"}' -H "Content-Type: application/json" -X POST http://api.xendiz.com/auth
+curl -d '{"username": "demo", "password":"demo"}' -H "Content-Type: application/json" -X POST http://api.xendiz.com/authtoken
 ```
 
 Response:
@@ -26,20 +26,18 @@ Response:
 {
   "data": {
     "name": "Demo Company",
-    "apiKey": "01bde69ca3b11b8eaac505b63562hd0a",
+    "token": "01bde69ca3b11b8eaac505b63562hd0a",
     "Ssps": [
       {
         "id": 5,
         "name": "Demo SSP #11"
-      },
-      {}
+      }
     ],
     "Dsps": [
       {
         "id": 1,
         "name": "Demo DSP #1"
-      },
-      {}
+      }
     ]
   }
 }
