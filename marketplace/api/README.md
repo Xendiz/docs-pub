@@ -11,7 +11,7 @@ TRENDS API: ``http://api.xendiz.com/trends``
 
 ## Authorization
 
-`POST` /auth
+`POST` /authtoken
 
 * Send json with your username and password
 * Receive your `api_key` and list with ids and names of your company SSPs and DSPs

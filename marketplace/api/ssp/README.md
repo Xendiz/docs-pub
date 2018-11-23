@@ -5,6 +5,7 @@
   * [SSP endpoint details](#ssp-endpoint-details)
   * [Block creative](#block-creative)
   * [Unblock creative](#unblock-creative)
+  * [Get SSP platform report](#gey-ssp-platform-report)
 * [Financial](#financial-api)
 * [Custom report](#custom-report)
 
@@ -140,6 +141,34 @@ Request
 }, {
   "crid": "cr8.qwerty2"
 }]
+```
+
+### Get SSP platform report
+
+`GET` /ssp/:id/analytics/platform(?from=2018-01-01&to=2018-01-02&limit=10)
+
+Path params
+
+| Name         | Type | isRequired | Description   |
+| -------------| ---- | ---------- | ------------- |
+| from         | Date | No         | Report starting date in format `YYYY-MM-DD`. Expamle: `2018-01-01`
+| to           | Date | No         | Report end date in format `YYYY-MM-DD`. Expamle: `2018-01-01`
+| limit        | Int  | No         | Maximum rows amount in response. Defaulted to all
+
+`GET` /ssp/:id/analytics/platform?from=2018-01-01&to=2018-01-02&limit=10
+
+Response:
+```json
+{
+    "data": [
+        {
+            "platform": "name",
+            "type": "site",
+            "impressions": 123,
+            "spend": 11
+        }
+    ]
+}
 ```
 
 ## Financial API

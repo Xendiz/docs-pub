@@ -10,6 +10,8 @@
   * [Update DSP campaign](#update-dsp-campaign)
   * [Delete DSP campaign target](#delete-dsp-campaign-target)
   * [Change DSP endpoint URL](#change-dsp-endpoint-url)
+  * [Get DSP platform report](#gey-dsp-platform-report)
+  * [Get DSP network usage statisctics](#get-dsp-network-usage-statistics)
 * [Financial](#financial-api)
 * [Detailed](#detailed-reports-api)
   * [Campaign report](#campaign-report)
@@ -715,6 +717,62 @@ Request:
 Response:
 
 * STATUS CODE 204
+
+### Get DSP platform report
+
+`GET` /dsp/:id/analytics/platform(?from=2018-01-01&to=2018-01-02&limit=10)
+
+Path params
+
+| Name         | Type | isRequired | Description   |
+| -------------| ---- | ---------- | ------------- |
+| from         | Date | No         | Report starting date in format `YYYY-MM-DD`. Expamle: `2018-01-01`
+| to           | Date | No         | Report end date in format `YYYY-MM-DD`. Expamle: `2018-01-01`
+| limit        | Int  | No         | Maximum rows amount in response. Defaulted to all
+
+`GET` /dsp/:id/analytics/platform?from=2018-01-01&to=2018-01-02&limit=10
+
+Response:
+```json
+{
+    "data": [
+        {
+            "platform": "name",
+            "type": "site",
+            "impressions": 123,
+            "spend": 11
+        }
+    ]
+}
+```
+
+### Get DSP network usage statisctics
+
+`GET` /logs/network(?limit=10&from=2018-01-01&to=2018-01-31)
+
+Path params
+
+| Name         | Type | isRequired | Description   |
+| -------------| ---- | ---------- | ------------- |
+| from         | Date | No         | Report starting date in format `YYYY-MM-DD`. Defaulted to today's date. Expamle: `2018-01-01`
+| to           | Date | No         | Report end date in format `YYYY-MM-DD`. Defaulted to today's date. Expamle: `2018-01-01`
+| limit        | Int  | No         | Maximum rows amount in response. Defaulted to all
+
+Response: 
+```json
+{
+    "data": [
+        {
+            "id": 1,
+            "requests": 307,
+            "responses": 7,
+            "timeouts": 381,
+            "errors": 0,
+            "name": "name"
+        }
+    ]
+}
+```
 
 ## Financial API
 `GET` /dsp/financial
