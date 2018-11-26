@@ -7,7 +7,10 @@
   * [Unblock creative](#unblock-creative)
   * [Get SSP platform report](#get-ssp-platform-report)
 * [Financial](#financial-api)
-* [Custom report](#custom-report)
+* [Detailed](#detailed-reports-api)
+  * [OS report](#os-report)
+  * [Geo report](#geo-report)
+  * [Custom report](#custom-report)
 
 ## Overview
 This section of describes API routes for supply-side platforms.
@@ -68,7 +71,7 @@ Response:
     "sumReq": 123420199321,
     "sumRes": 221342132,
     "sumImp": 200210,
-    "spendToday": 102.121
+    "spendToday": 102.121,
     "manager": {
       "name": "John Doe",
       "email": "john.doe@xendiz.com"
@@ -225,7 +228,75 @@ Response:
 }
 ```
 
-## Custom report
+## Detailed reports API
+
+### OS report
+
+`GET` /dsp/detailed/os
+
+This method is used to generate detailed report about operational systems in your company based on either one specific `endpoint_id` or all of your company's endpoints.
+
+* Date fields `from` and `to` must be in format `YYYY-MM-DD`
+
+Query params
+
+| Name         | Type   | isRequired | Description   |
+| -------------| ------ | ---------- | ------------- |
+| from         | Date   | No        | Start date. If not set then current day will be chosen. Example: `&from=2018-01-01`
+| to           | Date   | No         | End date. Example: `&to=2018-01-10`
+| endpoint_id  | Int    | No         | Specific endpoint id. If the param is not specified, a full report will be created for all the endpoints of the company. Example: `&endpoint_id=21`
+| limit        | Int    | No         | Number of rows in response. Default is 10
+
+```json
+{
+  "data": [{
+    "date": "2018-01-01",
+    "os": "android",
+    "spend": 40.21,
+    "impressions": 1293811
+  }, {
+    "date": "2018-01-01",
+    "os": "ios",
+    "spend": 22.21,
+    "impressions": 13371337
+  }]
+}
+```
+
+### Geo report
+
+`GET` /dsp/detailed/geo
+
+This method is used to generate detailed report about geos in your company based on either one specific `endpoint_id` or all of your company's endpoints.
+
+* Date fields `from` and `to` must be in format `YYYY-MM-DD`
+
+Query params
+
+| Name         | Type   | isRequired | Description   |
+| -------------| ------ | ---------- | ------------- |
+| from         | Date   | No        | Start date. If not set then current day will be chosen. Example: `&from=2018-01-01`
+| to           | Date   | No         | End date. Example: `&to=2018-01-10`
+| endpoint_id  | Int    | No         | Specific endpoint id. If the param is not specified, a full report will be created for all the endpoints of the company. Example: `&endpoint_id=21`
+| limit        | Int    | No         | Number of rows in response. Default is 10
+
+```json
+{
+  "data": [{
+    "date": "2018-01-01",
+    "country": "USA",
+    "spend": 40.21,
+    "impressions": 1293811
+  }, {
+    "date": "2018-01-01",
+    "country": "UKR",
+    "spend": 22.21,
+    "impressions": 13371337
+  }]
+}
+```
+
+### Custom report
 `POST` /ssp/detailed/custom
 
 This method is used to generate custom detailed report for your company based on either one specific `endpoint_id` or all of your company's endpoints.  
