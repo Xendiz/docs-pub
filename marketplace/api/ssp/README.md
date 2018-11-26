@@ -148,7 +148,7 @@ Request
 
 ### Get SSP platform report
 
-`GET` /ssp/:id/platform(?from=2018-01-01&to=2018-01-02&limit=10)
+`GET` /ssp/platform(?from=2018-01-01&to=2018-01-02&limit=10&endpoint_id=1,2,3,4,5,6)
 
 Path params
 
@@ -157,8 +157,9 @@ Path params
 | from         | Date | No         | Report starting date in format `YYYY-MM-DD`. Expamle: `2018-01-01`
 | to           | Date | No         | Report end date in format `YYYY-MM-DD`. Expamle: `2018-01-01`
 | limit        | Int  | No         | Maximum rows amount in response. Defaulted to all
+| enpoint_id   | Int  | No         | Comma separated SSP id
 
-`GET` /ssp/1/platform?from=2018-01-01&to=2018-01-02&limit=10
+`GET` /ssp/platform?from=2018-01-01&to=2018-01-02&limit=10
 
 Response:
 ```json
