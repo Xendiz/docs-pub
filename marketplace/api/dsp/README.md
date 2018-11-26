@@ -10,7 +10,7 @@
   * [Update DSP campaign](#update-dsp-campaign)
   * [Delete DSP campaign target](#delete-dsp-campaign-target)
   * [Change DSP endpoint URL](#change-dsp-endpoint-url)
-  * [Get DSP platform report](#gey-dsp-platform-report)
+  * [Get DSP platform report](#get-dsp-platform-report)
   * [Get DSP network usage statisctics](#get-dsp-network-usage-statistics)
 * [Financial](#financial-api)
 * [Detailed](#detailed-reports-api)
@@ -720,7 +720,7 @@ Response:
 
 ### Get DSP platform report
 
-`GET` /dsp/:id/analytics/platform(?from=2018-01-01&to=2018-01-02&limit=10)
+`GET` /dsp/:id/platform(?from=2018-01-01&to=2018-01-02&limit=10)
 
 Path params
 
@@ -730,7 +730,7 @@ Path params
 | to           | Date | No         | Report end date in format `YYYY-MM-DD`. Expamle: `2018-01-01`
 | limit        | Int  | No         | Maximum rows amount in response. Defaulted to all
 
-`GET` /dsp/:id/analytics/platform?from=2018-01-01&to=2018-01-02&limit=10
+`GET` /dsp/1/platform?from=2018-01-01&to=2018-01-02&limit=10
 
 Response:
 ```json

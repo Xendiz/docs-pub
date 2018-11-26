@@ -5,7 +5,7 @@
   * [SSP endpoint details](#ssp-endpoint-details)
   * [Block creative](#block-creative)
   * [Unblock creative](#unblock-creative)
-  * [Get SSP platform report](#gey-ssp-platform-report)
+  * [Get SSP platform report](#get-ssp-platform-report)
 * [Financial](#financial-api)
 * [Custom report](#custom-report)
 
@@ -145,7 +145,7 @@ Request
 
 ### Get SSP platform report
 
-`GET` /ssp/:id/analytics/platform(?from=2018-01-01&to=2018-01-02&limit=10)
+`GET` /ssp/:id/platform(?from=2018-01-01&to=2018-01-02&limit=10)
 
 Path params
 
@@ -155,7 +155,7 @@ Path params
 | to           | Date | No         | Report end date in format `YYYY-MM-DD`. Expamle: `2018-01-01`
 | limit        | Int  | No         | Maximum rows amount in response. Defaulted to all
 
-`GET` /ssp/:id/analytics/platform?from=2018-01-01&to=2018-01-02&limit=10
+`GET` /ssp/1/platform?from=2018-01-01&to=2018-01-02&limit=10
 
 Response:
 ```json
