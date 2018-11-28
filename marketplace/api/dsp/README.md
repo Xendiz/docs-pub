@@ -11,7 +11,7 @@
   * [Delete DSP campaign target](#delete-dsp-campaign-target)
   * [Change DSP endpoint URL](#change-dsp-endpoint-url)
   * [Get DSP platform report](#get-dsp-platform-report)
-  * [Get DSP network usage statisctics](#get-dsp-network-usage-statistics)
+  * [Get DSP network usage statistics](#get-dsp-network-usage-statistics)
 * [Financial](#financial-api)
 * [Detailed](#detailed-reports-api)
   * [Campaign report](#campaign-report)
@@ -747,7 +747,7 @@ Response:
 }
 ```
 
-### Get DSP network usage statisctics
+### Get DSP network usage statistics
 
 `GET` /dsp/detailed/network(?limit=10&from=2018-01-01&to=2018-01-31&endpoint_id=1,2,3,4,5)
 
