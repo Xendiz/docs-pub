@@ -749,7 +749,7 @@ Response:
 
 ### Get DSP network usage statisctics
 
-`GET` /logs/network(?limit=10&from=2018-01-01&to=2018-01-31)
+`GET` /dsp/detailed/network(?limit=10&from=2018-01-01&to=2018-01-31&endpoint_id=1,2,3,4,5)
 
 Path params
 
@@ -758,18 +758,38 @@ Path params
 | from         | Date | No         | Report starting date in format `YYYY-MM-DD`. Defaulted to today's date. Expamle: `2018-01-01`
 | to           | Date | No         | Report end date in format `YYYY-MM-DD`. Defaulted to today's date. Expamle: `2018-01-01`
 | limit        | Int  | No         | Maximum rows amount in response. Defaulted to all
+| endpoint_id  | Int  | No         | DSP endpoints to select from. Defaults to all DSP endpoints/
+
+* If `from` and `to` are equal then report will be grouped by hour
+
+`GET` /dsp/detailed/network
 
 Response: 
 ```json
 {
     "data": [
         {
-            "id": 1,
-            "requests": 307,
-            "responses": 7,
-            "timeouts": 381,
-            "errors": 0,
-            "name": "name"
+            "hour": 12,
+            "requests": 97938100,
+            "responses": 305094,
+            "timeouts": 17062352,
+            "errors": 337213
+        }
+    ]
+}
+```
+`GET` /dsp/detailed/network?from=2018-10-01&to=2018-10-31
+
+Response: 
+```json
+{
+    "data": [
+        {
+            "date": "2018-10-01",
+            "requests": 97941371,
+            "responses": 305094,
+            "timeouts": 17062673,
+            "errors": 337254
         }
     ]
 }
